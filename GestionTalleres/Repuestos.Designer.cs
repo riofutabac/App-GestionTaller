@@ -325,6 +325,7 @@
             Controls.Add(panel2);
             Name = "Repuestos";
             Size = new Size(1409, 780);
+            Load += Repuestos_Load;
             ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).EndInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).EndInit();
             panel1.ResumeLayout(false);
