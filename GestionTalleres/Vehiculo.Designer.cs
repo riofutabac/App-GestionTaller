@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vehiculo));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
             ciudadTextBox = new TextBox();
             colorTextBox = new TextBox();
@@ -48,13 +48,13 @@
             matriculaTextBox = new TextBox();
             label2 = new Label();
             label1 = new Label();
-            datosRepuestosDataGridView = new DataGridView();
+            datosVehiculosDataGridView = new DataGridView();
             panel2 = new Panel();
             cilindrajeBox1 = new TextBox();
             label8 = new Label();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)datosVehiculosDataGridView).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -257,30 +257,30 @@
             label1.TabIndex = 3;
             label1.Text = "Vehiculos";
             // 
-            // datosRepuestosDataGridView
+            // datosVehiculosDataGridView
             // 
-            datosRepuestosDataGridView.AllowUserToAddRows = false;
-            datosRepuestosDataGridView.AllowUserToDeleteRows = false;
-            datosRepuestosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            datosRepuestosDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            datosRepuestosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            datosRepuestosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            datosRepuestosDataGridView.EnableHeadersVisualStyles = false;
-            datosRepuestosDataGridView.Location = new Point(22, 62);
-            datosRepuestosDataGridView.Margin = new Padding(4);
-            datosRepuestosDataGridView.Name = "datosRepuestosDataGridView";
-            datosRepuestosDataGridView.ReadOnly = true;
-            datosRepuestosDataGridView.RowHeadersVisible = false;
-            datosRepuestosDataGridView.RowHeadersWidth = 51;
-            datosRepuestosDataGridView.Size = new Size(1317, 284);
-            datosRepuestosDataGridView.TabIndex = 2;
+            datosVehiculosDataGridView.AllowUserToAddRows = false;
+            datosVehiculosDataGridView.AllowUserToDeleteRows = false;
+            datosVehiculosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            datosVehiculosDataGridView.BorderStyle = BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            datosVehiculosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            datosVehiculosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            datosVehiculosDataGridView.EnableHeadersVisualStyles = false;
+            datosVehiculosDataGridView.Location = new Point(22, 62);
+            datosVehiculosDataGridView.Margin = new Padding(4);
+            datosVehiculosDataGridView.Name = "datosVehiculosDataGridView";
+            datosVehiculosDataGridView.ReadOnly = true;
+            datosVehiculosDataGridView.RowHeadersVisible = false;
+            datosVehiculosDataGridView.RowHeadersWidth = 51;
+            datosVehiculosDataGridView.Size = new Size(1317, 284);
+            datosVehiculosDataGridView.TabIndex = 2;
             // 
             // panel2
             // 
@@ -334,14 +334,14 @@
             // 
             panel1.BackColor = Color.White;
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(datosRepuestosDataGridView);
+            panel1.Controls.Add(datosVehiculosDataGridView);
             panel1.Location = new Point(21, 385);
             panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 3;
             // 
-            // Repuestos
+            // Vehiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -351,8 +351,9 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Vehiculo";
             Size = new Size(1409, 775);
+            Load += Vehiculo_Load;
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)datosVehiculosDataGridView).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
@@ -380,7 +381,7 @@
         private TextBox matriculaTextBox;
         private Label label2;
         private Label label1;
-        private DataGridView datosRepuestosDataGridView;
+        private DataGridView datosVehiculosDataGridView;
         private Panel panel2;
         private TextBox cilindrajeBox1;
         private Label label8;

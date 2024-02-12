@@ -76,7 +76,7 @@
             panel2.Controls.Add(datosEmpleadosDataGridView);
             panel2.Controls.Add(label1);
             panel2.Location = new Point(480, 27);
-            panel2.Margin = new Padding(4, 4, 4, 4);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
             panel2.Size = new Size(908, 721);
             panel2.TabIndex = 3;
@@ -98,7 +98,7 @@
             datosEmpleadosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosEmpleadosDataGridView.EnableHeadersVisualStyles = false;
             datosEmpleadosDataGridView.Location = new Point(25, 75);
-            datosEmpleadosDataGridView.Margin = new Padding(4, 4, 4, 4);
+            datosEmpleadosDataGridView.Margin = new Padding(4);
             datosEmpleadosDataGridView.Name = "datosEmpleadosDataGridView";
             datosEmpleadosDataGridView.ReadOnly = true;
             datosEmpleadosDataGridView.RowHeadersVisible = false;
@@ -113,7 +113,7 @@
             limpiarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             limpiarBtn.ForeColor = Color.White;
             limpiarBtn.Location = new Point(248, 628);
-            limpiarBtn.Margin = new Padding(4, 4, 4, 4);
+            limpiarBtn.Margin = new Padding(4);
             limpiarBtn.Name = "limpiarBtn";
             limpiarBtn.Size = new Size(144, 56);
             limpiarBtn.TabIndex = 15;
@@ -127,7 +127,7 @@
             eliminarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             eliminarBtn.ForeColor = Color.White;
             eliminarBtn.Location = new Point(43, 628);
-            eliminarBtn.Margin = new Padding(4, 4, 4, 4);
+            eliminarBtn.Margin = new Padding(4);
             eliminarBtn.Name = "eliminarBtn";
             eliminarBtn.Size = new Size(144, 56);
             eliminarBtn.TabIndex = 14;
@@ -141,7 +141,7 @@
             editarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             editarBtn.ForeColor = Color.White;
             editarBtn.Location = new Point(248, 536);
-            editarBtn.Margin = new Padding(4, 4, 4, 4);
+            editarBtn.Margin = new Padding(4);
             editarBtn.Name = "editarBtn";
             editarBtn.Size = new Size(144, 56);
             editarBtn.TabIndex = 13;
@@ -155,7 +155,7 @@
             agregarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             agregarBtn.ForeColor = Color.White;
             agregarBtn.Location = new Point(43, 536);
-            agregarBtn.Margin = new Padding(4, 4, 4, 4);
+            agregarBtn.Margin = new Padding(4);
             agregarBtn.Name = "agregarBtn";
             agregarBtn.Size = new Size(144, 56);
             agregarBtn.TabIndex = 12;
@@ -166,7 +166,7 @@
             // 
             cedulaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             cedulaTextBox.Location = new Point(142, 342);
-            cedulaTextBox.Margin = new Padding(4, 4, 4, 4);
+            cedulaTextBox.Margin = new Padding(4);
             cedulaTextBox.Name = "cedulaTextBox";
             cedulaTextBox.Size = new Size(246, 26);
             cedulaTextBox.TabIndex = 5;
@@ -186,7 +186,7 @@
             // 
             nombreTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             nombreTextBox.Location = new Point(142, 289);
-            nombreTextBox.Margin = new Padding(4, 4, 4, 4);
+            nombreTextBox.Margin = new Padding(4);
             nombreTextBox.Name = "nombreTextBox";
             nombreTextBox.Size = new Size(246, 26);
             nombreTextBox.TabIndex = 3;
@@ -206,7 +206,7 @@
             // 
             adminAddUsers_imageView.Image = (Image)resources.GetObject("adminAddUsers_imageView.Image");
             adminAddUsers_imageView.Location = new Point(0, 4);
-            adminAddUsers_imageView.Margin = new Padding(4, 4, 4, 4);
+            adminAddUsers_imageView.Margin = new Padding(4);
             adminAddUsers_imageView.Name = "adminAddUsers_imageView";
             adminAddUsers_imageView.Size = new Size(120, 124);
             adminAddUsers_imageView.SizeMode = PictureBoxSizeMode.Zoom;
@@ -217,7 +217,7 @@
             // 
             tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tallerTextBox.Location = new Point(142, 240);
-            tallerTextBox.Margin = new Padding(4, 4, 4, 4);
+            tallerTextBox.Margin = new Padding(4);
             tallerTextBox.Name = "tallerTextBox";
             tallerTextBox.Size = new Size(246, 26);
             tallerTextBox.TabIndex = 24;
@@ -237,7 +237,7 @@
             // 
             codigoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             codigoTextBox.Location = new Point(142, 187);
-            codigoTextBox.Margin = new Padding(4, 4, 4, 4);
+            codigoTextBox.Margin = new Padding(4);
             codigoTextBox.Name = "codigoTextBox";
             codigoTextBox.Size = new Size(246, 26);
             codigoTextBox.TabIndex = 22;
@@ -257,7 +257,7 @@
             // 
             salarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             salarioTextBox.Location = new Point(142, 451);
-            salarioTextBox.Margin = new Padding(4, 4, 4, 4);
+            salarioTextBox.Margin = new Padding(4);
             salarioTextBox.Name = "salarioTextBox";
             salarioTextBox.Size = new Size(246, 26);
             salarioTextBox.TabIndex = 20;
@@ -277,7 +277,7 @@
             // 
             fechaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
             fechaTextBox.Location = new Point(142, 398);
-            fechaTextBox.Margin = new Padding(4, 4, 4, 4);
+            fechaTextBox.Margin = new Padding(4);
             fechaTextBox.Name = "fechaTextBox";
             fechaTextBox.Size = new Size(246, 26);
             fechaTextBox.TabIndex = 18;
@@ -298,7 +298,7 @@
             panel3.BackColor = Color.Silver;
             panel3.Controls.Add(adminAddUsers_imageView);
             panel3.Location = new Point(148, 28);
-            panel3.Margin = new Padding(4, 4, 4, 4);
+            panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
             panel3.Size = new Size(120, 128);
             panel3.TabIndex = 16;
@@ -324,7 +324,7 @@
             panel1.Controls.Add(nombreTextBox);
             panel1.Controls.Add(label2);
             panel1.Location = new Point(20, 30);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 718);
             panel1.TabIndex = 2;
@@ -339,6 +339,7 @@
             Margin = new Padding(3, 2, 3, 2);
             Name = "Empleado";
             Size = new Size(1409, 784);
+            Load += Empleado_Load;
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)datosEmpleadosDataGridView).EndInit();
