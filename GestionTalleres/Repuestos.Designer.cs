@@ -124,6 +124,7 @@
             adminAddProducts_clearBtn.TabIndex = 23;
             adminAddProducts_clearBtn.Text = "LIMPIAR";
             adminAddProducts_clearBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_clearBtn.Click += adminAddProducts_clearBtn_Click;
             // 
             // adminAddProducts_deleteBtn
             // 
@@ -138,6 +139,7 @@
             adminAddProducts_deleteBtn.TabIndex = 22;
             adminAddProducts_deleteBtn.Text = "ELIMINAR";
             adminAddProducts_deleteBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_deleteBtn.Click += adminAddProducts_deleteBtn_Click;
             // 
             // adminAddProducts_updateBtn
             // 
@@ -152,6 +154,7 @@
             adminAddProducts_updateBtn.TabIndex = 21;
             adminAddProducts_updateBtn.Text = "EDITAR";
             adminAddProducts_updateBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_updateBtn.Click += adminAddProducts_updateBtn_Click;
             // 
             // adminAddProducts_addBtn
             // 
@@ -166,6 +169,7 @@
             adminAddProducts_addBtn.TabIndex = 20;
             adminAddProducts_addBtn.Text = "AGREGAR";
             adminAddProducts_addBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
             // 
             // label4
             // 

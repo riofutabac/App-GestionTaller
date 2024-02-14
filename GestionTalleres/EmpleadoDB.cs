@@ -8,7 +8,7 @@ namespace GestionTalleres
 {
     internal class EmpleadoDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
 
         public string CodigoEmpleado { get; set; }
         public string CodigoTaller { get; set; }

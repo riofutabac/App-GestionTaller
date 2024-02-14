@@ -8,8 +8,7 @@ namespace GestionTalleres
 {
     class VehiculoDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
-
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
         public string NumeroMatricula { get; set; }
         public string NumeroPlaca { get; set; }
         public string Color { get; set; }

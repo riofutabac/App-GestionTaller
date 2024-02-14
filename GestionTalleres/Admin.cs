@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace GestionTalleres
 {
-    public partial class Admin : Form
+    partial class Admin : Form
     {
         DashboardAdmin dashboardAdmin = new DashboardAdmin();
         Cliente cliente = new Cliente();
@@ -15,11 +15,11 @@ namespace GestionTalleres
         public Admin()
         {
             InitializeComponent();
+            panel3.Controls.Add(dashboardAdmin);
         }
 
         private void clienteButton_Click(object sender, EventArgs e)
         {
-           
             panel3.Controls.Clear();
             panel3.Controls.Add(cliente);
         }

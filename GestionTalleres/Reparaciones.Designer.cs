@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reparaciones));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
             fechaTextBox = new TextBox();
             observacionesTextBox = new TextBox();
@@ -99,6 +99,7 @@
             adminAddProducts_clearBtn.TabIndex = 23;
             adminAddProducts_clearBtn.Text = "LIMPIAR";
             adminAddProducts_clearBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_clearBtn.Click += adminAddProducts_clearBtn_Click;
             // 
             // adminAddProducts_deleteBtn
             // 
@@ -113,6 +114,7 @@
             adminAddProducts_deleteBtn.TabIndex = 22;
             adminAddProducts_deleteBtn.Text = "ELIMINAR";
             adminAddProducts_deleteBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_deleteBtn.Click += adminAddProducts_deleteBtn_Click;
             // 
             // adminAddProducts_updateBtn
             // 
@@ -127,6 +129,7 @@
             adminAddProducts_updateBtn.TabIndex = 21;
             adminAddProducts_updateBtn.Text = "EDITAR";
             adminAddProducts_updateBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_updateBtn.Click += adminAddProducts_updateBtn_Click;
             // 
             // adminAddProducts_addBtn
             // 
@@ -141,6 +144,7 @@
             adminAddProducts_addBtn.TabIndex = 20;
             adminAddProducts_addBtn.Text = "AGREGAR";
             adminAddProducts_addBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
             // 
             // label4
             // 
@@ -287,14 +291,14 @@
             datosReparacionDataGridView.AllowUserToDeleteRows = false;
             datosReparacionDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosReparacionDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle4.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             datosReparacionDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosReparacionDataGridView.EnableHeadersVisualStyles = false;
             datosReparacionDataGridView.Location = new Point(22, 62);

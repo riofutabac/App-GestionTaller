@@ -6,9 +6,9 @@ using System.Configuration;
 
 namespace GestionTalleres
 {
-    internal class ReparacionDB
+    class ReparacionDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
 
         public string IdReparacion { get; set; }
         public string NumeroMatricula { get; set; }

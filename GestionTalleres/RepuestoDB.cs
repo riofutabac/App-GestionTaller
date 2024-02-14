@@ -6,10 +6,9 @@ using System.Configuration;
 
 namespace GestionTalleres
 {
-    internal class RepuestoDB
+     class RepuestoDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
-
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
         public string IdRepuesto { get; set; }
         public string CodigoTaller { get; set; }
         public string NombreRepuesto { get; set; }

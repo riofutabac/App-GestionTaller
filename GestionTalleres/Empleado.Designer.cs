@@ -119,6 +119,7 @@
             limpiarBtn.TabIndex = 15;
             limpiarBtn.Text = "LIMPIAR";
             limpiarBtn.UseVisualStyleBackColor = false;
+            limpiarBtn.Click += limpiarBtn_Click;
             // 
             // eliminarBtn
             // 
@@ -133,6 +134,7 @@
             eliminarBtn.TabIndex = 14;
             eliminarBtn.Text = "ELIMINAR";
             eliminarBtn.UseVisualStyleBackColor = false;
+            eliminarBtn.Click += eliminarBtn_Click;
             // 
             // editarBtn
             // 
@@ -147,6 +149,7 @@
             editarBtn.TabIndex = 13;
             editarBtn.Text = "EDITAR";
             editarBtn.UseVisualStyleBackColor = false;
+            editarBtn.Click += editarBtn_Click;
             // 
             // agregarBtn
             // 
@@ -161,6 +164,7 @@
             agregarBtn.TabIndex = 12;
             agregarBtn.Text = "AGREGAR";
             agregarBtn.UseVisualStyleBackColor = false;
+            agregarBtn.Click += agregarBtn_Click;
             // 
             // cedulaTextBox
             // 

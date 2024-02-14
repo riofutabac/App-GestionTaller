@@ -8,7 +8,7 @@ namespace GestionTalleres
 {
     class ClienteDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
 
         public string CiCliente { get; set; }
         public string NombreCliente { get; set; }
