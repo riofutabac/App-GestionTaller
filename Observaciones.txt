@@ -1,0 +1,13 @@
+CLIENTES
+Eliminar ROWGUID
+
+EN TODAS LAS CLASES CON FECHAS
+cambiar el formato fecha contrato a un DateTimePicker
+
+REPUESTOS
+en la base de datos hay dos campos muy similares, los cuales son cantidad y stock, pero en el diseño esta arreglado
+
+VEHICULOS Y REPARACIONES
+No carga la tabla de la BD, pero todas las operaciones estan correctas. Si se visualizan registros insertados por la app, los mismos pueden ser editados y eliminados 
+
+
