@@ -55,5 +55,33 @@ namespace GestionTalleres
 
             return reparaciones;
         }
+
+        public List<string> GetAllTiposDeReparaciones()
+        {
+            List<string> tiposReparaciones = new List<string>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Asegúrate de que el nombre de tu columna en la base de datos sea 'tipo'
+                string query = "SELECT DISTINCT tipo FROM reparacion_N01";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        while (reader.Read())
+                        {
+                            tiposReparaciones.Add(reader["tipo"].ToString());
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Manejar adecuadamente la excepción
+                        Console.WriteLine("Error al obtener tipos de reparaciones: " + ex.Message);
+                    }
+                }
+            }
+            return tiposReparaciones;
+        }
     }
 }

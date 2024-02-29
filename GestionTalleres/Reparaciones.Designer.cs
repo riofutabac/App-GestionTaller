@@ -29,16 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reparaciones));
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
-            fechaTextBox = new TextBox();
             observacionesTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
             adminAddProducts_deleteBtn = new Button();
             adminAddProducts_updateBtn = new Button();
             adminAddProducts_addBtn = new Button();
             label4 = new Label();
-            tipoTextBox = new TextBox();
             label6 = new Label();
             precioTextBox = new TextBox();
             label7 = new Label();
@@ -48,9 +46,13 @@
             idTextBox = new TextBox();
             label2 = new Label();
             panel2 = new Panel();
+            tipoComboBox = new ComboBox();
+            tallerComboBox = new ComboBox();
+            label8 = new Label();
             label1 = new Label();
             datosReparacionDataGridView = new DataGridView();
             panel1 = new Panel();
+            fecha = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosReparacionDataGridView).BeginInit();
@@ -67,15 +69,6 @@
             adminAddUsers_imageView.SizeMode = PictureBoxSizeMode.Zoom;
             adminAddUsers_imageView.TabIndex = 26;
             adminAddUsers_imageView.TabStop = false;
-            // 
-            // fechaTextBox
-            // 
-            fechaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fechaTextBox.Location = new Point(735, 148);
-            fechaTextBox.Margin = new Padding(4);
-            fechaTextBox.Name = "fechaTextBox";
-            fechaTextBox.Size = new Size(246, 26);
-            fechaTextBox.TabIndex = 25;
             // 
             // observacionesTextBox
             // 
@@ -156,15 +149,6 @@
             label4.Size = new Size(58, 17);
             label4.TabIndex = 17;
             label4.Text = "Fecha:";
-            // 
-            // tipoTextBox
-            // 
-            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tipoTextBox.Location = new Point(735, 92);
-            tipoTextBox.Margin = new Padding(4);
-            tipoTextBox.Name = "tipoTextBox";
-            tipoTextBox.Size = new Size(246, 26);
-            tipoTextBox.TabIndex = 16;
             // 
             // label6
             // 
@@ -251,15 +235,17 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(fecha);
+            panel2.Controls.Add(tipoComboBox);
+            panel2.Controls.Add(tallerComboBox);
+            panel2.Controls.Add(label8);
             panel2.Controls.Add(adminAddUsers_imageView);
-            panel2.Controls.Add(fechaTextBox);
             panel2.Controls.Add(observacionesTextBox);
             panel2.Controls.Add(adminAddProducts_clearBtn);
             panel2.Controls.Add(adminAddProducts_deleteBtn);
             panel2.Controls.Add(adminAddProducts_updateBtn);
             panel2.Controls.Add(adminAddProducts_addBtn);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(tipoTextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(precioTextBox);
             panel2.Controls.Add(label7);
@@ -273,6 +259,39 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 4;
+            // 
+            // tipoComboBox
+            // 
+            tipoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tipoComboBox.FormattingEnabled = true;
+            tipoComboBox.Items.AddRange(new object[] { "1", "2" });
+            tipoComboBox.Location = new Point(735, 98);
+            tipoComboBox.Name = "tipoComboBox";
+            tipoComboBox.Size = new Size(246, 23);
+            tipoComboBox.Sorted = true;
+            tipoComboBox.TabIndex = 29;
+            // 
+            // tallerComboBox
+            // 
+            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tallerComboBox.FormattingEnabled = true;
+            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
+            tallerComboBox.Location = new Point(192, 194);
+            tallerComboBox.Name = "tallerComboBox";
+            tallerComboBox.Size = new Size(246, 23);
+            tallerComboBox.Sorted = true;
+            tallerComboBox.TabIndex = 28;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(48, 195);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(55, 17);
+            label8.TabIndex = 12;
+            label8.Text = "Taller:";
             // 
             // label1
             // 
@@ -291,14 +310,14 @@
             datosReparacionDataGridView.AllowUserToDeleteRows = false;
             datosReparacionDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosReparacionDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle4.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = Color.White;
-            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
-            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             datosReparacionDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosReparacionDataGridView.EnableHeadersVisualStyles = false;
             datosReparacionDataGridView.Location = new Point(22, 62);
@@ -320,6 +339,13 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 5;
+            // 
+            // fecha
+            // 
+            fecha.Location = new Point(735, 152);
+            fecha.Name = "fecha";
+            fecha.Size = new Size(246, 23);
+            fecha.TabIndex = 30;
             // 
             // Reparaciones
             // 
@@ -344,14 +370,12 @@
         #endregion
 
         private PictureBox adminAddUsers_imageView;
-        private TextBox fechaTextBox;
         private TextBox observacionesTextBox;
         private Button adminAddProducts_clearBtn;
         private Button adminAddProducts_deleteBtn;
         private Button adminAddProducts_updateBtn;
         private Button adminAddProducts_addBtn;
         private Label label4;
-        private TextBox tipoTextBox;
         private Label label6;
         private TextBox precioTextBox;
         private Label label7;
@@ -364,5 +388,9 @@
         private Label label1;
         private DataGridView datosReparacionDataGridView;
         private Panel panel1;
+        private Label label8;
+        private ComboBox tipoComboBox;
+        private ComboBox tallerComboBox;
+        private DateTimePicker fecha;
     }
 }

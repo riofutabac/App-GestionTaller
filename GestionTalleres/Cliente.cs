@@ -38,9 +38,18 @@ namespace GestionTalleres
             cedulaClienteTextBox.Text = "";
             nombreClienteTextBox.Text = "";
             apellidoClienteTextBox.Text = "";
-            ciudadClienteTextBox.Text = "";
-            tallerTextBox.Text = "";
+            tallerComboBox.Text = "";
+
+            // Habilitar todos los campos y revertir el botón
+            cedulaClienteTextBox.Enabled = true;
+            tallerComboBox.Enabled = true; // Desbloquear el taller al limpiar
+
+            // Cambiar el texto y eventos del botón de vuelta a "Agregar"
+            agregarBtn.Text = "AGREGAR";
+            agregarBtn.Click -= guardarCambiosBtn_Click; // Remover el evento de clic de guardar cambios
+            agregarBtn.Click += agregarBtn_Click; // Añadir el evento de clic de agregar
         }
+
 
         private void limpiarBtn_Click(object sender, EventArgs e)
         {
@@ -58,10 +67,9 @@ namespace GestionTalleres
         {
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(nombreClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(ciudadClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
+                !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("Nombre, Apellido y Ciudad deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nombre y Apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -71,32 +79,24 @@ namespace GestionTalleres
                 return;
             }
 
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("Código de Taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string ciCliente = cedulaClienteTextBox.Text;
             string nombreCliente = nombreClienteTextBox.Text;
             string apellidoCliente = apellidoClienteTextBox.Text;
-            string ciudad = ciudadClienteTextBox.Text;
-            string codigoTaller = tallerTextBox.Text;
+            string codigoTaller = tallerComboBox.Text;
             Guid rowguid = Guid.NewGuid(); // Generar un nuevo GUID para el rowguid
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "INSERT INTO cliente_N01 (ci_cliente, nombre_cliente, apellido_cliente, ciudad, codigo_taller, rowguid) VALUES (@ciCliente, @nombreCliente, @apellidoCliente, @ciudad, @codigoTaller, @rowguid)";
+                    string query = "INSERT INTO cliente_N01 (ci_cliente, nombre_cliente, apellido_cliente, codigo_taller, rowguid) VALUES (@ciCliente, @nombreCliente, @apellidoCliente, @codigoTaller, @rowguid)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ciCliente", ciCliente);
                         command.Parameters.AddWithValue("@nombreCliente", nombreCliente);
                         command.Parameters.AddWithValue("@apellidoCliente", apellidoCliente);
-                        command.Parameters.AddWithValue("@ciudad", ciudad);
                         command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
                         command.Parameters.AddWithValue("@rowguid", rowguid);
 
@@ -195,15 +195,16 @@ namespace GestionTalleres
             // Cargar la información del cliente seleccionado en los TextBoxes
             CargarDatosClienteParaEdicion();
 
-            // Deshabilitar la edición de la cédula
+            // Deshabilitar la edición de la cédula y el taller
             cedulaClienteTextBox.Enabled = false;
+            tallerComboBox.Enabled = false; // Bloquear el taller al editar
 
-            // Cambiar el botón de agregar a "Guardar Cambios" o habilitar un nuevo botón para guardar
-            // Por ejemplo:
+            // Cambiar el texto y eventos del botón agregar a "Guardar Cambios"
             agregarBtn.Text = "GUARDAR CAMBIOS";
-            agregarBtn.Click -= agregarBtn_Click; // Eliminar el evento de clic de agregar
-            agregarBtn.Click += guardarCambiosBtn_Click; // Agregar el evento de clic de guardar
+            agregarBtn.Click -= agregarBtn_Click; // Remover el evento de clic de agregar
+            agregarBtn.Click += guardarCambiosBtn_Click; // Añadir el evento de clic de guardar cambios
         }
+
 
         private void CargarDatosClienteParaEdicion()
         {
@@ -211,8 +212,7 @@ namespace GestionTalleres
             cedulaClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["CiCliente"].Value.ToString();
             nombreClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["NombreCliente"].Value.ToString();
             apellidoClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["ApellidoCliente"].Value.ToString();
-            ciudadClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
-            tallerTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
+            tallerComboBox.Text = datosClienteDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
 
         }
 
@@ -221,16 +221,9 @@ namespace GestionTalleres
         {
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(nombreClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(ciudadClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
+                !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("Nombre, Apellido y Ciudad deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("El código de taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nombre y Apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -255,13 +248,12 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "UPDATE cliente_N01 SET nombre_cliente = @nombreCliente, apellido_cliente = @apellidoCliente, ciudad = @ciudad, codigo_taller = @codigoTaller WHERE ci_cliente = @ciCliente";
+                    string query = "UPDATE cliente_N01 SET nombre_cliente = @nombreCliente, apellido_cliente = @apellidoCliente, codigo_taller = @codigoTaller WHERE ci_cliente = @ciCliente";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@nombreCliente", nombreClienteTextBox.Text);
                         command.Parameters.AddWithValue("@apellidoCliente", apellidoClienteTextBox.Text);
-                        command.Parameters.AddWithValue("@ciudad", ciudadClienteTextBox.Text);
-                        command.Parameters.AddWithValue("@codigoTaller", tallerTextBox.Text);
+                        command.Parameters.AddWithValue("@codigoTaller", tallerComboBox.Text);
                         command.Parameters.AddWithValue("@ciCliente", cedulaClienteTextBox.Text);
 
                         connection.Open();

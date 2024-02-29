@@ -39,15 +39,24 @@ namespace GestionTalleres
 
         private void Limpiar()
         {
-            // Restablecer el contenido de los TextBoxes a cadenas vacías
             codigoTextBox.Text = "";
             cedulaTextBox.Text = "";
             nombreTextBox.Text = "";
-            tallerTextBox.Text = "";
+            tallerComboBox.Text = "";
             salarioTextBox.Text = "";
-            fechaTextBox.Text = "";
+            fechaContrato.Text = "";
 
+            codigoTextBox.Enabled = true; // Desbloquear en caso de que estuviera bloqueado por edición
+            cedulaTextBox.Enabled = true; // Desbloquear siempre la cédula
+            fechaContrato.Enabled = true; // Desbloquear la fecha
+            tallerComboBox.Enabled = true; // Desbloquear el taller
+
+            // Revertir el botón de "Guardar Cambios" a "Agregar"
+            agregarBtn.Text = "Agregar";
+            agregarBtn.Click -= guardarCambiosBtn_Click; // Remover el evento de clic para guardar cambios
+            agregarBtn.Click += agregarBtn_Click; // Añadir el evento de clic para agregar
         }
+
 
         private void limpiarBtn_Click(object sender, EventArgs e)
         {
@@ -166,12 +175,6 @@ namespace GestionTalleres
                 return;
             }
 
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("El código de taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             if (!decimal.TryParse(salarioTextBox.Text, out decimal salario))
             {
                 MessageBox.Show("El salario debe ser un número válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -180,17 +183,12 @@ namespace GestionTalleres
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string codigoEmpleado = codigoTextBox.Text;
-            string codigoTaller = tallerTextBox.Text;
+            string codigoTaller = tallerComboBox.Text;
             string nombreEmpleado = nombreTextBox.Text;
             string ciEmpleado = cedulaTextBox.Text;
-            DateTime fechaContrato;
+            DateTime fecha = fechaContrato.Value;
 
-            // Intenta parsear la fecha del formato MM/dd/yy. Asegúrate de que el usuario haya ingresado la fecha en este formato.
-            if (!DateTime.TryParseExact(fechaTextBox.Text, "MM/dd/yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out fechaContrato))
-            {
-                MessageBox.Show("La fecha debe estar en el formato MM/dd/yy, por ejemplo, 12/31/20 para el 31 de diciembre de 2020.", "Formato de Fecha Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+
 
             // Primero, verifica si ya existe un empleado con el mismo código o cédula
             if (EmpleadoExiste(codigoEmpleado, ciEmpleado))
@@ -211,7 +209,7 @@ namespace GestionTalleres
                         command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
                         command.Parameters.AddWithValue("@nombreEmpleado", nombreEmpleado);
                         command.Parameters.AddWithValue("@ciEmpleado", ciEmpleado);
-                        command.Parameters.AddWithValue("@fechaContrato", fechaContrato);
+                        command.Parameters.AddWithValue("@fechaContrato", fecha);
                         command.Parameters.AddWithValue("@salario", salario);
 
                         connection.Open();
@@ -258,7 +256,8 @@ namespace GestionTalleres
             // Deshabilitar la edición del código de empleado, cédula y fecha de contrato
             codigoTextBox.Enabled = false;
             cedulaTextBox.Enabled = false;
-            fechaTextBox.Enabled = false;
+            fechaContrato.Enabled = false;
+            tallerComboBox.Enabled = false;
 
             // Cambiar el botón de agregar a "Guardar Cambios"
             agregarBtn.Text = "GUARDAR CAMBIOS";
@@ -272,8 +271,8 @@ namespace GestionTalleres
             codigoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoEmpleado"].Value.ToString();
             cedulaTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CiEmpleado"].Value.ToString();
             nombreTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["NombreEmpleado"].Value.ToString();
-            tallerTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
-            fechaTextBox.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaContrato"].Value).ToString("MM/dd/yy");
+            tallerComboBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
+            fechaContrato.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaContrato"].Value).ToString("MM/dd/yy");
             salarioTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Salario"].Value.ToString();
         }
 
@@ -283,12 +282,6 @@ namespace GestionTalleres
             if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("El nombre debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("El código de taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -305,7 +298,7 @@ namespace GestionTalleres
             Limpiar();
             codigoTextBox.Enabled = true;
             cedulaTextBox.Enabled = true;
-            fechaTextBox.Enabled = true;
+            fechaContrato.Enabled = true;
         }
 
         private void ActualizarEmpleado()
@@ -313,7 +306,7 @@ namespace GestionTalleres
             // Obtener los valores actualizados de los TextBoxes
             string codigoEmpleado = codigoTextBox.Text; // No se actualiza, pero se usa para identificar el registro
             string nombreEmpleado = nombreTextBox.Text;
-            string codigoTaller = tallerTextBox.Text;
+            string codigoTaller = tallerComboBox.Text;
             decimal salario;
             if (!decimal.TryParse(salarioTextBox.Text, out salario))
             {

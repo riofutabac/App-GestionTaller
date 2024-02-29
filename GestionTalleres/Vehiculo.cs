@@ -19,6 +19,7 @@ namespace GestionTalleres
         {
             InitializeComponent();
             vehiculoDB = new VehiculoDB();
+            CargarPropietarios();
 
         }
 
@@ -37,18 +38,36 @@ namespace GestionTalleres
             datosVehiculosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
+        private void CargarPropietarios()
+        {
+            List<String> propietarios = vehiculoDB.GetAllPropietarios();
+
+            propietarioComboBox.DataSource = propietarios;
+        }
+
         private void Limpiar()
         {
             // Restablece el contenido de los TextBoxes a cadenas vacías
             placaTextBox.Text = "";
-            ciudadTextBox.Text = "";
             colorTextBox.Text = "";
-            propietarioTextBox.Text = "";
+            propietarioComboBox.Text = "";
             chasisTextBox.Text = "";
             matriculaTextBox.Text = "";
             cilindrajeBox1.Text = "";
 
+            // Revertir el botón de "Guardar Cambios" a "Agregar"
+            adminAddProducts_addBtn.Text = "Agregar";
+            adminAddProducts_addBtn.Click -= GuardarCambiosVehiculo_Click; // Remover el evento de guardar cambios
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click; // Añadir el evento de agregar
+
+            // Habilitar todos los campos, incluyendo el taller
+            placaTextBox.Enabled = true;
+            chasisTextBox.Enabled = true;
+            matriculaTextBox.Enabled = true;
+            tallerComboBox.Enabled = true;
+            propietarioComboBox.Enabled = true;
         }
+
 
         private void adminAddProducts_clearBtn_Click(object sender, EventArgs e)
         {
@@ -117,23 +136,16 @@ namespace GestionTalleres
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(placaTextBox.Text, @"^[a-zA-Z0-9]+$") ||
                 !Regex.IsMatch(matriculaTextBox.Text, @"^[a-zA-Z0-9]+$") ||
+                !Regex.IsMatch(cilindrajeBox1.Text, @"^[a-zA-Z0-9]+$") ||
                 !Regex.IsMatch(chasisTextBox.Text, @"^[a-zA-Z0-9]+$"))
             {
-                MessageBox.Show("Matrícula, Placa y Chasis deben contener solo caracteres alfanuméricos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Matrícula, Placa, Chasis y Cilindraje deben contener solo caracteres alfanuméricos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!Regex.IsMatch(colorTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(propietarioTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(ciudadTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(colorTextBox.Text, @"^[a-zA-Z\s]+$")) 
             {
-                MessageBox.Show("Color, Nombre del propietario y Ciudad deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!int.TryParse(cilindrajeBox1.Text, out int cilindraje) || cilindraje <= 0)
-            {
-                MessageBox.Show("El cilindraje debe ser un número entero positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Color debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -142,8 +154,10 @@ namespace GestionTalleres
             string placa = placaTextBox.Text;
             string chasis = chasisTextBox.Text;
             string color = colorTextBox.Text;
-            string propietario = propietarioTextBox.Text;
-            string ciudad = ciudadTextBox.Text;
+            string propietario = propietarioComboBox.Text;
+            //string ciudad = ciudadTextBox.Text;
+            string taller = tallerComboBox.Text;
+            string cilindraje = cilindrajeBox1.Text;
 
             try
             {
@@ -160,7 +174,7 @@ namespace GestionTalleres
                         command.Parameters.AddWithValue("@chasis", chasis);
                         command.Parameters.AddWithValue("@color", color);
                         command.Parameters.AddWithValue("@propietario", propietario);
-                        command.Parameters.AddWithValue("@ciudad", ciudad);
+                        command.Parameters.AddWithValue("@ciudad", taller);
                         command.Parameters.AddWithValue("@cilindraje", cilindraje);
 
                         connection.Open();
@@ -202,6 +216,8 @@ namespace GestionTalleres
             placaTextBox.Enabled = false;
             chasisTextBox.Enabled = false;
             matriculaTextBox.Enabled = false;
+            tallerComboBox.Enabled = false;
+            propietarioComboBox.Enabled = false;
         }
         private void CargarDatosVehiculoParaEdicion()
         {
@@ -210,8 +226,8 @@ namespace GestionTalleres
             placaTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NumeroPlaca"].Value.ToString();
             colorTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Color"].Value.ToString();
             chasisTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Chasis"].Value.ToString();
-            propietarioTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NombrePropietario"].Value.ToString();
-            ciudadTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
+            propietarioComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NombrePropietario"].Value.ToString();
+            tallerComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
             cilindrajeBox1.Text = datosVehiculosDataGridView.CurrentRow.Cells["Cilindraje"].Value.ToString();
         }
 
@@ -223,19 +239,9 @@ namespace GestionTalleres
                 MessageBox.Show("El color debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!Regex.IsMatch(ciudadTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(cilindrajeBox1.Text, @"^[a-zA-Z0-9]+$"))
             {
-                MessageBox.Show("La ciudad debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!Regex.IsMatch(propietarioTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("El nombre del propietario debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!int.TryParse(cilindrajeBox1.Text, out int cilindraje) || cilindraje <= 0)
-            {
-                MessageBox.Show("El cilindraje debe ser un número entero positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El cilindraje debe ser alfanumerico.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -272,8 +278,8 @@ namespace GestionTalleres
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Color", colorTextBox.Text);
-                        command.Parameters.AddWithValue("@NombrePropietario", propietarioTextBox.Text);
-                        command.Parameters.AddWithValue("@Ciudad", ciudadTextBox.Text);
+                        command.Parameters.AddWithValue("@NombrePropietario", propietarioComboBox.Text);
+                        command.Parameters.AddWithValue("@Ciudad", tallerComboBox.Text);
                         command.Parameters.AddWithValue("@Cilindraje", cilindrajeBox1.Text);
                         command.Parameters.AddWithValue("@NumeroMatricula", matriculaTextBox.Text);
 
@@ -289,6 +295,5 @@ namespace GestionTalleres
             }
             CargarVehiculos();
         }
-
     }
 }

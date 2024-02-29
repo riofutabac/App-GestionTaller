@@ -37,8 +37,6 @@
             eliminarBtn = new Button();
             editarBtn = new Button();
             agregarBtn = new Button();
-            ciudadClienteTextBox = new TextBox();
-            label3 = new Label();
             apellidoClienteTextBox = new TextBox();
             label2 = new Label();
             adminAddUsers_imageView = new PictureBox();
@@ -46,10 +44,10 @@
             label6 = new Label();
             cedulaClienteTextBox = new TextBox();
             label7 = new Label();
-            tallerTextBox = new TextBox();
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosClienteDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -164,26 +162,6 @@
             agregarBtn.UseVisualStyleBackColor = false;
             agregarBtn.Click += agregarBtn_Click;
             // 
-            // ciudadClienteTextBox
-            // 
-            ciudadClienteTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ciudadClienteTextBox.Location = new Point(142, 377);
-            ciudadClienteTextBox.Margin = new Padding(4);
-            ciudadClienteTextBox.Name = "ciudadClienteTextBox";
-            ciudadClienteTextBox.Size = new Size(246, 26);
-            ciudadClienteTextBox.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 380);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(64, 17);
-            label3.TabIndex = 4;
-            label3.Text = "Ciudad:";
-            // 
             // apellidoClienteTextBox
             // 
             apellidoClienteTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -255,20 +233,11 @@
             label7.TabIndex = 21;
             label7.Text = "Cédula:";
             // 
-            // tallerTextBox
-            // 
-            tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tallerTextBox.Location = new Point(142, 433);
-            tallerTextBox.Margin = new Padding(4);
-            tallerTextBox.Name = "tallerTextBox";
-            tallerTextBox.Size = new Size(246, 26);
-            tallerTextBox.TabIndex = 18;
-            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 436);
+            label5.Location = new Point(20, 384);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(55, 17);
@@ -288,19 +257,17 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(tallerComboBox);
             panel1.Controls.Add(nombreClienteTextBox);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(cedulaClienteTextBox);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(tallerTextBox);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(limpiarBtn);
             panel1.Controls.Add(eliminarBtn);
             panel1.Controls.Add(editarBtn);
             panel1.Controls.Add(agregarBtn);
-            panel1.Controls.Add(ciudadClienteTextBox);
-            panel1.Controls.Add(label3);
             panel1.Controls.Add(apellidoClienteTextBox);
             panel1.Controls.Add(label2);
             panel1.Location = new Point(20, 30);
@@ -308,6 +275,17 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 721);
             panel1.TabIndex = 2;
+            // 
+            // tallerComboBox
+            // 
+            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tallerComboBox.FormattingEnabled = true;
+            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
+            tallerComboBox.Location = new Point(142, 384);
+            tallerComboBox.Name = "tallerComboBox";
+            tallerComboBox.Size = new Size(246, 23);
+            tallerComboBox.Sorted = true;
+            tallerComboBox.TabIndex = 28;
             // 
             // Cliente
             // 
@@ -339,8 +317,6 @@
         private Button eliminarBtn;
         private Button editarBtn;
         private Button agregarBtn;
-        private TextBox ciudadClienteTextBox;
-        private Label label3;
         private TextBox apellidoClienteTextBox;
         private Label label2;
         private PictureBox adminAddUsers_imageView;
@@ -348,11 +324,9 @@
         private Label label6;
         private TextBox cedulaClienteTextBox;
         private Label label7;
-        private TextBox tallerTextBox;
         private Label label5;
         private Panel panel3;
         private Panel panel1;
-
-
+        private ComboBox tallerComboBox;
     }
 }

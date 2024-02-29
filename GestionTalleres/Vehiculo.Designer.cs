@@ -31,14 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vehiculo));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
-            ciudadTextBox = new TextBox();
             colorTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
             adminAddProducts_deleteBtn = new Button();
             adminAddProducts_updateBtn = new Button();
             adminAddProducts_addBtn = new Button();
             label4 = new Label();
-            propietarioTextBox = new TextBox();
             label6 = new Label();
             chasisTextBox = new TextBox();
             label7 = new Label();
@@ -50,9 +48,11 @@
             label1 = new Label();
             datosVehiculosDataGridView = new DataGridView();
             panel2 = new Panel();
+            tallerComboBox = new ComboBox();
             cilindrajeBox1 = new TextBox();
             label8 = new Label();
             panel1 = new Panel();
+            propietarioComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)datosVehiculosDataGridView).BeginInit();
             panel2.SuspendLayout();
@@ -69,15 +69,6 @@
             adminAddUsers_imageView.SizeMode = PictureBoxSizeMode.Zoom;
             adminAddUsers_imageView.TabIndex = 26;
             adminAddUsers_imageView.TabStop = false;
-            // 
-            // ciudadTextBox
-            // 
-            ciudadTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ciudadTextBox.Location = new Point(735, 148);
-            ciudadTextBox.Margin = new Padding(4);
-            ciudadTextBox.Name = "ciudadTextBox";
-            ciudadTextBox.Size = new Size(246, 26);
-            ciudadTextBox.TabIndex = 25;
             // 
             // colorTextBox
             // 
@@ -155,18 +146,9 @@
             label4.Location = new Point(626, 152);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(64, 17);
+            label4.Size = new Size(55, 17);
             label4.TabIndex = 17;
-            label4.Text = "Ciudad:";
-            // 
-            // propietarioTextBox
-            // 
-            propietarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            propietarioTextBox.Location = new Point(735, 92);
-            propietarioTextBox.Margin = new Padding(4);
-            propietarioTextBox.Name = "propietarioTextBox";
-            propietarioTextBox.Size = new Size(246, 26);
-            propietarioTextBox.TabIndex = 16;
+            label4.Text = "Taller:";
             // 
             // label6
             // 
@@ -289,15 +271,15 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(propietarioComboBox);
+            panel2.Controls.Add(tallerComboBox);
             panel2.Controls.Add(adminAddUsers_imageView);
-            panel2.Controls.Add(ciudadTextBox);
             panel2.Controls.Add(colorTextBox);
             panel2.Controls.Add(adminAddProducts_clearBtn);
             panel2.Controls.Add(adminAddProducts_deleteBtn);
             panel2.Controls.Add(adminAddProducts_updateBtn);
             panel2.Controls.Add(adminAddProducts_addBtn);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(propietarioTextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(chasisTextBox);
             panel2.Controls.Add(label7);
@@ -313,6 +295,17 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 341);
             panel2.TabIndex = 4;
+            // 
+            // tallerComboBox
+            // 
+            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tallerComboBox.FormattingEnabled = true;
+            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
+            tallerComboBox.Location = new Point(735, 151);
+            tallerComboBox.Name = "tallerComboBox";
+            tallerComboBox.Size = new Size(246, 23);
+            tallerComboBox.Sorted = true;
+            tallerComboBox.TabIndex = 27;
             // 
             // cilindrajeBox1
             // 
@@ -345,6 +338,16 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 3;
             // 
+            // PropietarioComboBox
+            // 
+            propietarioComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            propietarioComboBox.FormattingEnabled = true;
+            propietarioComboBox.Location = new Point(735, 98);
+            propietarioComboBox.Name = "propietarioComboBox";
+            propietarioComboBox.Size = new Size(246, 23);
+            propietarioComboBox.Sorted = true;
+            propietarioComboBox.TabIndex = 28;
+            // 
             // Vehiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -368,14 +371,12 @@
         #endregion
 
         private PictureBox adminAddUsers_imageView;
-        private TextBox ciudadTextBox;
         private TextBox colorTextBox;
         private Button adminAddProducts_clearBtn;
         private Button adminAddProducts_deleteBtn;
         private Button adminAddProducts_updateBtn;
         private Button adminAddProducts_addBtn;
         private Label label4;
-        private TextBox propietarioTextBox;
         private Label label6;
         private TextBox chasisTextBox;
         private Label label7;
@@ -390,5 +391,8 @@
         private TextBox cilindrajeBox1;
         private Label label8;
         private Panel panel1;
+        private TextBox ciudadTextBox;
+        private ComboBox tallerComboBox;
+        private ComboBox propietarioComboBox;
     }
 }

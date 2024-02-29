@@ -39,14 +39,21 @@ namespace GestionTalleres
         }
         private void Limpiar()
         {
-            // Restablece el contenido de los TextBoxes a cadenas vacías
             idTextBox.Text = "";
             marcaTextBox.Text = "";
             nombreTextBox.Text = "";
             precioTextBox.Text = "";
             cantidadTextBox.Text = "";
-            tallerTextBox.Text = "";
+            tallerComboBox.Text = "";
+
+            idTextBox.Enabled = true; // Desbloquear el ID por si estaba bloqueado
+            tallerComboBox.Enabled = true; // Desbloquear el campo del taller al limpiar
+
+            adminAddProducts_addBtn.Text = "Agregar";
+            adminAddProducts_addBtn.Click -= GuardarCambiosRepuesto_Click; // Remover el evento de clic de guardar cambios
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click; // Reasignar el evento de clic de agregar
         }
+
 
         private void adminAddProducts_clearBtn_Click(object sender, EventArgs e)
         {
@@ -89,12 +96,6 @@ namespace GestionTalleres
 
         private void AgregarRepuesto()
         {
-            // Realizar las validaciones necesarias
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("El código de taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
@@ -116,7 +117,7 @@ namespace GestionTalleres
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string idRepuesto = idTextBox.Text;
-            string codigoTaller = tallerTextBox.Text;
+            string codigoTaller = tallerComboBox.Text;
             string nombreRepuesto = nombreTextBox.Text;
             string marca = marcaTextBox.Text;
             decimal precio;
@@ -230,7 +231,7 @@ namespace GestionTalleres
             nombreTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["NombreRepuesto"].Value.ToString();
             precioTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
             cantidadTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Cantidad"].Value.ToString();
-            tallerTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
+            tallerComboBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
             marcaTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Marca"].Value.ToString();
         }
 
@@ -258,11 +259,6 @@ namespace GestionTalleres
                 MessageBox.Show("El precio debe ser un número válido y positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (tallerTextBox.Text != "1" && tallerTextBox.Text != "2")
-            {
-                MessageBox.Show("El código de taller debe ser '1' o '2'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             // Llamada al método para actualizar el repuesto en la base de datos
             ActualizarRepuesto();
@@ -284,7 +280,7 @@ namespace GestionTalleres
             string marca = marcaTextBox.Text;
             decimal precio = decimal.Parse(precioTextBox.Text);
             int cantidad = int.Parse(cantidadTextBox.Text);
-            string codigoTaller = tallerTextBox.Text;
+            string codigoTaller = tallerComboBox.Text;
 
             try
             {
@@ -331,23 +327,20 @@ namespace GestionTalleres
 
         private void adminAddProducts_updateBtn_Click(object sender, EventArgs e)
         {
-            // Verificar si hay alguna fila actualmente seleccionada en el DataGridView de repuestos
             if (datosRepuestosDataGridView.CurrentRow == null)
             {
                 MessageBox.Show("Por favor, seleccione un repuesto para editar.", "Seleccionar repuesto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Cargar la información del repuesto seleccionado en los TextBoxes para editar
             CargarDatosRepuestoParaEdicion();
 
-            // Deshabilitar la edición del ID del repuesto
             idTextBox.Enabled = false;
+            tallerComboBox.Enabled = false; // Bloquear el campo del taller al editar
 
-            // Cambiar el texto del botón de agregar a "Guardar Cambios" y reasignar el evento click para guardar
             adminAddProducts_addBtn.Text = "Guardar Cambios";
-            adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click; // Eliminar el evento de clic de agregar
-            adminAddProducts_addBtn.Click += GuardarCambiosRepuesto_Click; // Agregar el evento de clic de guardar cambios
+            adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click;
+            adminAddProducts_addBtn.Click += GuardarCambiosRepuesto_Click;
         }
     }
 }

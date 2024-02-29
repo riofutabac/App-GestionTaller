@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Empleado));
             label1 = new Label();
             panel2 = new Panel();
@@ -42,16 +42,16 @@
             nombreTextBox = new TextBox();
             label2 = new Label();
             adminAddUsers_imageView = new PictureBox();
-            tallerTextBox = new TextBox();
             label6 = new Label();
             codigoTextBox = new TextBox();
             label7 = new Label();
             salarioTextBox = new TextBox();
             label4 = new Label();
-            fechaTextBox = new TextBox();
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            fechaContrato = new DateTimePicker();
+            tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosEmpleadosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -87,14 +87,14 @@
             datosEmpleadosDataGridView.AllowUserToDeleteRows = false;
             datosEmpleadosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosEmpleadosDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            datosEmpleadosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            datosEmpleadosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             datosEmpleadosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosEmpleadosDataGridView.EnableHeadersVisualStyles = false;
             datosEmpleadosDataGridView.Location = new Point(25, 75);
@@ -217,15 +217,6 @@
             adminAddUsers_imageView.TabIndex = 0;
             adminAddUsers_imageView.TabStop = false;
             // 
-            // tallerTextBox
-            // 
-            tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tallerTextBox.Location = new Point(142, 240);
-            tallerTextBox.Margin = new Padding(4);
-            tallerTextBox.Name = "tallerTextBox";
-            tallerTextBox.Size = new Size(246, 26);
-            tallerTextBox.TabIndex = 24;
-            // 
             // label6
             // 
             label6.AutoSize = true;
@@ -277,15 +268,6 @@
             label4.TabIndex = 19;
             label4.Text = "Salario:";
             // 
-            // fechaTextBox
-            // 
-            fechaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fechaTextBox.Location = new Point(142, 398);
-            fechaTextBox.Margin = new Padding(4);
-            fechaTextBox.Name = "fechaTextBox";
-            fechaTextBox.Size = new Size(246, 26);
-            fechaTextBox.TabIndex = 18;
-            // 
             // label5
             // 
             label5.AutoSize = true;
@@ -310,13 +292,13 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(tallerTextBox);
+            panel1.Controls.Add(fechaContrato);
+            panel1.Controls.Add(tallerComboBox);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(codigoTextBox);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(salarioTextBox);
             panel1.Controls.Add(label4);
-            panel1.Controls.Add(fechaTextBox);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(limpiarBtn);
@@ -332,6 +314,24 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 718);
             panel1.TabIndex = 2;
+            // 
+            // fechaContrato
+            // 
+            fechaContrato.Location = new Point(142, 400);
+            fechaContrato.Name = "fechaContrato";
+            fechaContrato.Size = new Size(246, 23);
+            fechaContrato.TabIndex = 29;
+            // 
+            // tallerComboBox
+            // 
+            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            tallerComboBox.FormattingEnabled = true;
+            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
+            tallerComboBox.Location = new Point(142, 242);
+            tallerComboBox.Name = "tallerComboBox";
+            tallerComboBox.Size = new Size(246, 23);
+            tallerComboBox.Sorted = true;
+            tallerComboBox.TabIndex = 28;
             // 
             // Empleado
             // 
@@ -368,15 +368,15 @@
         private TextBox nombreTextBox;
         private Label label2;
         private PictureBox adminAddUsers_imageView;
-        private TextBox tallerTextBox;
         private Label label6;
         private TextBox codigoTextBox;
         private Label label7;
         private TextBox salarioTextBox;
         private Label label4;
-        private TextBox fechaTextBox;
         private Label label5;
         private Panel panel3;
         private Panel panel1;
+        private ComboBox tallerComboBox;
+        private DateTimePicker fechaContrato;
     }
 }

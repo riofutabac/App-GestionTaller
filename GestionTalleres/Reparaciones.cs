@@ -20,6 +20,7 @@ namespace GestionTalleres
         {
             InitializeComponent();
             reparacionDB = new ReparacionDB();
+            CargarTiposDeReparaciones();
         }
 
         private void Reparaciones_Load(object sender, EventArgs e)
@@ -46,8 +47,20 @@ namespace GestionTalleres
             matriculaTextBox.Text = "";
             observacionesTextBox.Text = "";
             precioTextBox.Text = "";
-            tipoTextBox.Text = "";
-            fechaTextBox.Text = "";
+            tallerComboBox.Text = "";
+            fecha.Text = "";
+            tipoComboBox.Text = "";
+
+            // Desbloquear todos los campos para una nueva entrada
+            idTextBox.Enabled = true;
+            matriculaTextBox.Enabled = true;
+            fecha.Enabled = true;
+            tallerComboBox.Enabled = true;
+
+            // Cambiar el texto del botón y suscribir el evento correcto
+            adminAddProducts_addBtn.Text = "Agregar";
+            adminAddProducts_addBtn.Click -= guardarCambiosBtn_Click;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
         }
 
 
@@ -65,24 +78,10 @@ namespace GestionTalleres
                 return;
             }
 
-            // Validar que observaciones y tipo sean alfabéticos
-            if (!Regex.IsMatch(observacionesTextBox.Text, @"^[a-zA-Z\s]+$") || !Regex.IsMatch(tipoTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("Las observaciones y el tipo deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
             // Validar que precio sea numérico
             if (!decimal.TryParse(precioTextBox.Text, out decimal precio) || precio <= 0)
             {
                 MessageBox.Show("El precio debe ser un número positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Validar el formato de fecha
-            if (!DateTime.TryParseExact(fechaTextBox.Text, "MM/dd/yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fecha))
-            {
-                MessageBox.Show("La fecha debe estar en el formato MM/dd/yy, por ejemplo, 12/31/20 para el 31 de diciembre de 2020.", "Formato de Fecha Inválido", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -93,8 +92,8 @@ namespace GestionTalleres
             }
 
             // Si todas las validaciones son correctas, procede a añadir la reparación
-            string query = @"INSERT INTO reparacion_N01 (id_reparacion, numero_matricula, observaciones, precio, tipo, fecha_reparacion) 
-                     VALUES (@idReparacion, @numeroMatricula, @observaciones, @precio, @tipo, @fechaReparacion)";
+            string query = @"INSERT INTO reparacion_N01 (id_reparacion, numero_matricula, observaciones, precio, tipo, fecha_reparacion, taller) 
+                     VALUES (@idReparacion, @numeroMatricula, @observaciones, @precio, @tipo, @fechaReparacion, @taller)";
 
             using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
             {
@@ -104,8 +103,9 @@ namespace GestionTalleres
                     command.Parameters.AddWithValue("@numeroMatricula", matriculaTextBox.Text);
                     command.Parameters.AddWithValue("@observaciones", observacionesTextBox.Text);
                     command.Parameters.AddWithValue("@precio", precio); // Se asume que ya se validó que es decimal
-                    command.Parameters.AddWithValue("@tipo", tipoTextBox.Text);
+                    command.Parameters.AddWithValue("@tipo", tipoComboBox.Text);
                     command.Parameters.AddWithValue("@fechaReparacion", fecha); // Se asume que ya se validó el formato
+                    command.Parameters.AddWithValue("@taller", tallerComboBox.Text);
 
                     try
                     {
@@ -153,6 +153,11 @@ namespace GestionTalleres
             }
         }
 
+        private void CargarTiposDeReparaciones()
+        {
+            List<string> tiposReparaciones = reparacionDB.GetAllTiposDeReparaciones();
+            tipoComboBox.DataSource = tiposReparaciones;
+        }
 
 
 
@@ -171,7 +176,8 @@ namespace GestionTalleres
             // Deshabilitar la edición de id, matricula y fecha
             idTextBox.Enabled = false;
             matriculaTextBox.Enabled = false;
-            fechaTextBox.Enabled = false;
+            fecha.Enabled = false;
+            tallerComboBox.Enabled = false;
 
             // Cambiar el botón de agregar a "Guardar Cambios"
             adminAddProducts_addBtn.Text = "GUARDAR CAMBIOS";
@@ -185,8 +191,9 @@ namespace GestionTalleres
             matriculaTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["NumeroMatricula"].Value.ToString();
             observacionesTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Observaciones"].Value.ToString();
             precioTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
-            tipoTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Tipo"].Value.ToString();
-            fechaTextBox.Text = ((DateTime)datosReparacionDataGridView.CurrentRow.Cells["FechaReparacion"].Value).ToString("MM/dd/yy");
+            tipoComboBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Tipo"].Value.ToString();
+            tallerComboBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Taller"].Value.ToString();
+            fecha.Text = ((DateTime)datosReparacionDataGridView.CurrentRow.Cells["FechaContrato"].Value).ToString("MM/dd/yy");
         }
 
         private void guardarCambiosBtn_Click(object sender, EventArgs e)
@@ -195,12 +202,6 @@ namespace GestionTalleres
             if (!Regex.IsMatch(observacionesTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("Las observaciones deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!Regex.IsMatch(tipoTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("El tipo debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -220,10 +221,11 @@ namespace GestionTalleres
             Limpiar();
             idTextBox.Enabled = true;
             matriculaTextBox.Enabled = true;
-            fechaTextBox.Enabled = true;
+            fecha.Enabled = true;
 
             // Actualizar la lista de reparaciones
             CargarReparaciones();
+            Limpiar();
         }
 
         private void ActualizarReparacion()
@@ -233,12 +235,6 @@ namespace GestionTalleres
             if (!Regex.IsMatch(observacionesTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("Las observaciones deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (!Regex.IsMatch(tipoTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("El tipo debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -258,14 +254,16 @@ namespace GestionTalleres
                     string query = @"UPDATE reparacion_N01 SET 
                              observaciones = @observaciones, 
                              precio = @precio, 
-                             tipo = @tipo
+                             tipo = @tipo,
+                             taller = @taller
                              WHERE id_reparacion = @idReparacion";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@observaciones", observacionesTextBox.Text);
                         command.Parameters.AddWithValue("@precio", precio);
-                        command.Parameters.AddWithValue("@tipo", tipoTextBox.Text);
+                        command.Parameters.AddWithValue("@tipo", tipoComboBox.Text);
+                        command.Parameters.AddWithValue("@taller", tallerComboBox.Text);
                         command.Parameters.AddWithValue("@idReparacion", idReparacion); // El ID ya viene definido y no se edita
 
                         connection.Open();
