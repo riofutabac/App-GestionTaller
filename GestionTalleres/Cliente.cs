@@ -38,6 +38,7 @@ namespace GestionTalleres
             cedulaClienteTextBox.Text = "";
             nombreClienteTextBox.Text = "";
             apellidoClienteTextBox.Text = "";
+            ciudadTextBox.Text = "";
             tallerComboBox.Text = "";
 
             // Habilitar todos los campos y revertir el botón
@@ -67,9 +68,10 @@ namespace GestionTalleres
         {
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(nombreClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(ciudadTextBox.Text, @"^[a-zA-Z\s]+$") ||
                 !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("Nombre y Apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nombre, Apellido y Ciudad deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -80,25 +82,26 @@ namespace GestionTalleres
             }
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
-            string ciCliente = cedulaClienteTextBox.Text;
-            string nombreCliente = nombreClienteTextBox.Text;
-            string apellidoCliente = apellidoClienteTextBox.Text;
-            string codigoTaller = tallerComboBox.Text;
+            string Cedula = cedulaClienteTextBox.Text;
+            string Nombre = nombreClienteTextBox.Text;
+            string Apellido = apellidoClienteTextBox.Text;
+            string Ciudad = ciudadTextBox.Text;
+            string ID_Taller = tallerComboBox.Text;
             Guid rowguid = Guid.NewGuid(); // Generar un nuevo GUID para el rowguid
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "INSERT INTO cliente_N01 (ci_cliente, nombre_cliente, apellido_cliente, codigo_taller, rowguid) VALUES (@ciCliente, @nombreCliente, @apellidoCliente, @codigoTaller, @rowguid)";
+                    string query = "INSERT INTO Cliente_01 (Cedula, Nombre, Apellido, Ciudad, ID_Taller) VALUES (@Cedula, @Nombre, @Apellido, @Ciudad, @ID_Taller)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@ciCliente", ciCliente);
-                        command.Parameters.AddWithValue("@nombreCliente", nombreCliente);
-                        command.Parameters.AddWithValue("@apellidoCliente", apellidoCliente);
-                        command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
-                        command.Parameters.AddWithValue("@rowguid", rowguid);
+                        command.Parameters.AddWithValue("@Nombre", nombreClienteTextBox.Text);
+                        command.Parameters.AddWithValue("@Apellido", apellidoClienteTextBox.Text);
+                        command.Parameters.AddWithValue("@Ciudad", ciudadTextBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@Cedula", cedulaClienteTextBox.Text);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -143,7 +146,7 @@ namespace GestionTalleres
             if (confirmResult == DialogResult.Yes)
             {
                 // Obtener la cédula del cliente seleccionado
-                string ciClienteSeleccionado = datosClienteDataGridView.CurrentRow.Cells["CiCliente"].Value.ToString();
+                string ciClienteSeleccionado = datosClienteDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
                 EliminarCliente(ciClienteSeleccionado);
             }
         }
@@ -155,11 +158,11 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "DELETE FROM cliente_N01 WHERE ci_cliente = @ciCliente";
+                    string query = "DELETE FROM Cliente_01 WHERE Cedula = @Cedula";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@ciCliente", ciCliente);
+                        command.Parameters.AddWithValue("@Cedula", ciCliente);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -208,11 +211,11 @@ namespace GestionTalleres
 
         private void CargarDatosClienteParaEdicion()
         {
-            // Asumiendo que el nombre de la columna que contiene la cédula del cliente es "ci_cliente"
-            cedulaClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["CiCliente"].Value.ToString();
-            nombreClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["NombreCliente"].Value.ToString();
-            apellidoClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["ApellidoCliente"].Value.ToString();
-            tallerComboBox.Text = datosClienteDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
+            cedulaClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
+            nombreClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
+            apellidoClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
+            ciudadTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
+            tallerComboBox.Text = datosClienteDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
 
         }
 
@@ -221,9 +224,10 @@ namespace GestionTalleres
         {
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(nombreClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(ciudadTextBox.Text, @"^[a-zA-Z\s]+$") ||
                 !Regex.IsMatch(apellidoClienteTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("Nombre y Apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Nombre, Apellido y Ciudad deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -248,13 +252,14 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "UPDATE cliente_N01 SET nombre_cliente = @nombreCliente, apellido_cliente = @apellidoCliente, codigo_taller = @codigoTaller WHERE ci_cliente = @ciCliente";
+                    string query = "UPDATE Cliente_01 SET Nombre = @Nombre, Apellido = @Apellido, ID_Taller = @ID_Taller, Ciudad = @Ciudad WHERE Cedula = @Cedula";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@nombreCliente", nombreClienteTextBox.Text);
-                        command.Parameters.AddWithValue("@apellidoCliente", apellidoClienteTextBox.Text);
-                        command.Parameters.AddWithValue("@codigoTaller", tallerComboBox.Text);
-                        command.Parameters.AddWithValue("@ciCliente", cedulaClienteTextBox.Text);
+                        command.Parameters.AddWithValue("@Nombre", nombreClienteTextBox.Text);
+                        command.Parameters.AddWithValue("@Apellido", apellidoClienteTextBox.Text);
+                        command.Parameters.AddWithValue("@Ciudad", ciudadTextBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@Cedula", cedulaClienteTextBox.Text);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();

@@ -66,6 +66,7 @@ namespace GestionTalleres
             matriculaTextBox.Enabled = true;
             tallerComboBox.Enabled = true;
             propietarioComboBox.Enabled = true;
+            fechaCompra.Enabled = true; 
         }
 
 
@@ -88,21 +89,21 @@ namespace GestionTalleres
             if (confirmResult == DialogResult.Yes)
             {
                 // Obtener la matrícula o ID del vehículo seleccionado
-                string matriculaSeleccionada = datosVehiculosDataGridView.CurrentRow.Cells["NumeroMatricula"].Value.ToString();
+                string matriculaSeleccionada = datosVehiculosDataGridView.CurrentRow.Cells["Matricula"].Value.ToString();
                 EliminarVehiculo(matriculaSeleccionada);
             }
         }
-        private void EliminarVehiculo(string matricula)
+        private void EliminarVehiculo(string Matricula)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
-                    string query = "DELETE FROM vehiculo_N01 WHERE numero_matricula = @matricula";
+                    string query = "DELETE FROM Vehiculo_01 WHERE Matricula = @Matricula";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@matricula", matricula);
+                        command.Parameters.AddWithValue("@Matricula", Matricula);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -133,6 +134,8 @@ namespace GestionTalleres
         }
         private void AgregarVehiculo()
         {
+
+
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(placaTextBox.Text, @"^[a-zA-Z0-9]+$") ||
                 !Regex.IsMatch(matriculaTextBox.Text, @"^[a-zA-Z0-9]+$") ||
@@ -150,32 +153,38 @@ namespace GestionTalleres
             }
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
-            string matricula = matriculaTextBox.Text;
-            string placa = placaTextBox.Text;
-            string chasis = chasisTextBox.Text;
-            string color = colorTextBox.Text;
-            string propietario = propietarioComboBox.Text;
-            //string ciudad = ciudadTextBox.Text;
-            string taller = tallerComboBox.Text;
-            string cilindraje = cilindrajeBox1.Text;
+            string Matricula = matriculaTextBox.Text;
+            string Placa = placaTextBox.Text;
+            string Chasis = chasisTextBox.Text;
+            string Color = colorTextBox.Text;
+
+            string[] propietarioParts = propietarioComboBox.Text.Split(new[] { " " }, StringSplitOptions.RemoveEmptyEntries);
+            string Nombre = propietarioParts[0];
+            string Apellido = propietarioParts.Length > 1 ? propietarioParts[1] : "";
+
+            DateTime Fecha_Compra = fechaCompra.Value;
+            string ID_Taller = tallerComboBox.Text;
+            string Cilindraje = cilindrajeBox1.Text;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
                     string query = @"
-                INSERT INTO vehiculo_N01 (numero_matricula, numero_placa, chasis, color, nombre_propietario, ciudad, cilindraje) 
-                VALUES (@matricula, @placa, @chasis, @color, @propietario, @ciudad, @cilindraje)";
+                INSERT INTO Vehiculo_01 (Matricula, ID_Taller, Placa, Color, Cilindraje, Fecha_Compra, Chasis, Nombre, Apellido) 
+                VALUES (@Matricula, @ID_Taller, @Placa, @Color, @Cilindraje, @Fecha_Compra, @Chasis, @Nombre, @Apellido)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@matricula", matricula);
-                        command.Parameters.AddWithValue("@placa", placa);
-                        command.Parameters.AddWithValue("@chasis", chasis);
-                        command.Parameters.AddWithValue("@color", color);
-                        command.Parameters.AddWithValue("@propietario", propietario);
-                        command.Parameters.AddWithValue("@ciudad", taller);
-                        command.Parameters.AddWithValue("@cilindraje", cilindraje);
+                        command.Parameters.AddWithValue("@Matricula", Matricula);
+                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@Placa", Placa);
+                        command.Parameters.AddWithValue("@Color", Color);
+                        command.Parameters.AddWithValue("@Cilindraje", Cilindraje);
+                        command.Parameters.AddWithValue("@Fecha_Compra", Fecha_Compra);
+                        command.Parameters.AddWithValue("@Chasis", Chasis);
+                        command.Parameters.AddWithValue("@Nombre", Nombre);
+                        command.Parameters.AddWithValue("@Apellido", Apellido);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -218,18 +227,26 @@ namespace GestionTalleres
             matriculaTextBox.Enabled = false;
             tallerComboBox.Enabled = false;
             propietarioComboBox.Enabled = false;
+            fechaCompra.Enabled = false;
         }
         private void CargarDatosVehiculoParaEdicion()
         {
             // Suponiendo que tu DataGridView tiene nombres de columna como se muestra
-            matriculaTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NumeroMatricula"].Value.ToString();
-            placaTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NumeroPlaca"].Value.ToString();
+            matriculaTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Matricula"].Value.ToString();
+            placaTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Placa"].Value.ToString();
             colorTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Color"].Value.ToString();
             chasisTextBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Chasis"].Value.ToString();
-            propietarioComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["NombrePropietario"].Value.ToString();
-            tallerComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
+
+            // Concatenar el nombre y apellido recuperados de la fila actual
+            string nombreCompleto = datosVehiculosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString() + " " + datosVehiculosDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
+
+            // Buscar el ítem en el ComboBox que coincida con el nombre completo y seleccionarlo
+            propietarioComboBox.SelectedIndex = propietarioComboBox.FindStringExact(nombreCompleto);
+
+            tallerComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
             cilindrajeBox1.Text = datosVehiculosDataGridView.CurrentRow.Cells["Cilindraje"].Value.ToString();
         }
+
 
         private void GuardarCambiosVehiculo_Click(object sender, EventArgs e)
         {
@@ -268,20 +285,19 @@ namespace GestionTalleres
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
                     string query = @"
-                UPDATE Vehiculo_N01
-                SET Color = @Color, 
-                    Nombre_Propietario = @NombrePropietario, 
-                    Ciudad = @Ciudad, 
+                UPDATE Vehiculo_01
+                SET Color = @Color,  
                     Cilindraje = @Cilindraje
-                WHERE Numero_Matricula = @NumeroMatricula";
+                WHERE Matricula = @Matricula";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Color", colorTextBox.Text);
-                        command.Parameters.AddWithValue("@NombrePropietario", propietarioComboBox.Text);
-                        command.Parameters.AddWithValue("@Ciudad", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@Nombre", propietarioComboBox.Text);
+                        command.Parameters.AddWithValue("@Apellido", propietarioComboBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
                         command.Parameters.AddWithValue("@Cilindraje", cilindrajeBox1.Text);
-                        command.Parameters.AddWithValue("@NumeroMatricula", matriculaTextBox.Text);
+                        command.Parameters.AddWithValue("@Matricula", matriculaTextBox.Text);
 
                         connection.Open();
                         command.ExecuteNonQuery();

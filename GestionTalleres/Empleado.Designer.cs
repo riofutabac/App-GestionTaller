@@ -50,6 +50,8 @@
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            apellidoTextBox = new TextBox();
+            label8 = new Label();
             fechaContrato = new DateTimePicker();
             tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
@@ -169,7 +171,7 @@
             // cedulaTextBox
             // 
             cedulaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cedulaTextBox.Location = new Point(142, 342);
+            cedulaTextBox.Location = new Point(142, 386);
             cedulaTextBox.Margin = new Padding(4);
             cedulaTextBox.Name = "cedulaTextBox";
             cedulaTextBox.Size = new Size(246, 26);
@@ -179,7 +181,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 345);
+            label3.Location = new Point(20, 389);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(64, 17);
@@ -251,7 +253,7 @@
             // salarioTextBox
             // 
             salarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            salarioTextBox.Location = new Point(142, 451);
+            salarioTextBox.Location = new Point(142, 495);
             salarioTextBox.Margin = new Padding(4);
             salarioTextBox.Name = "salarioTextBox";
             salarioTextBox.Size = new Size(246, 26);
@@ -261,7 +263,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(20, 454);
+            label4.Location = new Point(20, 498);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(65, 17);
@@ -272,7 +274,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 400);
+            label5.Location = new Point(20, 444);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(73, 17);
@@ -292,6 +294,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(apellidoTextBox);
+            panel1.Controls.Add(label8);
             panel1.Controls.Add(fechaContrato);
             panel1.Controls.Add(tallerComboBox);
             panel1.Controls.Add(label6);
@@ -315,9 +319,29 @@
             panel1.Size = new Size(435, 718);
             panel1.TabIndex = 2;
             // 
+            // apellidoTextBox
+            // 
+            apellidoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            apellidoTextBox.Location = new Point(142, 337);
+            apellidoTextBox.Margin = new Padding(4);
+            apellidoTextBox.Name = "apellidoTextBox";
+            apellidoTextBox.Size = new Size(246, 26);
+            apellidoTextBox.TabIndex = 31;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(20, 340);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(72, 17);
+            label8.TabIndex = 30;
+            label8.Text = "Apellido:";
+            // 
             // fechaContrato
             // 
-            fechaContrato.Location = new Point(142, 400);
+            fechaContrato.Location = new Point(142, 444);
             fechaContrato.Name = "fechaContrato";
             fechaContrato.Size = new Size(246, 23);
             fechaContrato.TabIndex = 29;
@@ -378,5 +402,7 @@
         private Panel panel1;
         private ComboBox tallerComboBox;
         private DateTimePicker fechaContrato;
+        private TextBox apellidoTextBox;
+        private Label label8;
     }
 }

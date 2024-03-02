@@ -42,6 +42,7 @@ namespace GestionTalleres
             codigoTextBox.Text = "";
             cedulaTextBox.Text = "";
             nombreTextBox.Text = "";
+            apellidoTextBox.Text = "";
             tallerComboBox.Text = "";
             salarioTextBox.Text = "";
             fechaContrato.Text = "";
@@ -77,22 +78,22 @@ namespace GestionTalleres
             if (confirmResult == DialogResult.Yes)
             {
                 // Obtener el código del empleado seleccionado, asumiendo que la columna se llama 'codigo_empleado'
-                string codigoEmpleadoSeleccionado = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoEmpleado"].Value.ToString();
-                EliminarEmpleado(codigoEmpleadoSeleccionado);
+                string ID_Empleado = datosEmpleadosDataGridView.CurrentRow.Cells["ID_Empleado"].Value.ToString();
+                EliminarEmpleado(ID_Empleado);
             }
         }
 
-        private void EliminarEmpleado(string codigoEmpleado)
+        private void EliminarEmpleado(string ID_Empleado)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString)) // Asegúrate de tener la cadena de conexión correcta aquí
                 {
-                    string query = "DELETE FROM empleado_01 WHERE codigo_empleado = @codigoEmpleado";
+                    string query = "DELETE FROM Empleado_01 WHERE ID_Empleado = @ID_Empleado";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@codigoEmpleado", codigoEmpleado);
+                        command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -122,7 +123,7 @@ namespace GestionTalleres
             CargarEmpleados();
         }
 
-        private bool EmpleadoExiste(string codigoEmpleado, string ciEmpleado)
+        private bool EmpleadoExiste(string ID_Empleado, string Cedula)
         {
             try
             {
@@ -133,14 +134,14 @@ namespace GestionTalleres
                     // Consulta para verificar la existencia de un empleado con el mismo código o cédula
                     string query = @"
                 SELECT COUNT(1) 
-                FROM empleado_01 
-                WHERE codigo_empleado = @codigoEmpleado 
-                   OR ci_empleado = @ciEmpleado";
+                FROM Empleado_01 
+                WHERE ID_Empleado = @ID_Empleado 
+                   OR Cedula = @Cedula";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@codigoEmpleado", codigoEmpleado);
-                        command.Parameters.AddWithValue("@ciEmpleado", ciEmpleado);
+                        command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
+                        command.Parameters.AddWithValue("@Cedula", Cedula);
 
                         int count = (int)command.ExecuteScalar();
                         return count > 0;
@@ -157,9 +158,10 @@ namespace GestionTalleres
         private void AgregarEmpleado()
         {
             // Realizar las validaciones necesarias
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") || 
+                !Regex.IsMatch(apellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("El nombre debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El nombre  y apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -175,23 +177,24 @@ namespace GestionTalleres
                 return;
             }
 
-            if (!decimal.TryParse(salarioTextBox.Text, out decimal salario))
+            if (!decimal.TryParse(salarioTextBox.Text, out decimal Salario))
             {
                 MessageBox.Show("El salario debe ser un número válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
-            string codigoEmpleado = codigoTextBox.Text;
-            string codigoTaller = tallerComboBox.Text;
-            string nombreEmpleado = nombreTextBox.Text;
-            string ciEmpleado = cedulaTextBox.Text;
-            DateTime fecha = fechaContrato.Value;
+            string ID_Empleado = codigoTextBox.Text;
+            string ID_Taller = tallerComboBox.Text;
+            string Nombre = nombreTextBox.Text;
+            string Apellido = apellidoTextBox.Text;
+            string Cedula = cedulaTextBox.Text;
+            DateTime FechaC = fechaContrato.Value;
 
 
 
             // Primero, verifica si ya existe un empleado con el mismo código o cédula
-            if (EmpleadoExiste(codigoEmpleado, ciEmpleado))
+            if (EmpleadoExiste(ID_Empleado, Cedula))
             {
                 MessageBox.Show("Ya existe un empleado con el mismo código o cédula.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -201,16 +204,17 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString))
                 {
-                    string query = "INSERT INTO empleado_01 (codigo_empleado, codigo_taller, nombre_empleado, ci_empleado, fecha_contrato, salario) VALUES (@codigoEmpleado, @codigoTaller, @nombreEmpleado, @ciEmpleado, @fechaContrato, @salario)";
+                    string query = "INSERT INTO Empleado_01 (ID_Empleado, ID_Taller, Nombre, Apellido, Cedula, FechaC, Salario) VALUES (@ID_Empleado, @ID_Taller, @Nombre, @Apellido, @Cedula, @FechaC, @Salario)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@codigoEmpleado", codigoEmpleado);
-                        command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
-                        command.Parameters.AddWithValue("@nombreEmpleado", nombreEmpleado);
-                        command.Parameters.AddWithValue("@ciEmpleado", ciEmpleado);
-                        command.Parameters.AddWithValue("@fechaContrato", fecha);
-                        command.Parameters.AddWithValue("@salario", salario);
+                        command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
+                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@Nombre", Nombre);
+                        command.Parameters.AddWithValue("@Apellido", Nombre);
+                        command.Parameters.AddWithValue("@Cedula", Cedula);
+                        command.Parameters.AddWithValue("@FechaC", FechaC);
+                        command.Parameters.AddWithValue("@Salario", Salario);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -268,20 +272,22 @@ namespace GestionTalleres
         private void CargarDatosEmpleadoParaEdicion()
         {
             // Asumiendo que las columnas tienen estos nombres en tu DataGridView
-            codigoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoEmpleado"].Value.ToString();
-            cedulaTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CiEmpleado"].Value.ToString();
-            nombreTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["NombreEmpleado"].Value.ToString();
-            tallerComboBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
-            fechaContrato.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaContrato"].Value).ToString("MM/dd/yy");
+            codigoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["ID_Empleado"].Value.ToString();
+            cedulaTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
+            nombreTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
+            apellidoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
+            tallerComboBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
+            fechaContrato.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaC"].Value).ToString("MM/dd/yy");
             salarioTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Salario"].Value.ToString();
         }
 
         private void guardarCambiosBtn_Click(object sender, EventArgs e)
         {
             // Realizar las validaciones necesarias
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") || 
+                !Regex.IsMatch(apellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("El nombre debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("El nombre y apeliido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -299,16 +305,18 @@ namespace GestionTalleres
             codigoTextBox.Enabled = true;
             cedulaTextBox.Enabled = true;
             fechaContrato.Enabled = true;
+            tallerComboBox.Enabled = true;
         }
 
         private void ActualizarEmpleado()
         {
             // Obtener los valores actualizados de los TextBoxes
-            string codigoEmpleado = codigoTextBox.Text; // No se actualiza, pero se usa para identificar el registro
-            string nombreEmpleado = nombreTextBox.Text;
-            string codigoTaller = tallerComboBox.Text;
-            decimal salario;
-            if (!decimal.TryParse(salarioTextBox.Text, out salario))
+            string ID_Empleado = codigoTextBox.Text; // No se actualiza, pero se usa para identificar el registro
+            string Nombre = nombreTextBox.Text;
+            string Apellido = apellidoTextBox.Text;
+            string ID_Taller = tallerComboBox.Text;
+            decimal Salario;
+            if (!decimal.TryParse(salarioTextBox.Text, out Salario))
             {
                 MessageBox.Show("El salario debe ser un número válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -321,18 +329,20 @@ namespace GestionTalleres
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString))
                 {
                     string query = @"
-                UPDATE empleado_01 
-                SET nombre_empleado = @nombreEmpleado, 
-                    codigo_taller = @codigoTaller, 
-                    salario = @salario
-                WHERE codigo_empleado = @codigoEmpleado";
+                UPDATE Empleado_01 
+                SET Nombre = @Nombre,
+                    Apellido = @Apellido,
+                    ID_Taller = @ID_Taller, 
+                    Salario = @Salario
+                WHERE ID_Empleado = @ID_Empleado";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@nombreEmpleado", nombreEmpleado);
-                        command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
-                        command.Parameters.AddWithValue("@salario", salario);
-                        command.Parameters.AddWithValue("@codigoEmpleado", codigoEmpleado);
+                        command.Parameters.AddWithValue("@Nombre", Nombre);
+                        command.Parameters.AddWithValue("@Apellido", Apellido);
+                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@Salario", Salario);
+                        command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();

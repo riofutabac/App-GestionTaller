@@ -10,12 +10,11 @@ namespace GestionTalleres
     {
         public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
 
-        public string CiCliente { get; set; }
-        public string NombreCliente { get; set; }
-        public string ApellidoCliente { get; set; }
+        public string Cedula { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
         public string Ciudad { get; set; }
-        public string CodigoTaller { get; set; }
-        public Guid Rowguid { get; set; }
+        public string ID_Taller { get; set; }
 
         public List<ClienteDB> GetAllClientes()
         {
@@ -23,7 +22,7 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM cliente_N01";
+                string query = "SELECT * FROM Cliente_01";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -36,12 +35,11 @@ namespace GestionTalleres
                         {
                             ClienteDB cliente = new ClienteDB()
                             {
-                                CiCliente = reader["ci_cliente"].ToString(),
-                                NombreCliente = reader["nombre_cliente"].ToString(),
-                                ApellidoCliente = reader["apellido_cliente"].ToString(),
-                                Ciudad = reader["ciudad"].ToString(),
-                                CodigoTaller = reader["codigo_taller"].ToString(),
-                                Rowguid = (Guid)reader["rowguid"]
+                                Cedula = reader["Cedula"].ToString(),
+                                Nombre = reader["Nombre"].ToString(),
+                                Apellido = reader["Apellido"].ToString(),
+                                Ciudad = reader["Ciudad"].ToString(),
+                                ID_Taller = reader["ID_Taller"].ToString(),
                             };
                             clientes.Add(cliente);
                         }

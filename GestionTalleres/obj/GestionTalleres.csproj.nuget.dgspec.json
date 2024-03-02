@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\GestionTalleres.csproj": {}
+    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj": {}
   },
   "projects": {
-    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\GestionTalleres.csproj": {
+    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\GestionTalleres.csproj",
+        "projectUniqueName": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj",
         "projectName": "GestionTalleres",
-        "projectPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\GestionTalleres.csproj",
+        "projectPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj",
         "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\obj\\",
+        "outputPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",

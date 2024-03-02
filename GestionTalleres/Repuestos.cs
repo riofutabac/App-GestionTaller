@@ -60,17 +60,17 @@ namespace GestionTalleres
             Limpiar();
         }
 
-        private void EliminarRepuesto(string idRepuesto)
+        private void EliminarRepuesto(string ID_Repuesto)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
-                    string query = "DELETE FROM repuesto_N01 WHERE id_repuesto = @idRepuesto";
+                    string query = "DELETE FROM Repuestos_01 WHERE ID_Repuesto = @ID_Repuesto";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@idRepuesto", idRepuesto);
+                        command.Parameters.AddWithValue("@ID_Repuesto", ID_Repuesto);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -97,37 +97,33 @@ namespace GestionTalleres
         private void AgregarRepuesto()
         {
 
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("El nombre debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La Marca y el Nombre deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!int.TryParse(cantidadTextBox.Text, out int cantidad) || cantidad < 0)
+            if (!int.TryParse(cantidadTextBox.Text, out int Cantidad) || Cantidad < 0)
             {
                 MessageBox.Show("La cantidad debe ser un número entero positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (!Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("La marca debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
-            string idRepuesto = idTextBox.Text;
-            string codigoTaller = tallerComboBox.Text;
-            string nombreRepuesto = nombreTextBox.Text;
-            string marca = marcaTextBox.Text;
-            decimal precio;
-            if (!decimal.TryParse(precioTextBox.Text, out precio) || precio < 0)
+            string ID_Repuesto = idTextBox.Text;
+            string ID_Taller = tallerComboBox.Text;
+            string Nombre = nombreTextBox.Text;
+            string Marca = marcaTextBox.Text;
+            decimal Precio;
+            if (!decimal.TryParse(precioTextBox.Text, out Precio) || Precio < 0)
             {
                 MessageBox.Show("El precio debe ser un número válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (RepuestoExiste(idRepuesto))
+            if (RepuestoExiste(ID_Repuesto))
             {
                 MessageBox.Show("Ya existe un repuesto con el mismo ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -142,11 +138,11 @@ namespace GestionTalleres
                         connection.Open();
 
                         // Consulta para verificar la existencia de un repuesto con el mismo ID
-                        string query = "SELECT COUNT(1) FROM repuesto_N01 WHERE id_repuesto = @idRepuesto";
+                        string query = "SELECT COUNT(1) FROM Repuestos_01 WHERE ID_Repuesto = @ID_Repuesto";
 
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
-                            command.Parameters.AddWithValue("@idRepuesto", idRepuesto);
+                            command.Parameters.AddWithValue("@ID_Repuesto", idRepuesto);
 
                             int count = (int)command.ExecuteScalar();
                             return count > 0;
@@ -165,18 +161,17 @@ namespace GestionTalleres
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
                     string query = @"
-                INSERT INTO repuesto_N01 (id_repuesto, codigo_taller, nombre_repuesto, precio, cantidad, stock, marca) 
-                VALUES (@idRepuesto, @codigoTaller, @nombreRepuesto, @precio, @cantidad, @stock, @marca)";
+                INSERT INTO Repuestos_01 (ID_Repuesto, ID_Taller, Nombre, Precio, Cantidad, Marca) 
+                VALUES (@ID_Repuesto, @ID_Taller, @Nombre, @Precio, @Cantidad, @Marca)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@idRepuesto", idRepuesto);
-                        command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
-                        command.Parameters.AddWithValue("@nombreRepuesto", nombreRepuesto);
-                        command.Parameters.AddWithValue("@precio", precio);
-                        command.Parameters.AddWithValue("@cantidad", cantidad);
-                        command.Parameters.AddWithValue("@stock", cantidad);
-                        command.Parameters.AddWithValue("@marca", marca);
+                        command.Parameters.AddWithValue("@ID_Repuesto", ID_Repuesto);
+                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@Nombre", Nombre);
+                        command.Parameters.AddWithValue("@Precio", Precio);
+                        command.Parameters.AddWithValue("@Cantidad", Cantidad);
+                        command.Parameters.AddWithValue("@Marca", Marca);
 
                         connection.Open();
                         command.ExecuteNonQuery();
@@ -217,7 +212,7 @@ namespace GestionTalleres
             if (confirmResult == DialogResult.Yes)
             {
                 // Obtener el id del repuesto seleccionado
-                string idRepuestoSeleccionado = datosRepuestosDataGridView.CurrentRow.Cells["IdRepuesto"].Value.ToString();
+                string idRepuestoSeleccionado = datosRepuestosDataGridView.CurrentRow.Cells["ID_Repuesto"].Value.ToString();
                 EliminarRepuesto(idRepuestoSeleccionado);
             }
         }
@@ -227,25 +222,21 @@ namespace GestionTalleres
         private void CargarDatosRepuestoParaEdicion()
         {
             // Asumiendo que las columnas tienen estos nombres en tu DataGridView
-            idTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["IdRepuesto"].Value.ToString();
-            nombreTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["NombreRepuesto"].Value.ToString();
+            idTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["ID_Repuesto"].Value.ToString();
+            nombreTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
             precioTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
             cantidadTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Cantidad"].Value.ToString();
-            tallerComboBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["CodigoTaller"].Value.ToString();
+            tallerComboBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
             marcaTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Marca"].Value.ToString();
         }
 
         private void GuardarCambiosRepuesto_Click(object sender, EventArgs e)
         {
             // Validaciones de los campos editables
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$"))
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
-                MessageBox.Show("El nombre debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("La marca debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La Marca y Nombre deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (!int.TryParse(cantidadTextBox.Text, out int cantidad) || cantidad < 0)
@@ -275,31 +266,31 @@ namespace GestionTalleres
 
         private void ActualizarRepuesto()
         {
-            string idRepuesto = idTextBox.Text;
-            string nombreRepuesto = nombreTextBox.Text;
-            string marca = marcaTextBox.Text;
-            decimal precio = decimal.Parse(precioTextBox.Text);
-            int cantidad = int.Parse(cantidadTextBox.Text);
-            string codigoTaller = tallerComboBox.Text;
+            string ID_Repuesto = idTextBox.Text;
+            string Nombre = nombreTextBox.Text;
+            string Marca = marcaTextBox.Text;
+            decimal Precio = decimal.Parse(precioTextBox.Text);
+            int Cantidad = int.Parse(cantidadTextBox.Text);
+            string ID_Taller = tallerComboBox.Text;
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
-                    string query = @"UPDATE repuesto_N01 
-                             SET nombre_repuesto = @nombreRepuesto, marca = @marca, precio = @precio, 
-                                 cantidad = @cantidad, stock = @cantidad, /* Asumiendo que cantidad y stock son iguales */
-                                 codigo_taller = @codigoTaller
-                             WHERE id_repuesto = @idRepuesto";
+                    string query = @"UPDATE Repuestos_01 
+                             SET Nombre = @Nombre, Marca = @Marca, Precio = @Precio, 
+                                 Cantidad = @Cantidad, 
+                                 ID_Taller = @ID_Taller
+                             WHERE ID_Repuesto = @ID_Repuesto";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@nombreRepuesto", nombreRepuesto);
-                        command.Parameters.AddWithValue("@marca", marca);
-                        command.Parameters.AddWithValue("@precio", precio);
-                        command.Parameters.AddWithValue("@cantidad", cantidad);
-                        command.Parameters.AddWithValue("@codigoTaller", codigoTaller);
-                        command.Parameters.AddWithValue("@idRepuesto", idRepuesto);
+                        command.Parameters.AddWithValue("@Nombre", Nombre);
+                        command.Parameters.AddWithValue("@Marca", Marca);
+                        command.Parameters.AddWithValue("@Precio", Precio);
+                        command.Parameters.AddWithValue("@Cantidad", Cantidad);
+                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@ID_Repuesto", ID_Repuesto);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();

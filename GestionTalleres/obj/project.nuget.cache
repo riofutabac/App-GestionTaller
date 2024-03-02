@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zP4HYlX4w2KYEvH+GYziLJN9PmaKbs8JzCC1g1LMXK2VJKdLlzCBZDGZHCmKoG30q7IpDm8VI5xSQHVNnAl7sA==",
+  "dgSpecHash": "hvXT8yQpfV/abbPrwa4eG+FXU4hTmA2j3BpagT574h48KANOnYU/N7FU0V1mfZTEYJudlsE1D8QVJPz0/cdFVw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-master\\GestionTalleres\\GestionTalleres.csproj",
+  "projectFilePath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\isaac\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\isaac\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",

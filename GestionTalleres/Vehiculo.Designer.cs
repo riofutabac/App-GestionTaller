@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vehiculo));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
             colorTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
@@ -48,11 +48,13 @@
             label1 = new Label();
             datosVehiculosDataGridView = new DataGridView();
             panel2 = new Panel();
+            propietarioComboBox = new ComboBox();
             tallerComboBox = new ComboBox();
             cilindrajeBox1 = new TextBox();
             label8 = new Label();
             panel1 = new Panel();
-            propietarioComboBox = new ComboBox();
+            fechaCompra = new DateTimePicker();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)datosVehiculosDataGridView).BeginInit();
             panel2.SuspendLayout();
@@ -164,7 +166,7 @@
             // chasisTextBox
             // 
             chasisTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chasisTextBox.Location = new Point(735, 38);
+            chasisTextBox.Location = new Point(761, 44);
             chasisTextBox.Margin = new Padding(4);
             chasisTextBox.Name = "chasisTextBox";
             chasisTextBox.Size = new Size(246, 26);
@@ -249,14 +251,14 @@
             datosVehiculosDataGridView.AllowUserToDeleteRows = false;
             datosVehiculosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosVehiculosDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            datosVehiculosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            datosVehiculosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             datosVehiculosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosVehiculosDataGridView.EnableHeadersVisualStyles = false;
             datosVehiculosDataGridView.Location = new Point(22, 62);
@@ -271,6 +273,8 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(fechaCompra);
+            panel2.Controls.Add(label9);
             panel2.Controls.Add(propietarioComboBox);
             panel2.Controls.Add(tallerComboBox);
             panel2.Controls.Add(adminAddUsers_imageView);
@@ -296,12 +300,22 @@
             panel2.Size = new Size(1363, 341);
             panel2.TabIndex = 4;
             // 
+            // propietarioComboBox
+            // 
+            propietarioComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            propietarioComboBox.FormattingEnabled = true;
+            propietarioComboBox.Location = new Point(761, 95);
+            propietarioComboBox.Name = "propietarioComboBox";
+            propietarioComboBox.Size = new Size(246, 23);
+            propietarioComboBox.Sorted = true;
+            propietarioComboBox.TabIndex = 28;
+            // 
             // tallerComboBox
             // 
             tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             tallerComboBox.FormattingEnabled = true;
             tallerComboBox.Items.AddRange(new object[] { "1", "2" });
-            tallerComboBox.Location = new Point(735, 151);
+            tallerComboBox.Location = new Point(761, 148);
             tallerComboBox.Name = "tallerComboBox";
             tallerComboBox.Size = new Size(246, 23);
             tallerComboBox.Sorted = true;
@@ -338,15 +352,23 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 3;
             // 
-            // PropietarioComboBox
+            // fechaCompra
             // 
-            propietarioComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            propietarioComboBox.FormattingEnabled = true;
-            propietarioComboBox.Location = new Point(735, 98);
-            propietarioComboBox.Name = "propietarioComboBox";
-            propietarioComboBox.Size = new Size(246, 23);
-            propietarioComboBox.Sorted = true;
-            propietarioComboBox.TabIndex = 28;
+            fechaCompra.Location = new Point(761, 192);
+            fechaCompra.Name = "fechaCompra";
+            fechaCompra.Size = new Size(246, 23);
+            fechaCompra.TabIndex = 31;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(626, 194);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(120, 17);
+            label9.TabIndex = 30;
+            label9.Text = "Fecha Compra:";
             // 
             // Vehiculo
             // 
@@ -394,5 +416,7 @@
         private TextBox ciudadTextBox;
         private ComboBox tallerComboBox;
         private ComboBox propietarioComboBox;
+        private DateTimePicker fechaCompra;
+        private Label label9;
     }
 }

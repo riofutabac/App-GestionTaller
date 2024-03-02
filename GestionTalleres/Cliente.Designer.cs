@@ -47,6 +47,8 @@
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            ciudadTextBox = new TextBox();
+            label3 = new Label();
             tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosClienteDataGridView).BeginInit();
@@ -237,7 +239,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 384);
+            label5.Location = new Point(20, 429);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(55, 17);
@@ -257,6 +259,8 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(ciudadTextBox);
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(tallerComboBox);
             panel1.Controls.Add(nombreClienteTextBox);
             panel1.Controls.Add(label6);
@@ -276,12 +280,32 @@
             panel1.Size = new Size(435, 721);
             panel1.TabIndex = 2;
             // 
+            // ciudadTextBox
+            // 
+            ciudadTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ciudadTextBox.Location = new Point(142, 375);
+            ciudadTextBox.Margin = new Padding(4);
+            ciudadTextBox.Name = "ciudadTextBox";
+            ciudadTextBox.Size = new Size(246, 26);
+            ciudadTextBox.TabIndex = 30;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(20, 378);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 17);
+            label3.TabIndex = 29;
+            label3.Text = "Ciudad:";
+            // 
             // tallerComboBox
             // 
             tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             tallerComboBox.FormattingEnabled = true;
             tallerComboBox.Items.AddRange(new object[] { "1", "2" });
-            tallerComboBox.Location = new Point(142, 384);
+            tallerComboBox.Location = new Point(142, 429);
             tallerComboBox.Name = "tallerComboBox";
             tallerComboBox.Size = new Size(246, 23);
             tallerComboBox.Sorted = true;
@@ -328,5 +352,7 @@
         private Panel panel3;
         private Panel panel1;
         private ComboBox tallerComboBox;
+        private TextBox ciudadTextBox;
+        private Label label3;
     }
 }

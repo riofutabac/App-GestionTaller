@@ -31,9 +31,9 @@ namespace GestionTalleres
         private void CargarDashboard()
         {
             // Actualiza cada contador en el dashboard
-            ActualizarContador("SELECT COUNT(*) FROM empleado_01", dashboard_TC);
-            ActualizarContador("SELECT COUNT(*) FROM cliente_N01", dashboard_TCust);
-            ActualizarContador("SELECT COUNT(*) FROM vehiculo_N01", dashboard_TI);
+            ActualizarContador("SELECT COUNT(*) FROM Empleado_01", dashboard_TC);
+            ActualizarContador("SELECT COUNT(*) FROM Cliente_01", dashboard_TCust);
+            ActualizarContador("SELECT COUNT(*) FROM Vehiculo_01", dashboard_TI);
         }
 
         private void ActualizarContador(string query, Label labelToUpdate)
