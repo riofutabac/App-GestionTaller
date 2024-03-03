@@ -93,11 +93,12 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT DISTINCT Matricula FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
+                //CAMUFLADO
+                string query = "SELECT Matricula FROM Vehiculos_02 ";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
+                    //command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();

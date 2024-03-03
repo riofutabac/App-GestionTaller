@@ -37,8 +37,8 @@ namespace GestionTalleres
         }
         private void CargarMatriculas()
         {
-            List<string> matriculas = reparacionDB.GetAllMatriculas();
-            matriculaComboBox.DataSource = matriculas;
+            //List<string> matriculas = reparacionDB.GetAllMatriculas();
+            //matriculaComboBox.DataSource = matriculas;
         }
 
 
@@ -93,10 +93,10 @@ namespace GestionTalleres
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID_Reparacion", idTextBox.Text);
-                    command.Parameters.AddWithValue("@Matricula",  matriculaComboBox.Text);
+                    command.Parameters.AddWithValue("@Matricula", matriculaComboBox.Text);
                     command.Parameters.AddWithValue("@Descripcion", descripcionTextBox.Text);
                     command.Parameters.AddWithValue("@Precio", precio);
-                    command.Parameters.AddWithValue("@Tipo", Globals.SelectedNode);
+                    command.Parameters.AddWithValue("@Tipo", tipoTextBox.Text);
                     command.Parameters.AddWithValue("@FechaReparacion", fecha.Value);
 
                     try
@@ -121,7 +121,7 @@ namespace GestionTalleres
 
         private bool ExisteReparacion(string ID_Reparacion)
         {
-            string query = "SELECT COUNT(*) FROM Reparacion_01 WHERE ID_Reparacion = @ID_Reparacion";
+            string query = "SELECT COUNT(*) FROM Reparacion_02 WHERE ID_Reparacion = @ID_Reparacion";
 
             using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
             {
@@ -175,12 +175,12 @@ namespace GestionTalleres
             matriculaComboBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Matricula"].Value.ToString();
             descripcionTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Descripcion"].Value.ToString();
             precioTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
-
+            tipoTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Tipo"].Value.ToString();
             fecha.Text = ((DateTime)datosReparacionDataGridView.CurrentRow.Cells["FechaReparacion"].Value).ToString("MM/dd/yy");
         }
 
         private void guardarCambiosBtn_Click(object sender, EventArgs e)
-        {   
+        {
             if (!Regex.IsMatch(descripcionTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("Las descripcion debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -226,7 +226,7 @@ namespace GestionTalleres
                     {
                         command.Parameters.AddWithValue("@Descripcion", descripcionTextBox.Text);
                         command.Parameters.AddWithValue("@Precio", precioTextBox.Text);
-                        command.Parameters.AddWithValue("@Tipo",Globals.SelectedNode);
+                        command.Parameters.AddWithValue("@Tipo", tipoTextBox.Text);
                         command.Parameters.AddWithValue("@ID_Reparacion", idReparacion);
 
                         connection.Open();
@@ -312,6 +312,11 @@ namespace GestionTalleres
         private void adminAddProducts_clearBtn_Click(object sender, EventArgs e)
         {
             Limpiar();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

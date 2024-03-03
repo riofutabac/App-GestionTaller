@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reparaciones));
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
             descripcionTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
@@ -49,6 +49,8 @@
             label1 = new Label();
             datosReparacionDataGridView = new DataGridView();
             panel1 = new Panel();
+            tipoTextBox = new TextBox();
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosReparacionDataGridView).BeginInit();
@@ -211,6 +213,8 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(tipoTextBox);
+            panel2.Controls.Add(label6);
             panel2.Controls.Add(matriculaComboBox);
             panel2.Controls.Add(fecha);
             panel2.Controls.Add(adminAddUsers_imageView);
@@ -236,7 +240,7 @@
             // 
             matriculaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             matriculaComboBox.FormattingEnabled = true;
-            matriculaComboBox.Items.AddRange(new object[] { "1", "2" });
+            matriculaComboBox.Items.AddRange(new object[] { "", "", "PCB777" });
             matriculaComboBox.Location = new Point(192, 98);
             matriculaComboBox.Name = "matriculaComboBox";
             matriculaComboBox.Size = new Size(246, 23);
@@ -267,14 +271,14 @@
             datosReparacionDataGridView.AllowUserToDeleteRows = false;
             datosReparacionDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosReparacionDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = Color.White;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             datosReparacionDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosReparacionDataGridView.EnableHeadersVisualStyles = false;
             datosReparacionDataGridView.Location = new Point(22, 62);
@@ -296,6 +300,27 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 5;
+            // 
+            // tipoTextBox
+            // 
+            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tipoTextBox.Location = new Point(735, 94);
+            tipoTextBox.Margin = new Padding(4);
+            tipoTextBox.Name = "tipoTextBox";
+            tipoTextBox.Size = new Size(246, 26);
+            tipoTextBox.TabIndex = 33;
+            tipoTextBox.TextChanged += textBox1_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(626, 100);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 17);
+            label6.TabIndex = 32;
+            label6.Text = "Tipo:";
             // 
             // Reparaciones
             // 
@@ -338,5 +363,7 @@
         private Panel panel1;
         private DateTimePicker fecha;
         private ComboBox matriculaComboBox;
+        private TextBox tipoTextBox;
+        private Label label6;
     }
 }
