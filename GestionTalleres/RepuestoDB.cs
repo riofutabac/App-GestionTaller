@@ -6,16 +6,14 @@ using System.Configuration;
 
 namespace GestionTalleres
 {
-    internal class RepuestoDB
+     class RepuestoDB
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
-
-        public string IdRepuesto { get; set; }
-        public string CodigoTaller { get; set; }
-        public string NombreRepuesto { get; set; }
+        public string connectionString = ConfigurationManager.ConnectionStrings["myconstring"].ConnectionString;
+        public string ID_Repuesto { get; set; }
+        public string ID_Taller { get; set; }
+        public string Nombre { get; set; }
         public decimal Precio { get; set; }
         public int Cantidad { get; set; }
-        public int Stock { get; set; }
         public string Marca { get; set; }
 
         public List<RepuestoDB> GetAllRepuestos()
@@ -24,10 +22,11 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM repuesto_N01";
+                string query = "SELECT * FROM VistaRepuestos WHERE ID_Taller = @ID_Taller";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();
@@ -37,13 +36,12 @@ namespace GestionTalleres
                         {
                             RepuestoDB repuesto = new RepuestoDB()
                             {
-                                IdRepuesto = reader["id_repuesto"].ToString(),
-                                CodigoTaller = reader["codigo_taller"].ToString(),
-                                NombreRepuesto = reader["nombre_repuesto"].ToString(),
-                                Precio = (decimal)reader["precio"],
-                                Cantidad = (int)reader["cantidad"],
-                                Stock = (int)reader["stock"],
-                                Marca = reader["marca"].ToString()
+                                ID_Repuesto = reader["ID_Repuesto"].ToString(),
+                                ID_Taller = reader["ID_Taller"].ToString(),
+                                Nombre = reader["Nombre"].ToString(),
+                                Precio = (decimal)reader["Precio"],
+                                Cantidad = (int)reader["Cantidad"],
+                                Marca = reader["Marca"].ToString()
                             };
                             repuestos.Add(repuesto);
                         }

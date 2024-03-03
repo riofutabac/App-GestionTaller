@@ -1,0 +1,59 @@
+VEHICULOS Y REPARACIONES
+No carga la tabla de la BD, pero todas las operaciones estan correctas. Si se visualizan registros insertados por la app, los mismos pueden ser editados y eliminados 
+
+
+INTERFAZ
+
+GENERAL
+verificaciones de longitud de campos
+
+Para todo esto mejor asignar taller directamente mediante el login, vamos a tener adminN1,  adminN2 y admin (global) . Mostramos el atributo taller ya bloqueado en esta dependiendo el login, ADMIN sera el UNICO que lo tendra desbloqueado
+
+
+Vehiculos (hecho)
+(en la clase cambiar lo de ciudad a taller con la nueva BD)
+(una vez cambiado eso se tomara el atributo en taller y se lo bloquea)
+pasar cilindraje a alfanum (hecho)
+eliminar ciudad, utilizar taller y que sea un combo box (Hecho)
+
+en propietario mostrar una lista de los clientes del taller actual en un combo box, primero debe ser cliente para registrar un vehiculo (hecho)
+
+Al editar bloquear el taller y propietario (hecho)
+Al limpiar desbloquear cajas de texto y revertir el boton guardar cambios (hecho)
+
+Clientes (Hecho)
+Porque ciudad y taller, solo usemos taller, ya que eso distingue entre las ciudades (hecho)
+
+utilizar taller y que sea un combo box (hecho)
+Al editar bloquear el taller (hecho)
+Al limpiar desbloquear cajas de texto y revertir el boton guardar cambios (hecho)
+
+Reparaciones
+fecha cambiar a una seleccion de fecha como calendario (hecho)
+en tipo mostrar un combo box con las reparaciones ofrecidas (hecho)reparaciones, la gui seria algo mas como la tabla de vehiculo-reparacion)
+mostrar el taller pero igualmente bloqueado dependiendo el log in 
+Al editar bloquear el taller (hecho)
+Al limpiar desbloquear cajas de texto y revertir el boton guardar cambios(hecho)
+
+Repuestos (Hecho)
+taller y que sea un combo box (hecho)
+Al editar bloquear el taller (hecho)
+Al limpiar desbloquear cajas de texto y revertir el boton guardar cambios (hecho)
+
+Empleados (hecho)
+fecha c cambiar a una seleccion de fecha como calendario (hecho)
+taller combo box (Hecho)
+Al editar bloquear el taller (hecho)
+Al limpiar desbloquear cajas de texto y revertir el boton guardar cambios (hecho)
+
+
+Falta Hacer
+
+Añadir interfaz de telefono empleados (preferible dentro del modulo de empleados, que se accesda mediante un boton o pestaña), ahi se mostrara una lista de los empleados como un combo box, a elegir empleado se mostrara los numeros de telefonos asignados al ID del empleado, ahi podemos añadir cuantos numeros querramos y asociarlos al empleado
+
+verificaciones de longitud de campos
+
+diferentes logins con taller asignado dependiendo (opcional)
+
+
+

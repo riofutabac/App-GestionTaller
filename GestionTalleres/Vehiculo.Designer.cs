@@ -29,16 +29,13 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Vehiculo));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
-            ciudadTextBox = new TextBox();
             colorTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
             adminAddProducts_deleteBtn = new Button();
             adminAddProducts_updateBtn = new Button();
             adminAddProducts_addBtn = new Button();
-            label4 = new Label();
-            propietarioTextBox = new TextBox();
             label6 = new Label();
             chasisTextBox = new TextBox();
             label7 = new Label();
@@ -50,9 +47,13 @@
             label1 = new Label();
             datosVehiculosDataGridView = new DataGridView();
             panel2 = new Panel();
+            fechaCompra = new DateTimePicker();
+            label9 = new Label();
+            propietarioComboBox = new ComboBox();
             cilindrajeBox1 = new TextBox();
             label8 = new Label();
             panel1 = new Panel();
+            guardarCambiosBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)datosVehiculosDataGridView).BeginInit();
             panel2.SuspendLayout();
@@ -70,15 +71,6 @@
             adminAddUsers_imageView.TabIndex = 26;
             adminAddUsers_imageView.TabStop = false;
             // 
-            // ciudadTextBox
-            // 
-            ciudadTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ciudadTextBox.Location = new Point(735, 148);
-            ciudadTextBox.Margin = new Padding(4);
-            ciudadTextBox.Name = "ciudadTextBox";
-            ciudadTextBox.Size = new Size(246, 26);
-            ciudadTextBox.TabIndex = 25;
-            // 
             // colorTextBox
             // 
             colorTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -94,13 +86,14 @@
             adminAddProducts_clearBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_clearBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_clearBtn.ForeColor = Color.White;
-            adminAddProducts_clearBtn.Location = new Point(837, 240);
+            adminAddProducts_clearBtn.Location = new Point(815, 240);
             adminAddProducts_clearBtn.Margin = new Padding(4);
             adminAddProducts_clearBtn.Name = "adminAddProducts_clearBtn";
             adminAddProducts_clearBtn.Size = new Size(144, 56);
             adminAddProducts_clearBtn.TabIndex = 23;
             adminAddProducts_clearBtn.Text = "LIMPIAR";
             adminAddProducts_clearBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_clearBtn.Click += adminAddProducts_clearBtn_Click;
             // 
             // adminAddProducts_deleteBtn
             // 
@@ -108,13 +101,14 @@
             adminAddProducts_deleteBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_deleteBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_deleteBtn.ForeColor = Color.White;
-            adminAddProducts_deleteBtn.Location = new Point(633, 240);
+            adminAddProducts_deleteBtn.Location = new Point(611, 240);
             adminAddProducts_deleteBtn.Margin = new Padding(4);
             adminAddProducts_deleteBtn.Name = "adminAddProducts_deleteBtn";
             adminAddProducts_deleteBtn.Size = new Size(144, 56);
             adminAddProducts_deleteBtn.TabIndex = 22;
             adminAddProducts_deleteBtn.Text = "ELIMINAR";
             adminAddProducts_deleteBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_deleteBtn.Click += adminAddProducts_deleteBtn_Click;
             // 
             // adminAddProducts_updateBtn
             // 
@@ -129,6 +123,7 @@
             adminAddProducts_updateBtn.TabIndex = 21;
             adminAddProducts_updateBtn.Text = "EDITAR";
             adminAddProducts_updateBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_updateBtn.Click += adminAddProducts_updateBtn_Click;
             // 
             // adminAddProducts_addBtn
             // 
@@ -143,26 +138,7 @@
             adminAddProducts_addBtn.TabIndex = 20;
             adminAddProducts_addBtn.Text = "AGREGAR";
             adminAddProducts_addBtn.UseVisualStyleBackColor = false;
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(626, 152);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(64, 17);
-            label4.TabIndex = 17;
-            label4.Text = "Ciudad:";
-            // 
-            // propietarioTextBox
-            // 
-            propietarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            propietarioTextBox.Location = new Point(735, 92);
-            propietarioTextBox.Margin = new Padding(4);
-            propietarioTextBox.Name = "propietarioTextBox";
-            propietarioTextBox.Size = new Size(246, 26);
-            propietarioTextBox.TabIndex = 16;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
             // 
             // label6
             // 
@@ -178,7 +154,7 @@
             // chasisTextBox
             // 
             chasisTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            chasisTextBox.Location = new Point(735, 38);
+            chasisTextBox.Location = new Point(761, 44);
             chasisTextBox.Margin = new Padding(4);
             chasisTextBox.Name = "chasisTextBox";
             chasisTextBox.Size = new Size(246, 26);
@@ -263,14 +239,14 @@
             datosVehiculosDataGridView.AllowUserToDeleteRows = false;
             datosVehiculosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosVehiculosDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            datosVehiculosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            datosVehiculosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             datosVehiculosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosVehiculosDataGridView.EnableHeadersVisualStyles = false;
             datosVehiculosDataGridView.Location = new Point(22, 62);
@@ -285,15 +261,16 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guardarCambiosBtn);
+            panel2.Controls.Add(fechaCompra);
+            panel2.Controls.Add(label9);
+            panel2.Controls.Add(propietarioComboBox);
             panel2.Controls.Add(adminAddUsers_imageView);
-            panel2.Controls.Add(ciudadTextBox);
             panel2.Controls.Add(colorTextBox);
             panel2.Controls.Add(adminAddProducts_clearBtn);
             panel2.Controls.Add(adminAddProducts_deleteBtn);
             panel2.Controls.Add(adminAddProducts_updateBtn);
             panel2.Controls.Add(adminAddProducts_addBtn);
-            panel2.Controls.Add(label4);
-            panel2.Controls.Add(propietarioTextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(chasisTextBox);
             panel2.Controls.Add(label7);
@@ -309,6 +286,34 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 341);
             panel2.TabIndex = 4;
+            // 
+            // fechaCompra
+            // 
+            fechaCompra.Location = new Point(761, 145);
+            fechaCompra.Name = "fechaCompra";
+            fechaCompra.Size = new Size(246, 23);
+            fechaCompra.TabIndex = 31;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label9.Location = new Point(626, 147);
+            label9.Margin = new Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new Size(120, 17);
+            label9.TabIndex = 30;
+            label9.Text = "Fecha Compra:";
+            // 
+            // propietarioComboBox
+            // 
+            propietarioComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            propietarioComboBox.FormattingEnabled = true;
+            propietarioComboBox.Location = new Point(761, 95);
+            propietarioComboBox.Name = "propietarioComboBox";
+            propietarioComboBox.Size = new Size(246, 23);
+            propietarioComboBox.Sorted = true;
+            propietarioComboBox.TabIndex = 28;
             // 
             // cilindrajeBox1
             // 
@@ -341,6 +346,22 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 3;
             // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(1010, 240);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click;
+            // 
             // Vehiculo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -364,14 +385,11 @@
         #endregion
 
         private PictureBox adminAddUsers_imageView;
-        private TextBox ciudadTextBox;
         private TextBox colorTextBox;
         private Button adminAddProducts_clearBtn;
         private Button adminAddProducts_deleteBtn;
         private Button adminAddProducts_updateBtn;
         private Button adminAddProducts_addBtn;
-        private Label label4;
-        private TextBox propietarioTextBox;
         private Label label6;
         private TextBox chasisTextBox;
         private Label label7;
@@ -386,5 +404,10 @@
         private TextBox cilindrajeBox1;
         private Label label8;
         private Panel panel1;
+        private TextBox ciudadTextBox;
+        private ComboBox propietarioComboBox;
+        private DateTimePicker fechaCompra;
+        private Label label9;
+        private Button guardarCambiosBtn;
     }
 }

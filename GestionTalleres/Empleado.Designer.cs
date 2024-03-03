@@ -42,16 +42,17 @@
             nombreTextBox = new TextBox();
             label2 = new Label();
             adminAddUsers_imageView = new PictureBox();
-            tallerTextBox = new TextBox();
-            label6 = new Label();
             codigoTextBox = new TextBox();
             label7 = new Label();
             salarioTextBox = new TextBox();
             label4 = new Label();
-            fechaTextBox = new TextBox();
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            guardarCambiosBtn = new Button();
+            apellidoTextBox = new TextBox();
+            label8 = new Label();
+            fechaContrato = new DateTimePicker();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosEmpleadosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -112,13 +113,14 @@
             limpiarBtn.FlatStyle = FlatStyle.Flat;
             limpiarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             limpiarBtn.ForeColor = Color.White;
-            limpiarBtn.Location = new Point(248, 628);
+            limpiarBtn.Location = new Point(244, 571);
             limpiarBtn.Margin = new Padding(4);
             limpiarBtn.Name = "limpiarBtn";
             limpiarBtn.Size = new Size(144, 56);
             limpiarBtn.TabIndex = 15;
             limpiarBtn.Text = "LIMPIAR";
             limpiarBtn.UseVisualStyleBackColor = false;
+            limpiarBtn.Click += limpiarBtn_Click;
             // 
             // eliminarBtn
             // 
@@ -126,13 +128,14 @@
             eliminarBtn.FlatStyle = FlatStyle.Flat;
             eliminarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             eliminarBtn.ForeColor = Color.White;
-            eliminarBtn.Location = new Point(43, 628);
+            eliminarBtn.Location = new Point(39, 571);
             eliminarBtn.Margin = new Padding(4);
             eliminarBtn.Name = "eliminarBtn";
             eliminarBtn.Size = new Size(144, 56);
             eliminarBtn.TabIndex = 14;
             eliminarBtn.Text = "ELIMINAR";
             eliminarBtn.UseVisualStyleBackColor = false;
+            eliminarBtn.Click += eliminarBtn_Click;
             // 
             // editarBtn
             // 
@@ -140,13 +143,14 @@
             editarBtn.FlatStyle = FlatStyle.Flat;
             editarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             editarBtn.ForeColor = Color.White;
-            editarBtn.Location = new Point(248, 536);
+            editarBtn.Location = new Point(244, 479);
             editarBtn.Margin = new Padding(4);
             editarBtn.Name = "editarBtn";
             editarBtn.Size = new Size(144, 56);
             editarBtn.TabIndex = 13;
             editarBtn.Text = "EDITAR";
             editarBtn.UseVisualStyleBackColor = false;
+            editarBtn.Click += editarBtn_Click;
             // 
             // agregarBtn
             // 
@@ -154,18 +158,19 @@
             agregarBtn.FlatStyle = FlatStyle.Flat;
             agregarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             agregarBtn.ForeColor = Color.White;
-            agregarBtn.Location = new Point(43, 536);
+            agregarBtn.Location = new Point(39, 479);
             agregarBtn.Margin = new Padding(4);
             agregarBtn.Name = "agregarBtn";
             agregarBtn.Size = new Size(144, 56);
             agregarBtn.TabIndex = 12;
             agregarBtn.Text = "AGREGAR";
             agregarBtn.UseVisualStyleBackColor = false;
+            agregarBtn.Click += agregarBtn_Click;
             // 
             // cedulaTextBox
             // 
             cedulaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cedulaTextBox.Location = new Point(142, 342);
+            cedulaTextBox.Location = new Point(142, 336);
             cedulaTextBox.Margin = new Padding(4);
             cedulaTextBox.Name = "cedulaTextBox";
             cedulaTextBox.Size = new Size(246, 26);
@@ -175,7 +180,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 345);
+            label3.Location = new Point(20, 339);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(64, 17);
@@ -185,7 +190,7 @@
             // nombreTextBox
             // 
             nombreTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nombreTextBox.Location = new Point(142, 289);
+            nombreTextBox.Location = new Point(142, 239);
             nombreTextBox.Margin = new Padding(4);
             nombreTextBox.Name = "nombreTextBox";
             nombreTextBox.Size = new Size(246, 26);
@@ -195,7 +200,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(20, 292);
+            label2.Location = new Point(20, 242);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(71, 17);
@@ -212,26 +217,6 @@
             adminAddUsers_imageView.SizeMode = PictureBoxSizeMode.Zoom;
             adminAddUsers_imageView.TabIndex = 0;
             adminAddUsers_imageView.TabStop = false;
-            // 
-            // tallerTextBox
-            // 
-            tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tallerTextBox.Location = new Point(142, 240);
-            tallerTextBox.Margin = new Padding(4);
-            tallerTextBox.Name = "tallerTextBox";
-            tallerTextBox.Size = new Size(246, 26);
-            tallerTextBox.TabIndex = 24;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(20, 243);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(55, 17);
-            label6.TabIndex = 23;
-            label6.Text = "Taller:";
             // 
             // codigoTextBox
             // 
@@ -256,7 +241,7 @@
             // salarioTextBox
             // 
             salarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            salarioTextBox.Location = new Point(142, 451);
+            salarioTextBox.Location = new Point(142, 445);
             salarioTextBox.Margin = new Padding(4);
             salarioTextBox.Name = "salarioTextBox";
             salarioTextBox.Size = new Size(246, 26);
@@ -266,27 +251,18 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(20, 454);
+            label4.Location = new Point(20, 448);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(65, 17);
             label4.TabIndex = 19;
             label4.Text = "Salario:";
             // 
-            // fechaTextBox
-            // 
-            fechaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fechaTextBox.Location = new Point(142, 398);
-            fechaTextBox.Margin = new Padding(4);
-            fechaTextBox.Name = "fechaTextBox";
-            fechaTextBox.Size = new Size(246, 26);
-            fechaTextBox.TabIndex = 18;
-            // 
             // label5
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 400);
+            label5.Location = new Point(20, 394);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(73, 17);
@@ -306,13 +282,14 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(tallerTextBox);
-            panel1.Controls.Add(label6);
+            panel1.Controls.Add(guardarCambiosBtn);
+            panel1.Controls.Add(apellidoTextBox);
+            panel1.Controls.Add(label8);
+            panel1.Controls.Add(fechaContrato);
             panel1.Controls.Add(codigoTextBox);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(salarioTextBox);
             panel1.Controls.Add(label4);
-            panel1.Controls.Add(fechaTextBox);
             panel1.Controls.Add(label5);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(limpiarBtn);
@@ -328,6 +305,49 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 718);
             panel1.TabIndex = 2;
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(142, 658);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
+            // 
+            // apellidoTextBox
+            // 
+            apellidoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            apellidoTextBox.Location = new Point(142, 287);
+            apellidoTextBox.Margin = new Padding(4);
+            apellidoTextBox.Name = "apellidoTextBox";
+            apellidoTextBox.Size = new Size(246, 26);
+            apellidoTextBox.TabIndex = 31;
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label8.Location = new Point(20, 290);
+            label8.Margin = new Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new Size(72, 17);
+            label8.TabIndex = 30;
+            label8.Text = "Apellido:";
+            // 
+            // fechaContrato
+            // 
+            fechaContrato.Location = new Point(142, 394);
+            fechaContrato.Name = "fechaContrato";
+            fechaContrato.Size = new Size(246, 23);
+            fechaContrato.TabIndex = 29;
             // 
             // Empleado
             // 
@@ -364,15 +384,16 @@
         private TextBox nombreTextBox;
         private Label label2;
         private PictureBox adminAddUsers_imageView;
-        private TextBox tallerTextBox;
-        private Label label6;
         private TextBox codigoTextBox;
         private Label label7;
         private TextBox salarioTextBox;
         private Label label4;
-        private TextBox fechaTextBox;
         private Label label5;
         private Panel panel3;
         private Panel panel1;
+        private DateTimePicker fechaContrato;
+        private TextBox apellidoTextBox;
+        private Label label8;
+        private Button guardarCambiosBtn;
     }
 }

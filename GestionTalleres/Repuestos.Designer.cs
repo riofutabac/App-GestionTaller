@@ -45,12 +45,11 @@
             label6 = new Label();
             label7 = new Label();
             label5 = new Label();
-            tallerTextBox = new TextBox();
-            label3 = new Label();
             idTextBox = new TextBox();
             label2 = new Label();
             precioTextBox = new TextBox();
             panel2 = new Panel();
+            guardarCambiosBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel1.SuspendLayout();
@@ -117,13 +116,14 @@
             adminAddProducts_clearBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_clearBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_clearBtn.ForeColor = Color.White;
-            adminAddProducts_clearBtn.Location = new Point(837, 240);
+            adminAddProducts_clearBtn.Location = new Point(814, 240);
             adminAddProducts_clearBtn.Margin = new Padding(4);
             adminAddProducts_clearBtn.Name = "adminAddProducts_clearBtn";
             adminAddProducts_clearBtn.Size = new Size(144, 56);
             adminAddProducts_clearBtn.TabIndex = 23;
             adminAddProducts_clearBtn.Text = "LIMPIAR";
             adminAddProducts_clearBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_clearBtn.Click += adminAddProducts_clearBtn_Click;
             // 
             // adminAddProducts_deleteBtn
             // 
@@ -131,13 +131,14 @@
             adminAddProducts_deleteBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_deleteBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_deleteBtn.ForeColor = Color.White;
-            adminAddProducts_deleteBtn.Location = new Point(633, 240);
+            adminAddProducts_deleteBtn.Location = new Point(610, 240);
             adminAddProducts_deleteBtn.Margin = new Padding(4);
             adminAddProducts_deleteBtn.Name = "adminAddProducts_deleteBtn";
             adminAddProducts_deleteBtn.Size = new Size(144, 56);
             adminAddProducts_deleteBtn.TabIndex = 22;
             adminAddProducts_deleteBtn.Text = "ELIMINAR";
             adminAddProducts_deleteBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_deleteBtn.Click += adminAddProducts_deleteBtn_Click;
             // 
             // adminAddProducts_updateBtn
             // 
@@ -152,6 +153,7 @@
             adminAddProducts_updateBtn.TabIndex = 21;
             adminAddProducts_updateBtn.Text = "EDITAR";
             adminAddProducts_updateBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_updateBtn.Click += adminAddProducts_updateBtn_Click;
             // 
             // adminAddProducts_addBtn
             // 
@@ -166,6 +168,7 @@
             adminAddProducts_addBtn.TabIndex = 20;
             adminAddProducts_addBtn.Text = "AGREGAR";
             adminAddProducts_addBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
             // 
             // label4
             // 
@@ -242,26 +245,6 @@
             label5.TabIndex = 11;
             label5.Text = "Nombre:";
             // 
-            // tallerTextBox
-            // 
-            tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tallerTextBox.Location = new Point(192, 92);
-            tallerTextBox.Margin = new Padding(4);
-            tallerTextBox.Name = "tallerTextBox";
-            tallerTextBox.Size = new Size(246, 26);
-            tallerTextBox.TabIndex = 7;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(48, 98);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(55, 17);
-            label3.TabIndex = 6;
-            label3.Text = "Taller:";
-            // 
             // idTextBox
             // 
             idTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -294,6 +277,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guardarCambiosBtn);
             panel2.Controls.Add(adminAddUsers_imageView);
             panel2.Controls.Add(marcaTextBox);
             panel2.Controls.Add(nombreTextBox);
@@ -307,8 +291,6 @@
             panel2.Controls.Add(precioTextBox);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(tallerTextBox);
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(idTextBox);
             panel2.Controls.Add(label2);
             panel2.Location = new Point(23, 24);
@@ -316,6 +298,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 5;
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(1004, 240);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click;
             // 
             // Repuestos
             // 
@@ -352,11 +350,10 @@
         private Label label6;
         private Label label7;
         private Label label5;
-        private TextBox tallerTextBox;
-        private Label label3;
         private TextBox idTextBox;
         private Label label2;
         private TextBox precioTextBox;
         private Panel panel2;
+        private Button guardarCambiosBtn;
     }
 }

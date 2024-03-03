@@ -42,10 +42,6 @@
             panel6 = new Panel();
             label4 = new Label();
             panel4 = new Panel();
-            dashboard_TIn = new Label();
-            pictureBox4 = new PictureBox();
-            label8 = new Label();
-            panel5 = new Panel();
             panel1 = new Panel();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
@@ -55,8 +51,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             panel6.SuspendLayout();
             panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
-            panel5.SuspendLayout();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -65,7 +59,7 @@
             panel2.BackColor = Color.White;
             panel2.Controls.Add(pictureBox5);
             panel2.Location = new Point(18, 324);
-            panel2.Margin = new Padding(4, 4, 4, 4);
+            panel2.Margin = new Padding(4);
             panel2.Name = "panel2";
             panel2.Size = new Size(1383, 431);
             panel2.TabIndex = 3;
@@ -73,7 +67,7 @@
             // pictureBox5
             // 
             pictureBox5.Location = new Point(24, 28);
-            pictureBox5.Margin = new Padding(4, 4, 4, 4);
+            pictureBox5.Margin = new Padding(4);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(1330, 377);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -110,8 +104,8 @@
             panel3.Controls.Add(dashboard_TC);
             panel3.Controls.Add(label1);
             panel3.Controls.Add(pictureBox1);
-            panel3.Location = new Point(24, 38);
-            panel3.Margin = new Padding(4, 4, 4, 4);
+            panel3.Location = new Point(54, 38);
+            panel3.Margin = new Padding(4);
             panel3.Name = "panel3";
             panel3.Size = new Size(332, 199);
             panel3.TabIndex = 0;
@@ -119,7 +113,7 @@
             // pictureBox1
             // 
             pictureBox1.Location = new Point(21, 37);
-            pictureBox1.Margin = new Padding(4, 4, 4, 4);
+            pictureBox1.Margin = new Padding(4);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(105, 104);
             pictureBox1.TabIndex = 0;
@@ -130,7 +124,7 @@
             dashboard_TI.AutoSize = true;
             dashboard_TI.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
             dashboard_TI.ForeColor = Color.White;
-            dashboard_TI.Location = new Point(151, 148);
+            dashboard_TI.Location = new Point(286, 146);
             dashboard_TI.Margin = new Padding(4, 0, 4, 0);
             dashboard_TI.Name = "dashboard_TI";
             dashboard_TI.Size = new Size(22, 24);
@@ -140,7 +134,7 @@
             // pictureBox3
             // 
             pictureBox3.Location = new Point(14, 40);
-            pictureBox3.Margin = new Padding(4, 4, 4, 4);
+            pictureBox3.Margin = new Padding(4);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(105, 104);
             pictureBox3.TabIndex = 6;
@@ -173,7 +167,7 @@
             // pictureBox2
             // 
             pictureBox2.Location = new Point(18, 37);
-            pictureBox2.Margin = new Padding(4, 4, 4, 4);
+            pictureBox2.Margin = new Padding(4);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(105, 104);
             pictureBox2.TabIndex = 3;
@@ -185,8 +179,8 @@
             panel6.Controls.Add(dashboard_TI);
             panel6.Controls.Add(pictureBox3);
             panel6.Controls.Add(label6);
-            panel6.Location = new Point(731, 34);
-            panel6.Margin = new Padding(4, 4, 4, 4);
+            panel6.Location = new Point(1005, 38);
+            panel6.Margin = new Padding(4);
             panel6.Name = "panel6";
             panel6.Size = new Size(332, 199);
             panel6.TabIndex = 2;
@@ -209,66 +203,20 @@
             panel4.Controls.Add(dashboard_TCust);
             panel4.Controls.Add(pictureBox2);
             panel4.Controls.Add(label4);
-            panel4.Location = new Point(377, 38);
-            panel4.Margin = new Padding(4, 4, 4, 4);
+            panel4.Location = new Point(531, 38);
+            panel4.Margin = new Padding(4);
             panel4.Name = "panel4";
             panel4.Size = new Size(332, 199);
             panel4.TabIndex = 1;
             // 
-            // dashboard_TIn
-            // 
-            dashboard_TIn.AutoSize = true;
-            dashboard_TIn.Font = new Font("Arial Rounded MT Bold", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dashboard_TIn.ForeColor = Color.White;
-            dashboard_TIn.Location = new Point(161, 148);
-            dashboard_TIn.Margin = new Padding(4, 0, 4, 0);
-            dashboard_TIn.Name = "dashboard_TIn";
-            dashboard_TIn.Size = new Size(22, 24);
-            dashboard_TIn.TabIndex = 11;
-            dashboard_TIn.Text = "0";
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Location = new Point(24, 40);
-            pictureBox4.Margin = new Padding(4, 4, 4, 4);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(105, 104);
-            pictureBox4.TabIndex = 9;
-            pictureBox4.TabStop = false;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.White;
-            label8.Location = new Point(162, 40);
-            label8.Margin = new Padding(4, 0, 4, 0);
-            label8.Name = "label8";
-            label8.Size = new Size(85, 17);
-            label8.TabIndex = 10;
-            label8.Text = "Vehiculo";
-            // 
-            // panel5
-            // 
-            panel5.BackColor = Color.FromArgb(192, 0, 0);
-            panel5.Controls.Add(dashboard_TIn);
-            panel5.Controls.Add(pictureBox4);
-            panel5.Controls.Add(label8);
-            panel5.Location = new Point(1085, 34);
-            panel5.Margin = new Padding(4, 4, 4, 4);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(298, 199);
-            panel5.TabIndex = 3;
-            // 
             // panel1
             // 
             panel1.BackColor = Color.White;
-            panel1.Controls.Add(panel5);
             panel1.Controls.Add(panel4);
             panel1.Controls.Add(panel6);
             panel1.Controls.Add(panel3);
             panel1.Location = new Point(18, 26);
-            panel1.Margin = new Padding(4, 4, 4, 4);
+            panel1.Margin = new Padding(4);
             panel1.Name = "panel1";
             panel1.Size = new Size(1400, 276);
             panel1.TabIndex = 2;
@@ -294,9 +242,6 @@
             panel6.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
             panel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -317,10 +262,6 @@
         private Panel panel6;
         private Label label4;
         private Panel panel4;
-        private Label dashboard_TIn;
-        private PictureBox pictureBox4;
-        private Label label8;
-        private Panel panel5;
         private Panel panel1;
     }
 }

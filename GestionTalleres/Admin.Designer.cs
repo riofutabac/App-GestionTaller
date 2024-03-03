@@ -43,8 +43,7 @@ namespace GestionTalleres
             reparacionButton = new Button();
             clienteButton = new Button();
             vehiculoButton = new Button();
-            nombreUsuarioLabel = new Label();
-            label3 = new Label();
+            nodoLabel = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
             panel3 = new Panel();
@@ -111,8 +110,7 @@ namespace GestionTalleres
             panel2.Controls.Add(reparacionButton);
             panel2.Controls.Add(clienteButton);
             panel2.Controls.Add(vehiculoButton);
-            panel2.Controls.Add(nombreUsuarioLabel);
-            panel2.Controls.Add(label3);
+            panel2.Controls.Add(nodoLabel);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(pictureBox1);
             panel2.Dock = DockStyle.Left;
@@ -241,29 +239,18 @@ namespace GestionTalleres
             vehiculoButton.UseVisualStyleBackColor = false;
             vehiculoButton.Click += vehiculoButton_Click;
             // 
-            // nombreUsuarioLabel
+            // nodoLabel
             // 
-            nombreUsuarioLabel.AutoSize = true;
-            nombreUsuarioLabel.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nombreUsuarioLabel.ForeColor = Color.White;
-            nombreUsuarioLabel.Location = new Point(108, 224);
-            nombreUsuarioLabel.Margin = new Padding(4, 0, 4, 0);
-            nombreUsuarioLabel.Name = "nombreUsuarioLabel";
-            nombreUsuarioLabel.Size = new Size(48, 15);
-            nombreUsuarioLabel.TabIndex = 12;
-            nombreUsuarioLabel.Text = "Admin";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(14, 224);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(58, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Usuario";
+            nodoLabel.AutoSize = true;
+            nodoLabel.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            nodoLabel.ForeColor = Color.White;
+            nodoLabel.Location = new Point(83, 223);
+            nodoLabel.Margin = new Padding(4, 0, 4, 0);
+            nodoLabel.Name = "nodoLabel";
+            nodoLabel.Size = new Size(48, 15);
+            nodoLabel.TabIndex = 12;
+            nodoLabel.Text = "Admin";
+            nodoLabel.Click += nodoLabel_Click;
             // 
             // label2
             // 
@@ -326,8 +313,7 @@ namespace GestionTalleres
         private System.Windows.Forms.Label close;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label nombreUsuarioLabel;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label nodoLabel;
         private System.Windows.Forms.Button reparacionButton;
         private System.Windows.Forms.Button clienteButton;
         private System.Windows.Forms.Button vehiculoButton;

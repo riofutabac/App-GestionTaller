@@ -37,8 +37,6 @@
             eliminarBtn = new Button();
             editarBtn = new Button();
             agregarBtn = new Button();
-            ciudadClienteTextBox = new TextBox();
-            label3 = new Label();
             apellidoClienteTextBox = new TextBox();
             label2 = new Label();
             adminAddUsers_imageView = new PictureBox();
@@ -46,10 +44,11 @@
             label6 = new Label();
             cedulaClienteTextBox = new TextBox();
             label7 = new Label();
-            tallerTextBox = new TextBox();
-            label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            ciudadTextBox = new TextBox();
+            label3 = new Label();
+            guardarCambiosBtn = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosClienteDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -110,13 +109,14 @@
             limpiarBtn.FlatStyle = FlatStyle.Flat;
             limpiarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             limpiarBtn.ForeColor = Color.White;
-            limpiarBtn.Location = new Point(248, 628);
+            limpiarBtn.Location = new Point(248, 563);
             limpiarBtn.Margin = new Padding(4);
             limpiarBtn.Name = "limpiarBtn";
             limpiarBtn.Size = new Size(144, 56);
             limpiarBtn.TabIndex = 15;
             limpiarBtn.Text = "LIMPIAR";
             limpiarBtn.UseVisualStyleBackColor = false;
+            limpiarBtn.Click += limpiarBtn_Click;
             // 
             // eliminarBtn
             // 
@@ -124,13 +124,14 @@
             eliminarBtn.FlatStyle = FlatStyle.Flat;
             eliminarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             eliminarBtn.ForeColor = Color.White;
-            eliminarBtn.Location = new Point(43, 628);
+            eliminarBtn.Location = new Point(43, 563);
             eliminarBtn.Margin = new Padding(4);
             eliminarBtn.Name = "eliminarBtn";
             eliminarBtn.Size = new Size(144, 56);
             eliminarBtn.TabIndex = 14;
             eliminarBtn.Text = "ELIMINAR";
             eliminarBtn.UseVisualStyleBackColor = false;
+            eliminarBtn.Click += eliminarBtn_Click;
             // 
             // editarBtn
             // 
@@ -138,13 +139,14 @@
             editarBtn.FlatStyle = FlatStyle.Flat;
             editarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             editarBtn.ForeColor = Color.White;
-            editarBtn.Location = new Point(248, 536);
+            editarBtn.Location = new Point(248, 471);
             editarBtn.Margin = new Padding(4);
             editarBtn.Name = "editarBtn";
             editarBtn.Size = new Size(144, 56);
             editarBtn.TabIndex = 13;
             editarBtn.Text = "EDITAR";
             editarBtn.UseVisualStyleBackColor = false;
+            editarBtn.Click += editarBtn_Click;
             // 
             // agregarBtn
             // 
@@ -152,33 +154,14 @@
             agregarBtn.FlatStyle = FlatStyle.Flat;
             agregarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             agregarBtn.ForeColor = Color.White;
-            agregarBtn.Location = new Point(43, 536);
+            agregarBtn.Location = new Point(43, 471);
             agregarBtn.Margin = new Padding(4);
             agregarBtn.Name = "agregarBtn";
             agregarBtn.Size = new Size(144, 56);
             agregarBtn.TabIndex = 12;
             agregarBtn.Text = "AGREGAR";
             agregarBtn.UseVisualStyleBackColor = false;
-            // 
-            // ciudadClienteTextBox
-            // 
-            ciudadClienteTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            ciudadClienteTextBox.Location = new Point(142, 377);
-            ciudadClienteTextBox.Margin = new Padding(4);
-            ciudadClienteTextBox.Name = "ciudadClienteTextBox";
-            ciudadClienteTextBox.Size = new Size(246, 26);
-            ciudadClienteTextBox.TabIndex = 5;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 380);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(64, 17);
-            label3.TabIndex = 4;
-            label3.Text = "Ciudad:";
+            agregarBtn.Click += agregarBtn_Click;
             // 
             // apellidoClienteTextBox
             // 
@@ -251,26 +234,6 @@
             label7.TabIndex = 21;
             label7.Text = "Cédula:";
             // 
-            // tallerTextBox
-            // 
-            tallerTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tallerTextBox.Location = new Point(142, 433);
-            tallerTextBox.Margin = new Padding(4);
-            tallerTextBox.Name = "tallerTextBox";
-            tallerTextBox.Size = new Size(246, 26);
-            tallerTextBox.TabIndex = 18;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 436);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(55, 17);
-            label5.TabIndex = 17;
-            label5.Text = "Taller:";
-            // 
             // panel3
             // 
             panel3.BackColor = Color.Silver;
@@ -284,19 +247,18 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(guardarCambiosBtn);
+            panel1.Controls.Add(ciudadTextBox);
+            panel1.Controls.Add(label3);
             panel1.Controls.Add(nombreClienteTextBox);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(cedulaClienteTextBox);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(tallerTextBox);
-            panel1.Controls.Add(label5);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(limpiarBtn);
             panel1.Controls.Add(eliminarBtn);
             panel1.Controls.Add(editarBtn);
             panel1.Controls.Add(agregarBtn);
-            panel1.Controls.Add(ciudadClienteTextBox);
-            panel1.Controls.Add(label3);
             panel1.Controls.Add(apellidoClienteTextBox);
             panel1.Controls.Add(label2);
             panel1.Location = new Point(20, 30);
@@ -304,6 +266,42 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 721);
             panel1.TabIndex = 2;
+            // 
+            // ciudadTextBox
+            // 
+            ciudadTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            ciudadTextBox.Location = new Point(142, 375);
+            ciudadTextBox.Margin = new Padding(4);
+            ciudadTextBox.Name = "ciudadTextBox";
+            ciudadTextBox.Size = new Size(246, 26);
+            ciudadTextBox.TabIndex = 30;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(20, 378);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 17);
+            label3.TabIndex = 29;
+            label3.Text = "Ciudad:";
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(148, 644);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
             // 
             // Cliente
             // 
@@ -335,8 +333,6 @@
         private Button eliminarBtn;
         private Button editarBtn;
         private Button agregarBtn;
-        private TextBox ciudadClienteTextBox;
-        private Label label3;
         private TextBox apellidoClienteTextBox;
         private Label label2;
         private PictureBox adminAddUsers_imageView;
@@ -344,9 +340,10 @@
         private Label label6;
         private TextBox cedulaClienteTextBox;
         private Label label7;
-        private TextBox tallerTextBox;
-        private Label label5;
         private Panel panel3;
         private Panel panel1;
+        private TextBox ciudadTextBox;
+        private Label label3;
+        private Button guardarCambiosBtn;
     }
 }

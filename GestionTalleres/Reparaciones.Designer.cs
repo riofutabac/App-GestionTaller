@@ -31,26 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reparaciones));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
-            fechaTextBox = new TextBox();
-            observacionesTextBox = new TextBox();
+            descripcionTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
             adminAddProducts_deleteBtn = new Button();
             adminAddProducts_updateBtn = new Button();
             adminAddProducts_addBtn = new Button();
             label4 = new Label();
-            tipoTextBox = new TextBox();
-            label6 = new Label();
             precioTextBox = new TextBox();
             label7 = new Label();
             label5 = new Label();
-            matriculaTextBox = new TextBox();
             label3 = new Label();
             idTextBox = new TextBox();
             label2 = new Label();
             panel2 = new Panel();
+            tipoTextBox = new TextBox();
+            label6 = new Label();
+            matriculaComboBox = new ComboBox();
+            fecha = new DateTimePicker();
             label1 = new Label();
             datosReparacionDataGridView = new DataGridView();
             panel1 = new Panel();
+            guardarCambiosBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosReparacionDataGridView).BeginInit();
@@ -68,23 +69,14 @@
             adminAddUsers_imageView.TabIndex = 26;
             adminAddUsers_imageView.TabStop = false;
             // 
-            // fechaTextBox
+            // descripcionTextBox
             // 
-            fechaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            fechaTextBox.Location = new Point(735, 148);
-            fechaTextBox.Margin = new Padding(4);
-            fechaTextBox.Name = "fechaTextBox";
-            fechaTextBox.Size = new Size(246, 26);
-            fechaTextBox.TabIndex = 25;
-            // 
-            // observacionesTextBox
-            // 
-            observacionesTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            observacionesTextBox.Location = new Point(192, 142);
-            observacionesTextBox.Margin = new Padding(4);
-            observacionesTextBox.Name = "observacionesTextBox";
-            observacionesTextBox.Size = new Size(246, 26);
-            observacionesTextBox.TabIndex = 24;
+            descripcionTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            descripcionTextBox.Location = new Point(192, 142);
+            descripcionTextBox.Margin = new Padding(4);
+            descripcionTextBox.Name = "descripcionTextBox";
+            descripcionTextBox.Size = new Size(246, 26);
+            descripcionTextBox.TabIndex = 24;
             // 
             // adminAddProducts_clearBtn
             // 
@@ -92,13 +84,14 @@
             adminAddProducts_clearBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_clearBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_clearBtn.ForeColor = Color.White;
-            adminAddProducts_clearBtn.Location = new Point(837, 240);
+            adminAddProducts_clearBtn.Location = new Point(806, 240);
             adminAddProducts_clearBtn.Margin = new Padding(4);
             adminAddProducts_clearBtn.Name = "adminAddProducts_clearBtn";
             adminAddProducts_clearBtn.Size = new Size(144, 56);
             adminAddProducts_clearBtn.TabIndex = 23;
             adminAddProducts_clearBtn.Text = "LIMPIAR";
             adminAddProducts_clearBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_clearBtn.Click += adminAddProducts_clearBtn_Click;
             // 
             // adminAddProducts_deleteBtn
             // 
@@ -106,13 +99,14 @@
             adminAddProducts_deleteBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_deleteBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_deleteBtn.ForeColor = Color.White;
-            adminAddProducts_deleteBtn.Location = new Point(633, 240);
+            adminAddProducts_deleteBtn.Location = new Point(602, 240);
             adminAddProducts_deleteBtn.Margin = new Padding(4);
             adminAddProducts_deleteBtn.Name = "adminAddProducts_deleteBtn";
             adminAddProducts_deleteBtn.Size = new Size(144, 56);
             adminAddProducts_deleteBtn.TabIndex = 22;
             adminAddProducts_deleteBtn.Text = "ELIMINAR";
             adminAddProducts_deleteBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_deleteBtn.Click += adminAddProducts_deleteBtn_Click;
             // 
             // adminAddProducts_updateBtn
             // 
@@ -127,6 +121,7 @@
             adminAddProducts_updateBtn.TabIndex = 21;
             adminAddProducts_updateBtn.Text = "EDITAR";
             adminAddProducts_updateBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_updateBtn.Click += adminAddProducts_updateBtn_Click;
             // 
             // adminAddProducts_addBtn
             // 
@@ -141,6 +136,7 @@
             adminAddProducts_addBtn.TabIndex = 20;
             adminAddProducts_addBtn.Text = "AGREGAR";
             adminAddProducts_addBtn.UseVisualStyleBackColor = false;
+            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
             // 
             // label4
             // 
@@ -152,26 +148,6 @@
             label4.Size = new Size(58, 17);
             label4.TabIndex = 17;
             label4.Text = "Fecha:";
-            // 
-            // tipoTextBox
-            // 
-            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tipoTextBox.Location = new Point(735, 92);
-            tipoTextBox.Margin = new Padding(4);
-            tipoTextBox.Name = "tipoTextBox";
-            tipoTextBox.Size = new Size(246, 26);
-            tipoTextBox.TabIndex = 16;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(626, 98);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(44, 17);
-            label6.TabIndex = 15;
-            label6.Text = "Tipo:";
             // 
             // precioTextBox
             // 
@@ -200,18 +176,9 @@
             label5.Location = new Point(48, 148);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new Size(123, 17);
+            label5.Size = new Size(101, 17);
             label5.TabIndex = 11;
-            label5.Text = "Observaciones:";
-            // 
-            // matriculaTextBox
-            // 
-            matriculaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            matriculaTextBox.Location = new Point(192, 92);
-            matriculaTextBox.Margin = new Padding(4);
-            matriculaTextBox.Name = "matriculaTextBox";
-            matriculaTextBox.Size = new Size(246, 26);
-            matriculaTextBox.TabIndex = 7;
+            label5.Text = "Descripcion:";
             // 
             // label3
             // 
@@ -247,20 +214,21 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guardarCambiosBtn);
+            panel2.Controls.Add(tipoTextBox);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(matriculaComboBox);
+            panel2.Controls.Add(fecha);
             panel2.Controls.Add(adminAddUsers_imageView);
-            panel2.Controls.Add(fechaTextBox);
-            panel2.Controls.Add(observacionesTextBox);
+            panel2.Controls.Add(descripcionTextBox);
             panel2.Controls.Add(adminAddProducts_clearBtn);
             panel2.Controls.Add(adminAddProducts_deleteBtn);
             panel2.Controls.Add(adminAddProducts_updateBtn);
             panel2.Controls.Add(adminAddProducts_addBtn);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(tipoTextBox);
-            panel2.Controls.Add(label6);
             panel2.Controls.Add(precioTextBox);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(matriculaTextBox);
             panel2.Controls.Add(label3);
             panel2.Controls.Add(idTextBox);
             panel2.Controls.Add(label2);
@@ -269,6 +237,44 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 4;
+            // 
+            // tipoTextBox
+            // 
+            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tipoTextBox.Location = new Point(735, 94);
+            tipoTextBox.Margin = new Padding(4);
+            tipoTextBox.Name = "tipoTextBox";
+            tipoTextBox.Size = new Size(246, 26);
+            tipoTextBox.TabIndex = 33;
+            tipoTextBox.TextChanged += textBox1_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(626, 100);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 17);
+            label6.TabIndex = 32;
+            label6.Text = "Tipo:";
+            // 
+            // matriculaComboBox
+            // 
+            matriculaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            matriculaComboBox.FormattingEnabled = true;
+            matriculaComboBox.Location = new Point(192, 98);
+            matriculaComboBox.Name = "matriculaComboBox";
+            matriculaComboBox.Size = new Size(246, 23);
+            matriculaComboBox.Sorted = true;
+            matriculaComboBox.TabIndex = 31;
+            // 
+            // fecha
+            // 
+            fecha.Location = new Point(735, 152);
+            fecha.Name = "fecha";
+            fecha.Size = new Size(246, 23);
+            fecha.TabIndex = 30;
             // 
             // label1
             // 
@@ -317,6 +323,22 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 5;
             // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(991, 240);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 34;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
+            // 
             // Reparaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -340,19 +362,15 @@
         #endregion
 
         private PictureBox adminAddUsers_imageView;
-        private TextBox fechaTextBox;
-        private TextBox observacionesTextBox;
+        private TextBox descripcionTextBox;
         private Button adminAddProducts_clearBtn;
         private Button adminAddProducts_deleteBtn;
         private Button adminAddProducts_updateBtn;
         private Button adminAddProducts_addBtn;
         private Label label4;
-        private TextBox tipoTextBox;
-        private Label label6;
         private TextBox precioTextBox;
         private Label label7;
         private Label label5;
-        private TextBox matriculaTextBox;
         private Label label3;
         private TextBox idTextBox;
         private Label label2;
@@ -360,5 +378,10 @@
         private Label label1;
         private DataGridView datosReparacionDataGridView;
         private Panel panel1;
+        private DateTimePicker fecha;
+        private ComboBox matriculaComboBox;
+        private TextBox tipoTextBox;
+        private Label label6;
+        private Button guardarCambiosBtn;
     }
 }
