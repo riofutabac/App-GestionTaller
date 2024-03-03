@@ -23,10 +23,11 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Reparacion_01";
+                string query = "SELECT * FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();
@@ -62,9 +63,10 @@ namespace GestionTalleres
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 // Asegúrate de que el nombre de tu columna en la base de datos sea 'tipo'
-                string query = "SELECT DISTINCT tipo FROM Reparacion_01";
+                string query = "SELECT DISTINCT Tipo FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();
@@ -90,10 +92,11 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT DISTINCT Matricula FROM Reparacion_01";
+                string query = "SELECT DISTINCT Matricula FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();

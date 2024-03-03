@@ -22,10 +22,11 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Cliente_01";
+                string query = "SELECT * FROM VistaCliente WHERE ID_Taller = @ID_Taller";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();

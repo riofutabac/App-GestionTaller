@@ -39,11 +39,13 @@ namespace GestionTalleres
             nombreClienteTextBox.Text = "";
             apellidoClienteTextBox.Text = "";
             ciudadTextBox.Text = "";
-            tallerComboBox.Text = "";
+
 
             // Habilitar todos los campos y revertir el botón
             cedulaClienteTextBox.Enabled = true;
-            tallerComboBox.Enabled = true; // Desbloquear el taller al limpiar
+            nombreClienteTextBox.Enabled = true;
+            apellidoClienteTextBox.Enabled = true;
+
 
             // Cambiar el texto y eventos del botón de vuelta a "Agregar"
             agregarBtn.Text = "AGREGAR";
@@ -86,21 +88,21 @@ namespace GestionTalleres
             string Nombre = nombreClienteTextBox.Text;
             string Apellido = apellidoClienteTextBox.Text;
             string Ciudad = ciudadTextBox.Text;
-            string ID_Taller = tallerComboBox.Text;
+   
             Guid rowguid = Guid.NewGuid(); // Generar un nuevo GUID para el rowguid
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "INSERT INTO Cliente_01 (Cedula, Nombre, Apellido, Ciudad, ID_Taller) VALUES (@Cedula, @Nombre, @Apellido, @Ciudad, @ID_Taller)";
+                    string query = "INSERT INTO VistaCliente (Cedula, Nombre, Apellido, Ciudad, ID_Taller) VALUES (@Cedula, @Nombre, @Apellido, @Ciudad, @ID_Taller)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Nombre", nombreClienteTextBox.Text);
                         command.Parameters.AddWithValue("@Apellido", apellidoClienteTextBox.Text);
                         command.Parameters.AddWithValue("@Ciudad", ciudadTextBox.Text);
-                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Cedula", cedulaClienteTextBox.Text);
 
                         connection.Open();
@@ -158,11 +160,18 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "DELETE FROM Cliente_01 WHERE Cedula = @Cedula";
+                   
+                    string nombreCliente = datosClienteDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
+                    string apellidoCliente = datosClienteDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
+                    string query = "DELETE FROM VistaCliente WHERE Cedula = @Cedula AND Nombre = @Nombre AND Apellido = @Apellido AND ID_Taller = @ID_Taller";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
+
                         command.Parameters.AddWithValue("@Cedula", ciCliente);
+                        command.Parameters.AddWithValue("@Nombre", nombreCliente);
+                        command.Parameters.AddWithValue("@Apellido", apellidoCliente);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode); 
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -200,7 +209,9 @@ namespace GestionTalleres
 
             // Deshabilitar la edición de la cédula y el taller
             cedulaClienteTextBox.Enabled = false;
-            tallerComboBox.Enabled = false; // Bloquear el taller al editar
+            nombreClienteTextBox.Enabled = false;
+            apellidoClienteTextBox.Enabled = false;
+
 
             // Cambiar el texto y eventos del botón agregar a "Guardar Cambios"
             agregarBtn.Text = "GUARDAR CAMBIOS";
@@ -215,7 +226,7 @@ namespace GestionTalleres
             nombreClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
             apellidoClienteTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
             ciudadTextBox.Text = datosClienteDataGridView.CurrentRow.Cells["Ciudad"].Value.ToString();
-            tallerComboBox.Text = datosClienteDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
+
 
         }
 
@@ -236,9 +247,9 @@ namespace GestionTalleres
             // Recargar la lista de clientes en el DataGridView para mostrar los cambios
             CargarClientes();
             // Cambiar el botón de vuelta a "Agregar" y limpiar los controles
-            agregarBtn.Text = "AGREGAR";
+            /*agregarBtn.Text = "AGREGAR";
             agregarBtn.Click -= guardarCambiosBtn_Click;
-            agregarBtn.Click += agregarBtn_Click;
+            agregarBtn.Click += agregarBtn_Click;*/
             cedulaClienteTextBox.Enabled = true; // Volver a habilitar la edición de la cédula si es necesario
             limpiar(); // Asegúrate de que exista un método llamado limpiar que restablezca los campos
         }
@@ -258,7 +269,7 @@ namespace GestionTalleres
                         command.Parameters.AddWithValue("@Nombre", nombreClienteTextBox.Text);
                         command.Parameters.AddWithValue("@Apellido", apellidoClienteTextBox.Text);
                         command.Parameters.AddWithValue("@Ciudad", ciudadTextBox.Text);
-                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Cedula", cedulaClienteTextBox.Text);
 
                         connection.Open();

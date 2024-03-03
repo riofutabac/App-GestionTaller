@@ -43,14 +43,14 @@ namespace GestionTalleres
             cedulaTextBox.Text = "";
             nombreTextBox.Text = "";
             apellidoTextBox.Text = "";
-            tallerComboBox.Text = "";
+
             salarioTextBox.Text = "";
             fechaContrato.Text = "";
 
             codigoTextBox.Enabled = true; // Desbloquear en caso de que estuviera bloqueado por edición
             cedulaTextBox.Enabled = true; // Desbloquear siempre la cédula
             fechaContrato.Enabled = true; // Desbloquear la fecha
-            tallerComboBox.Enabled = true; // Desbloquear el taller
+
 
             // Revertir el botón de "Guardar Cambios" a "Agregar"
             agregarBtn.Text = "Agregar";
@@ -89,11 +89,13 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString)) // Asegúrate de tener la cadena de conexión correcta aquí
                 {
-                    string query = "DELETE FROM Empleado_01 WHERE ID_Empleado = @ID_Empleado";
+                    string query = "DELETE FROM VistaEmpleado WHERE ID_Empleado = @ID_Empleado AND ID_Taller = @ID_Taller";
+
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -185,7 +187,7 @@ namespace GestionTalleres
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string ID_Empleado = codigoTextBox.Text;
-            string ID_Taller = tallerComboBox.Text;
+
             string Nombre = nombreTextBox.Text;
             string Apellido = apellidoTextBox.Text;
             string Cedula = cedulaTextBox.Text;
@@ -204,12 +206,12 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString))
                 {
-                    string query = "INSERT INTO Empleado_01 (ID_Empleado, ID_Taller, Nombre, Apellido, Cedula, FechaC, Salario) VALUES (@ID_Empleado, @ID_Taller, @Nombre, @Apellido, @Cedula, @FechaC, @Salario)";
+                    string query = "INSERT INTO VistaEmpleado (ID_Empleado, ID_Taller, Nombre, Apellido, Cedula, FechaC, Salario) VALUES (@ID_Empleado, @ID_Taller, @Nombre, @Apellido, @Cedula, @FechaC, @Salario)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
-                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Nombre", Nombre);
                         command.Parameters.AddWithValue("@Apellido", Nombre);
                         command.Parameters.AddWithValue("@Cedula", Cedula);
@@ -261,7 +263,7 @@ namespace GestionTalleres
             codigoTextBox.Enabled = false;
             cedulaTextBox.Enabled = false;
             fechaContrato.Enabled = false;
-            tallerComboBox.Enabled = false;
+  
 
             // Cambiar el botón de agregar a "Guardar Cambios"
             agregarBtn.Text = "GUARDAR CAMBIOS";
@@ -276,7 +278,7 @@ namespace GestionTalleres
             cedulaTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
             nombreTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
             apellidoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
-            tallerComboBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
+   
             fechaContrato.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaC"].Value).ToString("MM/dd/yy");
             salarioTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Salario"].Value.ToString();
         }
@@ -305,7 +307,7 @@ namespace GestionTalleres
             codigoTextBox.Enabled = true;
             cedulaTextBox.Enabled = true;
             fechaContrato.Enabled = true;
-            tallerComboBox.Enabled = true;
+
         }
 
         private void ActualizarEmpleado()
@@ -314,7 +316,7 @@ namespace GestionTalleres
             string ID_Empleado = codigoTextBox.Text; // No se actualiza, pero se usa para identificar el registro
             string Nombre = nombreTextBox.Text;
             string Apellido = apellidoTextBox.Text;
-            string ID_Taller = tallerComboBox.Text;
+
             decimal Salario;
             if (!decimal.TryParse(salarioTextBox.Text, out Salario))
             {
@@ -340,7 +342,7 @@ namespace GestionTalleres
                     {
                         command.Parameters.AddWithValue("@Nombre", Nombre);
                         command.Parameters.AddWithValue("@Apellido", Apellido);
-                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Salario", Salario);
                         command.Parameters.AddWithValue("@ID_Empleado", ID_Empleado);
 

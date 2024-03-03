@@ -64,7 +64,7 @@ namespace GestionTalleres
             placaTextBox.Enabled = true;
             chasisTextBox.Enabled = true;
             matriculaTextBox.Enabled = true;
-            tallerComboBox.Enabled = true;
+
             propietarioComboBox.Enabled = true;
             fechaCompra.Enabled = true; 
         }
@@ -99,11 +99,12 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
-                    string query = "DELETE FROM Vehiculo_01 WHERE Matricula = @Matricula";
+                    string query = "DELETE FROM VistaVehiculo WHERE Matricula = @Matricula AND ID_Taller = @ID_Taller";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Matricula", Matricula);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -163,7 +164,6 @@ namespace GestionTalleres
             string Apellido = propietarioParts.Length > 1 ? propietarioParts[1] : "";
 
             DateTime Fecha_Compra = fechaCompra.Value;
-            string ID_Taller = tallerComboBox.Text;
             string Cilindraje = cilindrajeBox1.Text;
 
             try
@@ -171,13 +171,13 @@ namespace GestionTalleres
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
                     string query = @"
-                INSERT INTO Vehiculo_01 (Matricula, ID_Taller, Placa, Color, Cilindraje, Fecha_Compra, Chasis, Nombre, Apellido) 
-                VALUES (@Matricula, @ID_Taller, @Placa, @Color, @Cilindraje, @Fecha_Compra, @Chasis, @Nombre, @Apellido)";
+            INSERT INTO VistaVehiculo (Matricula, ID_Taller, Placa, Color, Cilindraje, Fecha_Compra, Chasis, Nombre, Apellido) 
+            VALUES (@Matricula, @ID_Taller, @Placa, @Color, @Cilindraje, @Fecha_Compra, @Chasis, @Nombre, @Apellido)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Matricula", Matricula);
-                        command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Placa", Placa);
                         command.Parameters.AddWithValue("@Color", Color);
                         command.Parameters.AddWithValue("@Cilindraje", Cilindraje);
@@ -225,7 +225,7 @@ namespace GestionTalleres
             placaTextBox.Enabled = false;
             chasisTextBox.Enabled = false;
             matriculaTextBox.Enabled = false;
-            tallerComboBox.Enabled = false;
+        
             propietarioComboBox.Enabled = false;
             fechaCompra.Enabled = false;
         }
@@ -243,7 +243,7 @@ namespace GestionTalleres
             // Buscar el ítem en el ComboBox que coincida con el nombre completo y seleccionarlo
             propietarioComboBox.SelectedIndex = propietarioComboBox.FindStringExact(nombreCompleto);
 
-            tallerComboBox.Text = datosVehiculosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
+      
             cilindrajeBox1.Text = datosVehiculosDataGridView.CurrentRow.Cells["Cilindraje"].Value.ToString();
         }
 
@@ -295,7 +295,7 @@ namespace GestionTalleres
                         command.Parameters.AddWithValue("@Color", colorTextBox.Text);
                         command.Parameters.AddWithValue("@Nombre", propietarioComboBox.Text);
                         command.Parameters.AddWithValue("@Apellido", propietarioComboBox.Text);
-                        command.Parameters.AddWithValue("@ID_Taller", tallerComboBox.Text);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                         command.Parameters.AddWithValue("@Cilindraje", cilindrajeBox1.Text);
                         command.Parameters.AddWithValue("@Matricula", matriculaTextBox.Text);
 

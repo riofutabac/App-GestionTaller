@@ -37,7 +37,6 @@
             adminAddProducts_updateBtn = new Button();
             adminAddProducts_addBtn = new Button();
             label4 = new Label();
-            label6 = new Label();
             precioTextBox = new TextBox();
             label7 = new Label();
             label5 = new Label();
@@ -45,12 +44,11 @@
             idTextBox = new TextBox();
             label2 = new Label();
             panel2 = new Panel();
+            matriculaComboBox = new ComboBox();
             fecha = new DateTimePicker();
-            tipoComboBox = new ComboBox();
             label1 = new Label();
             datosReparacionDataGridView = new DataGridView();
             panel1 = new Panel();
-            matriculaComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosReparacionDataGridView).BeginInit();
@@ -148,17 +146,6 @@
             label4.TabIndex = 17;
             label4.Text = "Fecha:";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(626, 98);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(44, 17);
-            label6.TabIndex = 15;
-            label6.Text = "Tipo:";
-            // 
             // precioTextBox
             // 
             precioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -226,7 +213,6 @@
             panel2.BackColor = Color.White;
             panel2.Controls.Add(matriculaComboBox);
             panel2.Controls.Add(fecha);
-            panel2.Controls.Add(tipoComboBox);
             panel2.Controls.Add(adminAddUsers_imageView);
             panel2.Controls.Add(descripcionTextBox);
             panel2.Controls.Add(adminAddProducts_clearBtn);
@@ -234,7 +220,6 @@
             panel2.Controls.Add(adminAddProducts_updateBtn);
             panel2.Controls.Add(adminAddProducts_addBtn);
             panel2.Controls.Add(label4);
-            panel2.Controls.Add(label6);
             panel2.Controls.Add(precioTextBox);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label5);
@@ -247,23 +232,23 @@
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 4;
             // 
+            // matriculaComboBox
+            // 
+            matriculaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            matriculaComboBox.FormattingEnabled = true;
+            matriculaComboBox.Items.AddRange(new object[] { "1", "2" });
+            matriculaComboBox.Location = new Point(192, 98);
+            matriculaComboBox.Name = "matriculaComboBox";
+            matriculaComboBox.Size = new Size(246, 23);
+            matriculaComboBox.Sorted = true;
+            matriculaComboBox.TabIndex = 31;
+            // 
             // fecha
             // 
             fecha.Location = new Point(735, 152);
             fecha.Name = "fecha";
             fecha.Size = new Size(246, 23);
             fecha.TabIndex = 30;
-            // 
-            // tipoComboBox
-            // 
-            tipoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            tipoComboBox.FormattingEnabled = true;
-            tipoComboBox.Items.AddRange(new object[] { "1", "2" });
-            tipoComboBox.Location = new Point(735, 98);
-            tipoComboBox.Name = "tipoComboBox";
-            tipoComboBox.Size = new Size(246, 23);
-            tipoComboBox.Sorted = true;
-            tipoComboBox.TabIndex = 29;
             // 
             // label1
             // 
@@ -312,17 +297,6 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 5;
             // 
-            // matriculaComboBox
-            // 
-            matriculaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            matriculaComboBox.FormattingEnabled = true;
-            matriculaComboBox.Items.AddRange(new object[] { "1", "2" });
-            matriculaComboBox.Location = new Point(192, 98);
-            matriculaComboBox.Name = "matriculaComboBox";
-            matriculaComboBox.Size = new Size(246, 23);
-            matriculaComboBox.Sorted = true;
-            matriculaComboBox.TabIndex = 31;
-            // 
             // Reparaciones
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -352,7 +326,6 @@
         private Button adminAddProducts_updateBtn;
         private Button adminAddProducts_addBtn;
         private Label label4;
-        private Label label6;
         private TextBox precioTextBox;
         private Label label7;
         private Label label5;
@@ -363,7 +336,6 @@
         private Label label1;
         private DataGridView datosReparacionDataGridView;
         private Panel panel1;
-        private ComboBox tipoComboBox;
         private DateTimePicker fecha;
         private ComboBox matriculaComboBox;
     }

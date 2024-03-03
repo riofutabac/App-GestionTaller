@@ -9,7 +9,7 @@ namespace GestionTalleres
         {
             InitializeComponent();
 
-  
+            NodocomboBox.SelectedIndex = 0;
         }
         private void CloseBttn_Click(object sender, EventArgs e)
         {
@@ -50,6 +50,7 @@ namespace GestionTalleres
             }
         }
 
+
         private void Login_showPass_CheckedChanged(object sender, EventArgs e)
         {
             contraseniaLogin.PasswordChar = login_showPass.Checked ? '\0' : '*';
@@ -70,5 +71,19 @@ namespace GestionTalleres
                 Login_btn_Click(sender, e);
             }
         }
+
+        private void NodocomboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (NodocomboBox.SelectedItem.ToString() == "N01_QUITO")
+            {
+                Globals.SelectedNode = 1;
+
+            }
+            else if (NodocomboBox.SelectedItem.ToString() == "N02_GUAYAQUIL")
+            {
+                Globals.SelectedNode = 2;
+            }
+        }
+
     }
 }

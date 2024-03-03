@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Empleado));
             label1 = new Label();
             panel2 = new Panel();
@@ -42,7 +42,6 @@
             nombreTextBox = new TextBox();
             label2 = new Label();
             adminAddUsers_imageView = new PictureBox();
-            label6 = new Label();
             codigoTextBox = new TextBox();
             label7 = new Label();
             salarioTextBox = new TextBox();
@@ -53,7 +52,6 @@
             apellidoTextBox = new TextBox();
             label8 = new Label();
             fechaContrato = new DateTimePicker();
-            tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosEmpleadosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -89,14 +87,14 @@
             datosEmpleadosDataGridView.AllowUserToDeleteRows = false;
             datosEmpleadosDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosEmpleadosDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            datosEmpleadosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            datosEmpleadosDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             datosEmpleadosDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosEmpleadosDataGridView.EnableHeadersVisualStyles = false;
             datosEmpleadosDataGridView.Location = new Point(25, 75);
@@ -171,7 +169,7 @@
             // cedulaTextBox
             // 
             cedulaTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cedulaTextBox.Location = new Point(142, 386);
+            cedulaTextBox.Location = new Point(142, 336);
             cedulaTextBox.Margin = new Padding(4);
             cedulaTextBox.Name = "cedulaTextBox";
             cedulaTextBox.Size = new Size(246, 26);
@@ -181,7 +179,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(20, 389);
+            label3.Location = new Point(20, 339);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(64, 17);
@@ -191,7 +189,7 @@
             // nombreTextBox
             // 
             nombreTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            nombreTextBox.Location = new Point(142, 289);
+            nombreTextBox.Location = new Point(142, 239);
             nombreTextBox.Margin = new Padding(4);
             nombreTextBox.Name = "nombreTextBox";
             nombreTextBox.Size = new Size(246, 26);
@@ -201,7 +199,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(20, 292);
+            label2.Location = new Point(20, 242);
             label2.Margin = new Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(71, 17);
@@ -218,17 +216,6 @@
             adminAddUsers_imageView.SizeMode = PictureBoxSizeMode.Zoom;
             adminAddUsers_imageView.TabIndex = 0;
             adminAddUsers_imageView.TabStop = false;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(20, 243);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(55, 17);
-            label6.TabIndex = 23;
-            label6.Text = "Taller:";
             // 
             // codigoTextBox
             // 
@@ -253,7 +240,7 @@
             // salarioTextBox
             // 
             salarioTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            salarioTextBox.Location = new Point(142, 495);
+            salarioTextBox.Location = new Point(142, 445);
             salarioTextBox.Margin = new Padding(4);
             salarioTextBox.Name = "salarioTextBox";
             salarioTextBox.Size = new Size(246, 26);
@@ -263,7 +250,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(20, 498);
+            label4.Location = new Point(20, 448);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             label4.Size = new Size(65, 17);
@@ -274,7 +261,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 444);
+            label5.Location = new Point(20, 394);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             label5.Size = new Size(73, 17);
@@ -297,8 +284,6 @@
             panel1.Controls.Add(apellidoTextBox);
             panel1.Controls.Add(label8);
             panel1.Controls.Add(fechaContrato);
-            panel1.Controls.Add(tallerComboBox);
-            panel1.Controls.Add(label6);
             panel1.Controls.Add(codigoTextBox);
             panel1.Controls.Add(label7);
             panel1.Controls.Add(salarioTextBox);
@@ -322,7 +307,7 @@
             // apellidoTextBox
             // 
             apellidoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            apellidoTextBox.Location = new Point(142, 337);
+            apellidoTextBox.Location = new Point(142, 287);
             apellidoTextBox.Margin = new Padding(4);
             apellidoTextBox.Name = "apellidoTextBox";
             apellidoTextBox.Size = new Size(246, 26);
@@ -332,7 +317,7 @@
             // 
             label8.AutoSize = true;
             label8.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.Location = new Point(20, 340);
+            label8.Location = new Point(20, 290);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new Size(72, 17);
@@ -341,21 +326,10 @@
             // 
             // fechaContrato
             // 
-            fechaContrato.Location = new Point(142, 444);
+            fechaContrato.Location = new Point(142, 394);
             fechaContrato.Name = "fechaContrato";
             fechaContrato.Size = new Size(246, 23);
             fechaContrato.TabIndex = 29;
-            // 
-            // tallerComboBox
-            // 
-            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            tallerComboBox.FormattingEnabled = true;
-            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
-            tallerComboBox.Location = new Point(142, 242);
-            tallerComboBox.Name = "tallerComboBox";
-            tallerComboBox.Size = new Size(246, 23);
-            tallerComboBox.Sorted = true;
-            tallerComboBox.TabIndex = 28;
             // 
             // Empleado
             // 
@@ -392,7 +366,6 @@
         private TextBox nombreTextBox;
         private Label label2;
         private PictureBox adminAddUsers_imageView;
-        private Label label6;
         private TextBox codigoTextBox;
         private Label label7;
         private TextBox salarioTextBox;
@@ -400,7 +373,6 @@
         private Label label5;
         private Panel panel3;
         private Panel panel1;
-        private ComboBox tallerComboBox;
         private DateTimePicker fechaContrato;
         private TextBox apellidoTextBox;
         private Label label8;

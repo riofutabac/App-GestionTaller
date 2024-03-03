@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace GestionTalleres
 {
@@ -16,6 +17,7 @@ namespace GestionTalleres
         {
             InitializeComponent();
             panel3.Controls.Add(dashboardAdmin);
+            nodoLabel.Text = "Nodo actual: " + Globals.SelectedNode;
         }
 
         private void clienteButton_Click(object sender, EventArgs e)
@@ -27,6 +29,8 @@ namespace GestionTalleres
         {
             panel3.Controls.Clear();
             panel3.Controls.Add(dashboardAdmin);
+
+            Console.WriteLine("El nodo es: " + Globals.SelectedNode);
         }
         private void vehiculoButton_Click(object sender, EventArgs e)
         {
@@ -59,6 +63,11 @@ namespace GestionTalleres
             {
                 Application.Exit();
             }
+        }
+
+        private void nodoLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

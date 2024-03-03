@@ -45,12 +45,10 @@
             label6 = new Label();
             label7 = new Label();
             label5 = new Label();
-            label3 = new Label();
             idTextBox = new TextBox();
             label2 = new Label();
             precioTextBox = new TextBox();
             panel2 = new Panel();
-            tallerComboBox = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel1.SuspendLayout();
@@ -246,17 +244,6 @@
             label5.TabIndex = 11;
             label5.Text = "Nombre:";
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(48, 98);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(55, 17);
-            label3.TabIndex = 6;
-            label3.Text = "Taller:";
-            // 
             // idTextBox
             // 
             idTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
@@ -289,7 +276,6 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
-            panel2.Controls.Add(tallerComboBox);
             panel2.Controls.Add(adminAddUsers_imageView);
             panel2.Controls.Add(marcaTextBox);
             panel2.Controls.Add(nombreTextBox);
@@ -303,7 +289,6 @@
             panel2.Controls.Add(precioTextBox);
             panel2.Controls.Add(label7);
             panel2.Controls.Add(label5);
-            panel2.Controls.Add(label3);
             panel2.Controls.Add(idTextBox);
             panel2.Controls.Add(label2);
             panel2.Location = new Point(23, 24);
@@ -311,17 +296,6 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 5;
-            // 
-            // tallerComboBox
-            // 
-            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            tallerComboBox.FormattingEnabled = true;
-            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
-            tallerComboBox.Location = new Point(192, 92);
-            tallerComboBox.Name = "tallerComboBox";
-            tallerComboBox.Size = new Size(246, 23);
-            tallerComboBox.Sorted = true;
-            tallerComboBox.TabIndex = 28;
             // 
             // Repuestos
             // 
@@ -358,11 +332,9 @@
         private Label label6;
         private Label label7;
         private Label label5;
-        private Label label3;
         private TextBox idTextBox;
         private Label label2;
         private TextBox precioTextBox;
         private Panel panel2;
-        private ComboBox tallerComboBox;
     }
 }

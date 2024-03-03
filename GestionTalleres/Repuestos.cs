@@ -44,11 +44,9 @@ namespace GestionTalleres
             nombreTextBox.Text = "";
             precioTextBox.Text = "";
             cantidadTextBox.Text = "";
-            tallerComboBox.Text = "";
+
 
             idTextBox.Enabled = true; // Desbloquear el ID por si estaba bloqueado
-            tallerComboBox.Enabled = true; // Desbloquear el campo del taller al limpiar
-
             adminAddProducts_addBtn.Text = "Agregar";
             adminAddProducts_addBtn.Click -= GuardarCambiosRepuesto_Click; // Remover el evento de clic de guardar cambios
             adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click; // Reasignar el evento de clic de agregar
@@ -66,11 +64,14 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
-                    string query = "DELETE FROM Repuestos_01 WHERE ID_Repuesto = @ID_Repuesto";
+                    string query = "DELETE FROM VistaRepuestos WHERE ID_Repuesto = @ID_Repuesto AND ID_Taller = @ID_Taller";
+
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@ID_Repuesto", ID_Repuesto);
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode); // Usando la variable global para determinar el taller actual
+
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -113,7 +114,7 @@ namespace GestionTalleres
 
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string ID_Repuesto = idTextBox.Text;
-            string ID_Taller = tallerComboBox.Text;
+            string ID_Taller = Globals.SelectedNode.ToString();
             string Nombre = nombreTextBox.Text;
             string Marca = marcaTextBox.Text;
             decimal Precio;
@@ -161,10 +162,11 @@ namespace GestionTalleres
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
                     string query = @"
-                INSERT INTO Repuestos_01 (ID_Repuesto, ID_Taller, Nombre, Precio, Cantidad, Marca) 
-                VALUES (@ID_Repuesto, @ID_Taller, @Nombre, @Precio, @Cantidad, @Marca)";
+            INSERT INTO VistaRepuestos (ID_Repuesto, ID_Taller, Nombre, Precio, Cantidad, Marca) 
+            VALUES (@ID_Repuesto, @ID_Taller, @Nombre, @Precio, @Cantidad, @Marca)";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
+
                     {
                         command.Parameters.AddWithValue("@ID_Repuesto", ID_Repuesto);
                         command.Parameters.AddWithValue("@ID_Taller", ID_Taller);
@@ -226,7 +228,6 @@ namespace GestionTalleres
             nombreTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
             precioTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
             cantidadTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Cantidad"].Value.ToString();
-            tallerComboBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["ID_Taller"].Value.ToString();
             marcaTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Marca"].Value.ToString();
         }
 
@@ -271,7 +272,7 @@ namespace GestionTalleres
             string Marca = marcaTextBox.Text;
             decimal Precio = decimal.Parse(precioTextBox.Text);
             int Cantidad = int.Parse(cantidadTextBox.Text);
-            string ID_Taller = tallerComboBox.Text;
+            string ID_Taller = Globals.SelectedNode.ToString();
 
             try
             {
@@ -327,7 +328,7 @@ namespace GestionTalleres
             CargarDatosRepuestoParaEdicion();
 
             idTextBox.Enabled = false;
-            tallerComboBox.Enabled = false; // Bloquear el campo del taller al editar
+
 
             adminAddProducts_addBtn.Text = "Guardar Cambios";
             adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click;

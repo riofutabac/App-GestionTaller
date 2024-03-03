@@ -44,12 +44,10 @@
             label6 = new Label();
             cedulaClienteTextBox = new TextBox();
             label7 = new Label();
-            label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
             ciudadTextBox = new TextBox();
             label3 = new Label();
-            tallerComboBox = new ComboBox();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosClienteDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -110,7 +108,7 @@
             limpiarBtn.FlatStyle = FlatStyle.Flat;
             limpiarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             limpiarBtn.ForeColor = Color.White;
-            limpiarBtn.Location = new Point(248, 628);
+            limpiarBtn.Location = new Point(248, 563);
             limpiarBtn.Margin = new Padding(4);
             limpiarBtn.Name = "limpiarBtn";
             limpiarBtn.Size = new Size(144, 56);
@@ -125,7 +123,7 @@
             eliminarBtn.FlatStyle = FlatStyle.Flat;
             eliminarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             eliminarBtn.ForeColor = Color.White;
-            eliminarBtn.Location = new Point(43, 628);
+            eliminarBtn.Location = new Point(43, 563);
             eliminarBtn.Margin = new Padding(4);
             eliminarBtn.Name = "eliminarBtn";
             eliminarBtn.Size = new Size(144, 56);
@@ -140,7 +138,7 @@
             editarBtn.FlatStyle = FlatStyle.Flat;
             editarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             editarBtn.ForeColor = Color.White;
-            editarBtn.Location = new Point(248, 536);
+            editarBtn.Location = new Point(248, 471);
             editarBtn.Margin = new Padding(4);
             editarBtn.Name = "editarBtn";
             editarBtn.Size = new Size(144, 56);
@@ -155,7 +153,7 @@
             agregarBtn.FlatStyle = FlatStyle.Flat;
             agregarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             agregarBtn.ForeColor = Color.White;
-            agregarBtn.Location = new Point(43, 536);
+            agregarBtn.Location = new Point(43, 471);
             agregarBtn.Margin = new Padding(4);
             agregarBtn.Name = "agregarBtn";
             agregarBtn.Size = new Size(144, 56);
@@ -235,17 +233,6 @@
             label7.TabIndex = 21;
             label7.Text = "Cédula:";
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label5.Location = new Point(20, 429);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(55, 17);
-            label5.TabIndex = 17;
-            label5.Text = "Taller:";
-            // 
             // panel3
             // 
             panel3.BackColor = Color.Silver;
@@ -261,12 +248,10 @@
             panel1.BackColor = Color.White;
             panel1.Controls.Add(ciudadTextBox);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(tallerComboBox);
             panel1.Controls.Add(nombreClienteTextBox);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(cedulaClienteTextBox);
             panel1.Controls.Add(label7);
-            panel1.Controls.Add(label5);
             panel1.Controls.Add(panel3);
             panel1.Controls.Add(limpiarBtn);
             panel1.Controls.Add(eliminarBtn);
@@ -299,17 +284,6 @@
             label3.Size = new Size(64, 17);
             label3.TabIndex = 29;
             label3.Text = "Ciudad:";
-            // 
-            // tallerComboBox
-            // 
-            tallerComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            tallerComboBox.FormattingEnabled = true;
-            tallerComboBox.Items.AddRange(new object[] { "1", "2" });
-            tallerComboBox.Location = new Point(142, 429);
-            tallerComboBox.Name = "tallerComboBox";
-            tallerComboBox.Size = new Size(246, 23);
-            tallerComboBox.Sorted = true;
-            tallerComboBox.TabIndex = 28;
             // 
             // Cliente
             // 
@@ -348,10 +322,8 @@
         private Label label6;
         private TextBox cedulaClienteTextBox;
         private Label label7;
-        private Label label5;
         private Panel panel3;
         private Panel panel1;
-        private ComboBox tallerComboBox;
         private TextBox ciudadTextBox;
         private Label label3;
     }

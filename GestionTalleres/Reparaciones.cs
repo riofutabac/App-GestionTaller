@@ -49,7 +49,6 @@ namespace GestionTalleres
             descripcionTextBox.Text = "";
             precioTextBox.Text = "";
             fecha.Text = "";
-            tipoComboBox.Text = "";
 
             idTextBox.Enabled = true;
             matriculaComboBox.Enabled = true;
@@ -85,8 +84,9 @@ namespace GestionTalleres
                 return;
             }
 
-            string query = @"INSERT INTO Reparacion_01 (ID_Reparacion, Matricula, Descripcion, Precio, Tipo, FechaReparacion) 
-                             VALUES (@ID_Reparacion, @Matricula, @Descripcion, @Precio, @Tipo, @FechaReparacion)";
+            string query = @"INSERT INTO VistaReparacion (ID_Reparacion, Matricula, Descripcion, Precio, Tipo, FechaReparacion) 
+                 VALUES (@ID_Reparacion, @Matricula, @Descripcion, @Precio, @Tipo, @FechaReparacion)";
+
 
             using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
             {
@@ -96,7 +96,7 @@ namespace GestionTalleres
                     command.Parameters.AddWithValue("@Matricula",  matriculaComboBox.Text);
                     command.Parameters.AddWithValue("@Descripcion", descripcionTextBox.Text);
                     command.Parameters.AddWithValue("@Precio", precio);
-                    command.Parameters.AddWithValue("@Tipo", tipoComboBox.Text);
+                    command.Parameters.AddWithValue("@Tipo", Globals.SelectedNode);
                     command.Parameters.AddWithValue("@FechaReparacion", fecha.Value);
 
                     try
@@ -147,7 +147,7 @@ namespace GestionTalleres
         private void CargarTiposDeReparaciones()
         {
             List<string> tiposReparaciones = reparacionDB.GetAllTiposDeReparaciones();
-            tipoComboBox.DataSource = tiposReparaciones;
+
         }
 
         private void adminAddProducts_updateBtn_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace GestionTalleres
             matriculaComboBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Matricula"].Value.ToString();
             descripcionTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Descripcion"].Value.ToString();
             precioTextBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
-            tipoComboBox.Text = datosReparacionDataGridView.CurrentRow.Cells["Tipo"].Value.ToString();
+
             fecha.Text = ((DateTime)datosReparacionDataGridView.CurrentRow.Cells["FechaReparacion"].Value).ToString("MM/dd/yy");
         }
 
@@ -226,7 +226,7 @@ namespace GestionTalleres
                     {
                         command.Parameters.AddWithValue("@Descripcion", descripcionTextBox.Text);
                         command.Parameters.AddWithValue("@Precio", precioTextBox.Text);
-                        command.Parameters.AddWithValue("@Tipo", tipoComboBox.Text);
+                        command.Parameters.AddWithValue("@Tipo",Globals.SelectedNode);
                         command.Parameters.AddWithValue("@ID_Reparacion", idReparacion);
 
                         connection.Open();
@@ -272,7 +272,8 @@ namespace GestionTalleres
 
         private void EliminarReparacion(string idReparacion)
         {
-            string query = "DELETE FROM Reparacion_01 WHERE ID_Reparacion = @ID_Reparacion";
+            string query = "DELETE FROM VistaReparacion WHERE ID_Reparacion = @ID_Reparacion";
+
 
             using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
             {

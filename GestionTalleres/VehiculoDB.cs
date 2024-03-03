@@ -25,10 +25,11 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM Vehiculo_01";
+                string query = "SELECT * FROM VistaVehiculo WHERE ID_Taller = @ID_Taller";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {
                         connection.Open();
@@ -66,9 +67,15 @@ namespace GestionTalleres
             List<string> propietarios = new List<string>();
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT Nombre + ' ' + Apellido AS Nombre_Completo FROM Cliente_01";
+                // Utiliza la vista VistaCliente en lugar de la tabla Cliente_01 directamente
+                // y filtra los resultados por el ID_Taller utilizando la variable global SelectedNode
+                string query = $"SELECT Nombre + ' ' + Apellido AS Nombre_Completo FROM VistaCliente WHERE ID_Taller = @ID_Taller";
+
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    // Asigna el valor de SelectedNode a @ID_Taller
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
+
                     try
                     {
                         connection.Open();
@@ -87,7 +94,6 @@ namespace GestionTalleres
             }
             return propietarios;
         }
-
+    }
 
     }
-}
