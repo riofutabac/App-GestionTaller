@@ -48,6 +48,7 @@
             panel1 = new Panel();
             ciudadTextBox = new TextBox();
             label3 = new Label();
+            guardarCambiosBtn = new Button();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosClienteDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
@@ -246,6 +247,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(guardarCambiosBtn);
             panel1.Controls.Add(ciudadTextBox);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(nombreClienteTextBox);
@@ -284,6 +286,22 @@
             label3.Size = new Size(64, 17);
             label3.TabIndex = 29;
             label3.Text = "Ciudad:";
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(148, 644);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
             // 
             // Cliente
             // 
@@ -326,5 +344,6 @@
         private Panel panel1;
         private TextBox ciudadTextBox;
         private Label label3;
+        private Button guardarCambiosBtn;
     }
 }

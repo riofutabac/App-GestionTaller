@@ -46,11 +46,8 @@ namespace GestionTalleres
             nombreClienteTextBox.Enabled = true;
             apellidoClienteTextBox.Enabled = true;
 
-
-            // Cambiar el texto y eventos del botón de vuelta a "Agregar"
-            agregarBtn.Text = "AGREGAR";
-            agregarBtn.Click -= guardarCambiosBtn_Click; // Remover el evento de clic de guardar cambios
-            agregarBtn.Click += agregarBtn_Click; // Añadir el evento de clic de agregar
+            guardarCambiosBtn.Visible = false;
+            agregarBtn.Visible = true;
         }
 
 
@@ -83,12 +80,18 @@ namespace GestionTalleres
                 return;
             }
 
+            if (ExisteCedula(cedulaClienteTextBox.Text))
+            {
+                MessageBox.Show("La cédula ya está registrada en la base de datos.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             // Continúa con la inserción en la base de datos si pasa las validaciones
             string Cedula = cedulaClienteTextBox.Text;
             string Nombre = nombreClienteTextBox.Text;
             string Apellido = apellidoClienteTextBox.Text;
             string Ciudad = ciudadTextBox.Text;
-   
+
             Guid rowguid = Guid.NewGuid(); // Generar un nuevo GUID para el rowguid
 
             try
@@ -134,6 +137,23 @@ namespace GestionTalleres
         }
 
 
+        private bool ExisteCedula(string cedula)
+        {
+            using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM VistaCliente WHERE Cedula = @Cedula";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Cedula", cedula);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+
         private void eliminarBtn_Click(object sender, EventArgs e)
         {
             // Verificar si hay alguna fila actualmente seleccionada
@@ -151,6 +171,7 @@ namespace GestionTalleres
                 string ciClienteSeleccionado = datosClienteDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
                 EliminarCliente(ciClienteSeleccionado);
             }
+            limpiar();
         }
 
 
@@ -160,7 +181,7 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                   
+
                     string nombreCliente = datosClienteDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
                     string apellidoCliente = datosClienteDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
                     string query = "DELETE FROM VistaCliente WHERE Cedula = @Cedula AND Nombre = @Nombre AND Apellido = @Apellido AND ID_Taller = @ID_Taller";
@@ -171,7 +192,7 @@ namespace GestionTalleres
                         command.Parameters.AddWithValue("@Cedula", ciCliente);
                         command.Parameters.AddWithValue("@Nombre", nombreCliente);
                         command.Parameters.AddWithValue("@Apellido", apellidoCliente);
-                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode); 
+                        command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
 
                         connection.Open();
                         int result = command.ExecuteNonQuery();
@@ -212,11 +233,8 @@ namespace GestionTalleres
             nombreClienteTextBox.Enabled = false;
             apellidoClienteTextBox.Enabled = false;
 
-
-            // Cambiar el texto y eventos del botón agregar a "Guardar Cambios"
-            agregarBtn.Text = "GUARDAR CAMBIOS";
-            agregarBtn.Click -= agregarBtn_Click; // Remover el evento de clic de agregar
-            agregarBtn.Click += guardarCambiosBtn_Click; // Añadir el evento de clic de guardar cambios
+            guardarCambiosBtn.Visible = true;
+            agregarBtn.Visible = false;
         }
 
 
@@ -230,8 +248,7 @@ namespace GestionTalleres
 
         }
 
-
-        private void guardarCambiosBtn_Click(object sender, EventArgs e)
+        private void guardarCambiosBtn_Click_1(object sender, EventArgs e)
         {
             // Realizar las validaciones necesarias
             if (!Regex.IsMatch(nombreClienteTextBox.Text, @"^[a-zA-Z\s]+$") ||
@@ -242,16 +259,12 @@ namespace GestionTalleres
                 return;
             }
 
-            // Si todas las validaciones son correctas, proceder a actualizar el cliente
             ActualizarCliente();
-            // Recargar la lista de clientes en el DataGridView para mostrar los cambios
             CargarClientes();
-            // Cambiar el botón de vuelta a "Agregar" y limpiar los controles
-            /*agregarBtn.Text = "AGREGAR";
-            agregarBtn.Click -= guardarCambiosBtn_Click;
-            agregarBtn.Click += agregarBtn_Click;*/
-            cedulaClienteTextBox.Enabled = true; // Volver a habilitar la edición de la cédula si es necesario
-            limpiar(); // Asegúrate de que exista un método llamado limpiar que restablezca los campos
+            nombreClienteTextBox.Enabled = true;
+            apellidoClienteTextBox.Enabled = true;
+            cedulaClienteTextBox.Enabled = true;
+            limpiar();
         }
 
         private void ActualizarCliente()
@@ -263,7 +276,16 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(clienteDB.connectionString))
                 {
-                    string query = "UPDATE Cliente_01 SET Nombre = @Nombre, Apellido = @Apellido, ID_Taller = @ID_Taller, Ciudad = @Ciudad WHERE Cedula = @Cedula";
+                    string tablaNombre = Globals.SelectedNode == 1 ? "Cliente_01" : "Cliente_02";
+
+                    string query = $@"
+                UPDATE {tablaNombre} SET 
+                Nombre = @Nombre, 
+                Apellido = @Apellido, 
+                ID_Taller = @ID_Taller, 
+                Ciudad = @Ciudad 
+                WHERE Cedula = @Cedula";
+
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@Nombre", nombreClienteTextBox.Text);
@@ -290,6 +312,7 @@ namespace GestionTalleres
                 MessageBox.Show($"Error al actualizar el cliente: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
     }
 }

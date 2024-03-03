@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -50,24 +51,23 @@ namespace GestionTalleres
             // Restablece el contenido de los TextBoxes a cadenas vacías
             placaTextBox.Text = "";
             colorTextBox.Text = "";
-            propietarioComboBox.Text = "";
+            propietarioComboBox.SelectedIndex = -1; // Selecciona ningún ítem
             chasisTextBox.Text = "";
             matriculaTextBox.Text = "";
             cilindrajeBox1.Text = "";
 
-            // Revertir el botón de "Guardar Cambios" a "Agregar"
-            adminAddProducts_addBtn.Text = "Agregar";
-            adminAddProducts_addBtn.Click -= GuardarCambiosVehiculo_Click; // Remover el evento de guardar cambios
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click; // Añadir el evento de agregar
-
-            // Habilitar todos los campos, incluyendo el taller
+            // Asegura que todos los campos estén habilitados
             placaTextBox.Enabled = true;
             chasisTextBox.Enabled = true;
             matriculaTextBox.Enabled = true;
-
             propietarioComboBox.Enabled = true;
-            fechaCompra.Enabled = true; 
+            fechaCompra.Enabled = true;
+
+            // Configura el botón para agregar, oculta el de guardar cambios
+            adminAddProducts_addBtn.Visible = true;
+            guardarCambiosBtn.Visible = false;
         }
+
 
 
         private void adminAddProducts_clearBtn_Click(object sender, EventArgs e)
@@ -92,6 +92,7 @@ namespace GestionTalleres
                 string matriculaSeleccionada = datosVehiculosDataGridView.CurrentRow.Cells["Matricula"].Value.ToString();
                 EliminarVehiculo(matriculaSeleccionada);
             }
+            Limpiar();
         }
         private void EliminarVehiculo(string Matricula)
         {
@@ -132,6 +133,8 @@ namespace GestionTalleres
         private void adminAddProducts_addBtn_Click(object sender, EventArgs e)
         {
             AgregarVehiculo();
+            CargarVehiculos();
+            Limpiar();
         }
         private void AgregarVehiculo()
         {
@@ -147,9 +150,20 @@ namespace GestionTalleres
                 return;
             }
 
-            if (!Regex.IsMatch(colorTextBox.Text, @"^[a-zA-Z\s]+$")) 
+            if (!Regex.IsMatch(colorTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("Color debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (ExisteMatricula(matriculaTextBox.Text))
+            {
+                MessageBox.Show("La matrícula ya existe en la base de datos.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (ExistePlaca(placaTextBox.Text))
+            {
+                MessageBox.Show("La placa ya existe en la base de datos.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -204,6 +218,7 @@ namespace GestionTalleres
             }
         }
 
+
         private void adminAddProducts_updateBtn_Click(object sender, EventArgs e)
         {
             // Verificar si hay alguna fila actualmente seleccionada en el DataGridView de vehículos
@@ -213,21 +228,17 @@ namespace GestionTalleres
                 return;
             }
 
-            // Cargar la información del vehículo seleccionado en los TextBoxes
             CargarDatosVehiculoParaEdicion();
-
-            // Cambiar el botón de "Agregar" a "Guardar Cambios" y ajustar los eventos de clic
-            adminAddProducts_addBtn.Text = "Guardar Cambios";
-            adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click; // Remover el evento de agregar
-            adminAddProducts_addBtn.Click += GuardarCambiosVehiculo_Click; // Añadir el evento de guardar cambios
 
             // Deshabilitar campos que no deben editarse
             placaTextBox.Enabled = false;
             chasisTextBox.Enabled = false;
             matriculaTextBox.Enabled = false;
-        
             propietarioComboBox.Enabled = false;
             fechaCompra.Enabled = false;
+
+            guardarCambiosBtn.Visible = true;
+            adminAddProducts_addBtn.Visible = false;
         }
         private void CargarDatosVehiculoParaEdicion()
         {
@@ -243,12 +254,12 @@ namespace GestionTalleres
             // Buscar el ítem en el ComboBox que coincida con el nombre completo y seleccionarlo
             propietarioComboBox.SelectedIndex = propietarioComboBox.FindStringExact(nombreCompleto);
 
-      
+
             cilindrajeBox1.Text = datosVehiculosDataGridView.CurrentRow.Cells["Cilindraje"].Value.ToString();
         }
 
 
-        private void GuardarCambiosVehiculo_Click(object sender, EventArgs e)
+        private void guardarCambiosBtn_Click(object sender, EventArgs e)
         {
             // Realiza las validaciones de los campos editables
             if (!Regex.IsMatch(colorTextBox.Text, @"^[a-zA-Z\s]+$"))
@@ -265,27 +276,63 @@ namespace GestionTalleres
             // Continúa con la actualización en la base de datos
             ActualizarVehiculo();
 
-            // Restablece la interfaz
-            adminAddProducts_addBtn.Text = "Agregar";
-            adminAddProducts_addBtn.Click -= GuardarCambiosVehiculo_Click;
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
 
             // Habilitar nuevamente los campos bloqueados para la próxima operación de agregar
             placaTextBox.Enabled = true;
             chasisTextBox.Enabled = true;
             matriculaTextBox.Enabled = true;
+            guardarCambiosBtn.Visible = false;
+            adminAddProducts_addBtn.Visible = true;
 
             Limpiar(); // Asegúrate de implementar este método para limpiar los campos después de guardar
             CargarVehiculos();
         }
+
+        private bool ExisteMatricula(string matricula)
+        {
+            using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM VistaVehiculo WHERE Matricula = @Matricula AND ID_Taller = @ID_Taller";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Matricula", matricula);
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+        private bool ExistePlaca(string placa)
+        {
+            using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM VistaVehiculo WHERE Placa = @Placa AND ID_Taller = @ID_Taller";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Placa", placa);
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
+
         private void ActualizarVehiculo()
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(vehiculoDB.connectionString))
                 {
-                    string query = @"
-                UPDATE Vehiculo_01
+                    string tablaNombre = Globals.SelectedNode == 1 ? "Vehiculo_01" : "Vehiculo_02";
+
+                    string query = $@"
+                UPDATE {tablaNombre}
                 SET Color = @Color,  
                     Cilindraje = @Cilindraje
                 WHERE Matricula = @Matricula";
@@ -309,7 +356,10 @@ namespace GestionTalleres
             {
                 MessageBox.Show($"Error al actualizar el vehículo: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            Limpiar();
             CargarVehiculos();
         }
+
+
     }
 }

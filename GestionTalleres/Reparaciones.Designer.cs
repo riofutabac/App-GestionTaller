@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reparaciones));
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             adminAddUsers_imageView = new PictureBox();
             descripcionTextBox = new TextBox();
             adminAddProducts_clearBtn = new Button();
@@ -44,13 +44,14 @@
             idTextBox = new TextBox();
             label2 = new Label();
             panel2 = new Panel();
+            tipoTextBox = new TextBox();
+            label6 = new Label();
             matriculaComboBox = new ComboBox();
             fecha = new DateTimePicker();
             label1 = new Label();
             datosReparacionDataGridView = new DataGridView();
             panel1 = new Panel();
-            tipoTextBox = new TextBox();
-            label6 = new Label();
+            guardarCambiosBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)datosReparacionDataGridView).BeginInit();
@@ -83,7 +84,7 @@
             adminAddProducts_clearBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_clearBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_clearBtn.ForeColor = Color.White;
-            adminAddProducts_clearBtn.Location = new Point(837, 240);
+            adminAddProducts_clearBtn.Location = new Point(806, 240);
             adminAddProducts_clearBtn.Margin = new Padding(4);
             adminAddProducts_clearBtn.Name = "adminAddProducts_clearBtn";
             adminAddProducts_clearBtn.Size = new Size(144, 56);
@@ -98,7 +99,7 @@
             adminAddProducts_deleteBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_deleteBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_deleteBtn.ForeColor = Color.White;
-            adminAddProducts_deleteBtn.Location = new Point(633, 240);
+            adminAddProducts_deleteBtn.Location = new Point(602, 240);
             adminAddProducts_deleteBtn.Margin = new Padding(4);
             adminAddProducts_deleteBtn.Name = "adminAddProducts_deleteBtn";
             adminAddProducts_deleteBtn.Size = new Size(144, 56);
@@ -213,6 +214,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guardarCambiosBtn);
             panel2.Controls.Add(tipoTextBox);
             panel2.Controls.Add(label6);
             panel2.Controls.Add(matriculaComboBox);
@@ -236,11 +238,31 @@
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 4;
             // 
+            // tipoTextBox
+            // 
+            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tipoTextBox.Location = new Point(735, 94);
+            tipoTextBox.Margin = new Padding(4);
+            tipoTextBox.Name = "tipoTextBox";
+            tipoTextBox.Size = new Size(246, 26);
+            tipoTextBox.TabIndex = 33;
+            tipoTextBox.TextChanged += textBox1_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(626, 100);
+            label6.Margin = new Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new Size(44, 17);
+            label6.TabIndex = 32;
+            label6.Text = "Tipo:";
+            // 
             // matriculaComboBox
             // 
             matriculaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             matriculaComboBox.FormattingEnabled = true;
-            matriculaComboBox.Items.AddRange(new object[] { "", "", "PCB777" });
             matriculaComboBox.Location = new Point(192, 98);
             matriculaComboBox.Name = "matriculaComboBox";
             matriculaComboBox.Size = new Size(246, 23);
@@ -271,14 +293,14 @@
             datosReparacionDataGridView.AllowUserToDeleteRows = false;
             datosReparacionDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             datosReparacionDataGridView.BorderStyle = BorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(7, 99, 102);
-            dataGridViewCellStyle2.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(7, 99, 102);
+            dataGridViewCellStyle1.Font = new Font("Arial Rounded MT Bold", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = Color.White;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
+            datosReparacionDataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             datosReparacionDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             datosReparacionDataGridView.EnableHeadersVisualStyles = false;
             datosReparacionDataGridView.Location = new Point(22, 62);
@@ -301,26 +323,21 @@
             panel1.Size = new Size(1363, 374);
             panel1.TabIndex = 5;
             // 
-            // tipoTextBox
+            // guardarCambiosBtn
             // 
-            tipoTextBox.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tipoTextBox.Location = new Point(735, 94);
-            tipoTextBox.Margin = new Padding(4);
-            tipoTextBox.Name = "tipoTextBox";
-            tipoTextBox.Size = new Size(246, 26);
-            tipoTextBox.TabIndex = 33;
-            tipoTextBox.TextChanged += textBox1_TextChanged;
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(626, 100);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(44, 17);
-            label6.TabIndex = 32;
-            label6.Text = "Tipo:";
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(991, 240);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 34;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
             // 
             // Reparaciones
             // 
@@ -365,5 +382,6 @@
         private ComboBox matriculaComboBox;
         private TextBox tipoTextBox;
         private Label label6;
+        private Button guardarCambiosBtn;
     }
 }

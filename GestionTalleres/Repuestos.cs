@@ -45,11 +45,9 @@ namespace GestionTalleres
             precioTextBox.Text = "";
             cantidadTextBox.Text = "";
 
-
-            idTextBox.Enabled = true; // Desbloquear el ID por si estaba bloqueado
-            adminAddProducts_addBtn.Text = "Agregar";
-            adminAddProducts_addBtn.Click -= GuardarCambiosRepuesto_Click; // Remover el evento de clic de guardar cambios
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click; // Reasignar el evento de clic de agregar
+            idTextBox.Enabled = true;
+            guardarCambiosBtn.Visible = false;
+            adminAddProducts_addBtn.Visible = true;
         }
 
 
@@ -139,7 +137,7 @@ namespace GestionTalleres
                         connection.Open();
 
                         // Consulta para verificar la existencia de un repuesto con el mismo ID
-                        string query = "SELECT COUNT(1) FROM Repuestos_01 WHERE ID_Repuesto = @ID_Repuesto";
+                        string query = "SELECT COUNT(1) FROM VistaRepuestos WHERE ID_Repuesto = @ID_Repuesto";
 
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
@@ -198,6 +196,7 @@ namespace GestionTalleres
         private void adminAddProducts_addBtn_Click(object sender, EventArgs e)
         {
             AgregarRepuesto();
+            CargarRepuestos();
         }
 
         private void adminAddProducts_deleteBtn_Click(object sender, EventArgs e)
@@ -217,6 +216,7 @@ namespace GestionTalleres
                 string idRepuestoSeleccionado = datosRepuestosDataGridView.CurrentRow.Cells["ID_Repuesto"].Value.ToString();
                 EliminarRepuesto(idRepuestoSeleccionado);
             }
+            Limpiar();
         }
 
 
@@ -229,40 +229,6 @@ namespace GestionTalleres
             precioTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Precio"].Value.ToString();
             cantidadTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Cantidad"].Value.ToString();
             marcaTextBox.Text = datosRepuestosDataGridView.CurrentRow.Cells["Marca"].Value.ToString();
-        }
-
-        private void GuardarCambiosRepuesto_Click(object sender, EventArgs e)
-        {
-            // Validaciones de los campos editables
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
-                !Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("La Marca y Nombre deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (!int.TryParse(cantidadTextBox.Text, out int cantidad) || cantidad < 0)
-            {
-                MessageBox.Show("La cantidad debe ser un número entero positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            decimal precio;
-            if (!decimal.TryParse(precioTextBox.Text, out precio) || precio < 0)
-            {
-                MessageBox.Show("El precio debe ser un número válido y positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Llamada al método para actualizar el repuesto en la base de datos
-            ActualizarRepuesto();
-
-            // Restablecer UI
-            adminAddProducts_addBtn.Text = "AGREGAR";
-            adminAddProducts_addBtn.Click -= GuardarCambiosRepuesto_Click;
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
-            Limpiar();
-            CargarRepuestos();
-            // Habilitar ID TextBox si estaba deshabilitado
-            idTextBox.Enabled = true;
         }
 
         private void ActualizarRepuesto()
@@ -278,11 +244,13 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(repuestoDB.connectionString))
                 {
-                    string query = @"UPDATE Repuestos_01 
-                             SET Nombre = @Nombre, Marca = @Marca, Precio = @Precio, 
-                                 Cantidad = @Cantidad, 
-                                 ID_Taller = @ID_Taller
-                             WHERE ID_Repuesto = @ID_Repuesto";
+                    string tablaNombre = Globals.SelectedNode == 1 ? "Repuestos_01" : "Repuestos_02";
+
+                    string query = $@"UPDATE {tablaNombre} 
+                              SET Nombre = @Nombre, Marca = @Marca, Precio = @Precio, 
+                                  Cantidad = @Cantidad, 
+                                  ID_Taller = @ID_Taller
+                              WHERE ID_Repuesto = @ID_Repuesto";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -328,11 +296,40 @@ namespace GestionTalleres
             CargarDatosRepuestoParaEdicion();
 
             idTextBox.Enabled = false;
+            guardarCambiosBtn.Visible = true;
+            adminAddProducts_addBtn.Visible = false;
+        }
 
+        private void guardarCambiosBtn_Click(object sender, EventArgs e)
+        {
+            // Validaciones de los campos editables
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(marcaTextBox.Text, @"^[a-zA-Z\s]+$"))
+            {
+                MessageBox.Show("La Marca y Nombre deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (!int.TryParse(cantidadTextBox.Text, out int cantidad) || cantidad < 0)
+            {
+                MessageBox.Show("La cantidad debe ser un número entero positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            decimal precio;
+            if (!decimal.TryParse(precioTextBox.Text, out precio) || precio < 0)
+            {
+                MessageBox.Show("El precio debe ser un número válido y positivo.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-            adminAddProducts_addBtn.Text = "Guardar Cambios";
-            adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click;
-            adminAddProducts_addBtn.Click += GuardarCambiosRepuesto_Click;
+            // Llamada al método para actualizar el repuesto en la base de datos
+            ActualizarRepuesto();
+            Limpiar();
+            CargarRepuestos();
+
+            // Habilitar ID TextBox si estaba deshabilitado
+            idTextBox.Enabled = true;
+            guardarCambiosBtn.Visible = false;
+            adminAddProducts_addBtn.Visible = true;
         }
     }
 }

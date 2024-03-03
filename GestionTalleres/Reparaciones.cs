@@ -21,13 +21,24 @@ namespace GestionTalleres
         {
             InitializeComponent();
             reparacionDB = new ReparacionDB();
-            CargarTiposDeReparaciones();
             CargarMatriculas();
+            this.VisibleChanged += new EventHandler(Reparaciones_VisibleChanged);
+
+        }
+
+        private void Reparaciones_VisibleChanged(object sender, EventArgs e)
+        {
+            // Cada vez que el control se muestra, actualiza la lista de matrículas
+            if (this.Visible)
+            {
+                CargarMatriculas();
+            }
         }
 
         private void Reparaciones_Load(object sender, EventArgs e)
         {
             CargarReparaciones();
+            CargarMatriculas();
         }
 
         private void CargarReparaciones()
@@ -37,8 +48,8 @@ namespace GestionTalleres
         }
         private void CargarMatriculas()
         {
-            //List<string> matriculas = reparacionDB.GetAllMatriculas();
-            //matriculaComboBox.DataSource = matriculas;
+            List<string> matriculas = reparacionDB.GetAllMatriculas();
+            matriculaComboBox.DataSource = matriculas;
         }
 
 
@@ -49,19 +60,21 @@ namespace GestionTalleres
             descripcionTextBox.Text = "";
             precioTextBox.Text = "";
             fecha.Text = "";
+            tipoTextBox.Text = "";
 
             idTextBox.Enabled = true;
             matriculaComboBox.Enabled = true;
             fecha.Enabled = true;
+            guardarCambiosBtn.Visible = false;
+            adminAddProducts_addBtn.Visible = true;
 
-            adminAddProducts_addBtn.Text = "Agregar";
-            adminAddProducts_addBtn.Click -= guardarCambiosBtn_Click;
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
+            CargarMatriculas();
         }
 
         private void adminAddProducts_addBtn_Click(object sender, EventArgs e)
         {
             AñadirReparacion();
+            CargarReparaciones();
         }
 
         private void AñadirReparacion()
@@ -80,9 +93,17 @@ namespace GestionTalleres
 
             if (ExisteReparacion(idTextBox.Text))
             {
-                MessageBox.Show("Ya existe una reparación con el mismo ID o número de matrícula.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("El ID ya está en uso. Por favor, utilice un ID diferente.", "Error de Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            // Verificación de Descripcion y Tipo (alfabético)
+            if (!Regex.IsMatch(descripcionTextBox.Text, @"^[a-zA-Z]+$") || !Regex.IsMatch(tipoTextBox.Text, @"^[a-zA-Z]+$"))
+            {
+                MessageBox.Show("La descripción y el tipo deben ser caracteres alfabéticos.", "Error de Entrada", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             string query = @"INSERT INTO VistaReparacion (ID_Reparacion, Matricula, Descripcion, Precio, Tipo, FechaReparacion) 
                  VALUES (@ID_Reparacion, @Matricula, @Descripcion, @Precio, @Tipo, @FechaReparacion)";
@@ -121,7 +142,7 @@ namespace GestionTalleres
 
         private bool ExisteReparacion(string ID_Reparacion)
         {
-            string query = "SELECT COUNT(*) FROM Reparacion_02 WHERE ID_Reparacion = @ID_Reparacion";
+            string query = "SELECT COUNT(*) FROM VistaReparacion WHERE ID_Reparacion = @ID_Reparacion";
 
             using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
             {
@@ -144,12 +165,6 @@ namespace GestionTalleres
             }
         }
 
-        private void CargarTiposDeReparaciones()
-        {
-            List<string> tiposReparaciones = reparacionDB.GetAllTiposDeReparaciones();
-
-        }
-
         private void adminAddProducts_updateBtn_Click(object sender, EventArgs e)
         {
             if (datosReparacionDataGridView.CurrentRow == null)
@@ -163,10 +178,8 @@ namespace GestionTalleres
             idTextBox.Enabled = false;
             matriculaComboBox.Enabled = false;
             fecha.Enabled = false;
-
-            adminAddProducts_addBtn.Text = "GUARDAR CAMBIOS";
-            adminAddProducts_addBtn.Click -= adminAddProducts_addBtn_Click;
-            adminAddProducts_addBtn.Click += guardarCambiosBtn_Click;
+            guardarCambiosBtn.Visible = true;
+            adminAddProducts_addBtn.Visible = false;
         }
 
         private void CargarDatosReparacionParaEdicion()
@@ -179,11 +192,12 @@ namespace GestionTalleres
             fecha.Text = ((DateTime)datosReparacionDataGridView.CurrentRow.Cells["FechaReparacion"].Value).ToString("MM/dd/yy");
         }
 
-        private void guardarCambiosBtn_Click(object sender, EventArgs e)
+        private void guardarCambiosBtn_Click_1(object sender, EventArgs e)
         {
-            if (!Regex.IsMatch(descripcionTextBox.Text, @"^[a-zA-Z\s]+$"))
+            // Verificación de Descripcion y Tipo (alfabético)
+            if (!Regex.IsMatch(descripcionTextBox.Text, @"^[a-zA-Z]+$") || !Regex.IsMatch(tipoTextBox.Text, @"^[a-zA-Z]+$"))
             {
-                MessageBox.Show("Las descripcion debe contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("La descripción y el tipo deben ser caracteres alfabéticos.", "Error de Entrada", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -195,17 +209,16 @@ namespace GestionTalleres
 
             ActualizarReparacion();
 
-            adminAddProducts_addBtn.Text = "AGREGAR";
-            adminAddProducts_addBtn.Click -= guardarCambiosBtn_Click;
-            adminAddProducts_addBtn.Click += adminAddProducts_addBtn_Click;
-            Limpiar();
             idTextBox.Enabled = true;
             matriculaComboBox.Enabled = true;
             fecha.Enabled = true;
+            guardarCambiosBtn.Visible = false;
+            adminAddProducts_addBtn.Visible = true;
 
             CargarReparaciones();
             Limpiar();
         }
+
 
         private void ActualizarReparacion()
         {
@@ -215,12 +228,14 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(reparacionDB.connectionString))
                 {
-                    string query = @"UPDATE Reparacion_01 SET 
-                         Descripcion = @Descripcion, 
-                         Precio = @Precio, 
-                         Tipo = @Tipo
-                         WHERE ID_Reparacion = @ID_Reparacion";
+                    string tablaNombre = Globals.SelectedNode == 1 ? "Reparacion_01" : "Reparacion_02";
 
+                    string query = $@"
+                UPDATE {tablaNombre} SET 
+                Descripcion = @Descripcion, 
+                Precio = @Precio, 
+                Tipo = @Tipo
+                WHERE ID_Reparacion = @ID_Reparacion";
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -268,6 +283,7 @@ namespace GestionTalleres
                 EliminarReparacion(idReparacion);
                 CargarReparaciones();
             }
+            Limpiar();
         }
 
         private void EliminarReparacion(string idReparacion)

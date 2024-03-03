@@ -49,6 +49,7 @@
             label2 = new Label();
             precioTextBox = new TextBox();
             panel2 = new Panel();
+            guardarCambiosBtn = new Button();
             ((System.ComponentModel.ISupportInitialize)datosRepuestosDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)adminAddUsers_imageView).BeginInit();
             panel1.SuspendLayout();
@@ -115,7 +116,7 @@
             adminAddProducts_clearBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_clearBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_clearBtn.ForeColor = Color.White;
-            adminAddProducts_clearBtn.Location = new Point(837, 240);
+            adminAddProducts_clearBtn.Location = new Point(814, 240);
             adminAddProducts_clearBtn.Margin = new Padding(4);
             adminAddProducts_clearBtn.Name = "adminAddProducts_clearBtn";
             adminAddProducts_clearBtn.Size = new Size(144, 56);
@@ -130,7 +131,7 @@
             adminAddProducts_deleteBtn.FlatStyle = FlatStyle.Flat;
             adminAddProducts_deleteBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             adminAddProducts_deleteBtn.ForeColor = Color.White;
-            adminAddProducts_deleteBtn.Location = new Point(633, 240);
+            adminAddProducts_deleteBtn.Location = new Point(610, 240);
             adminAddProducts_deleteBtn.Margin = new Padding(4);
             adminAddProducts_deleteBtn.Name = "adminAddProducts_deleteBtn";
             adminAddProducts_deleteBtn.Size = new Size(144, 56);
@@ -276,6 +277,7 @@
             // panel2
             // 
             panel2.BackColor = Color.White;
+            panel2.Controls.Add(guardarCambiosBtn);
             panel2.Controls.Add(adminAddUsers_imageView);
             panel2.Controls.Add(marcaTextBox);
             panel2.Controls.Add(nombreTextBox);
@@ -296,6 +298,22 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(1363, 324);
             panel2.TabIndex = 5;
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(1004, 240);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click;
             // 
             // Repuestos
             // 
@@ -336,5 +354,6 @@
         private Label label2;
         private TextBox precioTextBox;
         private Panel panel2;
+        private Button guardarCambiosBtn;
     }
 }

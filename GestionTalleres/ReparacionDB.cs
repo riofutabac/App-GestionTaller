@@ -58,35 +58,9 @@ namespace GestionTalleres
             return reparaciones;
         }
 
-        public List<string> GetAllTiposDeReparaciones()
-        {
-            List<string> tiposReparaciones = new List<string>();
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                // Asegúrate de que el nombre de tu columna en la base de datos sea 'tipo'
-                string query = "SELECT DISTINCT Tipo FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
-                    try
-                    {
-                        connection.Open();
-                        SqlDataReader reader = command.ExecuteReader();
-                        while (reader.Read())
-                        {
-                            tiposReparaciones.Add(reader["Tipo"].ToString());
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        // Manejar adecuadamente la excepción
-                        Console.WriteLine("Error al obtener tipos de reparaciones: " + ex.Message);
-                    }
-                }
-            }
-            return tiposReparaciones;
-        }
 
+
+        //Editar, de haber una tabla vehiculo matricula agarrar la de ahi
         public List<string> GetAllMatriculas()
         {
             List<string> matriculas = new List<string>();
@@ -94,10 +68,11 @@ namespace GestionTalleres
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 //CAMUFLADO
-                string query = "SELECT Matricula FROM Vehiculos_02 ";
+                string query = "SELECT Matricula FROM VistaVehiculo ";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    //necesitamos las de los dos nodos
                     //command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
                     try
                     {

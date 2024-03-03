@@ -51,11 +51,8 @@ namespace GestionTalleres
             cedulaTextBox.Enabled = true; // Desbloquear siempre la cédula
             fechaContrato.Enabled = true; // Desbloquear la fecha
 
-
-            // Revertir el botón de "Guardar Cambios" a "Agregar"
-            agregarBtn.Text = "Agregar";
-            agregarBtn.Click -= guardarCambiosBtn_Click; // Remover el evento de clic para guardar cambios
-            agregarBtn.Click += agregarBtn_Click; // Añadir el evento de clic para agregar
+            guardarCambiosBtn.Visible = false;
+            agregarBtn.Visible = true;
         }
 
 
@@ -81,6 +78,7 @@ namespace GestionTalleres
                 string ID_Empleado = datosEmpleadosDataGridView.CurrentRow.Cells["ID_Empleado"].Value.ToString();
                 EliminarEmpleado(ID_Empleado);
             }
+            Limpiar();
         }
 
         private void EliminarEmpleado(string ID_Empleado)
@@ -136,7 +134,7 @@ namespace GestionTalleres
                     // Consulta para verificar la existencia de un empleado con el mismo código o cédula
                     string query = @"
                 SELECT COUNT(1) 
-                FROM Empleado_01 
+                FROM VistaEmpleado 
                 WHERE ID_Empleado = @ID_Empleado 
                    OR Cedula = @Cedula";
 
@@ -157,10 +155,27 @@ namespace GestionTalleres
             return false;
         }
 
+        private bool CedulaExiste(string cedula)
+        {
+            using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString))
+            {
+                string query = "SELECT COUNT(*) FROM VistaEmpleado WHERE Cedula = @Cedula AND ID_Taller = @ID_Taller";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Cedula", cedula);
+                    command.Parameters.AddWithValue("@ID_Taller", Globals.SelectedNode);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+                    return count > 0;
+                }
+            }
+        }
+
         private void AgregarEmpleado()
         {
             // Realizar las validaciones necesarias
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") || 
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
                 !Regex.IsMatch(apellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
             {
                 MessageBox.Show("El nombre  y apellido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -182,6 +197,12 @@ namespace GestionTalleres
             if (!decimal.TryParse(salarioTextBox.Text, out decimal Salario))
             {
                 MessageBox.Show("El salario debe ser un número válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (CedulaExiste(cedulaTextBox.Text))
+            {
+                MessageBox.Show("La cédula ya está registrada en la base de datos.", "Error de duplicado", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -263,12 +284,9 @@ namespace GestionTalleres
             codigoTextBox.Enabled = false;
             cedulaTextBox.Enabled = false;
             fechaContrato.Enabled = false;
-  
 
-            // Cambiar el botón de agregar a "Guardar Cambios"
-            agregarBtn.Text = "GUARDAR CAMBIOS";
-            agregarBtn.Click -= agregarBtn_Click; // Eliminar el evento de clic de agregar
-            agregarBtn.Click += guardarCambiosBtn_Click; // Agregar el evento de clic de guardar cambios
+            guardarCambiosBtn.Visible = true;
+            agregarBtn.Visible = false;
         }
 
         private void CargarDatosEmpleadoParaEdicion()
@@ -278,36 +296,9 @@ namespace GestionTalleres
             cedulaTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Cedula"].Value.ToString();
             nombreTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Nombre"].Value.ToString();
             apellidoTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Apellido"].Value.ToString();
-   
+
             fechaContrato.Text = ((DateTime)datosEmpleadosDataGridView.CurrentRow.Cells["FechaC"].Value).ToString("MM/dd/yy");
             salarioTextBox.Text = datosEmpleadosDataGridView.CurrentRow.Cells["Salario"].Value.ToString();
-        }
-
-        private void guardarCambiosBtn_Click(object sender, EventArgs e)
-        {
-            // Realizar las validaciones necesarias
-            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") || 
-                !Regex.IsMatch(apellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
-            {
-                MessageBox.Show("El nombre y apeliido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // No necesitamos validar el código y cédula ya que no se pueden cambiar
-            // No validamos la fecha porque no se puede editar
-
-            ActualizarEmpleado();
-            
-            CargarEmpleados();
-            
-            agregarBtn.Text = "AGREGAR";
-            agregarBtn.Click -= guardarCambiosBtn_Click;
-            agregarBtn.Click += agregarBtn_Click;
-            Limpiar();
-            codigoTextBox.Enabled = true;
-            cedulaTextBox.Enabled = true;
-            fechaContrato.Enabled = true;
-
         }
 
         private void ActualizarEmpleado()
@@ -330,13 +321,16 @@ namespace GestionTalleres
             {
                 using (SqlConnection connection = new SqlConnection(empleadoDB.connectionString))
                 {
-                    string query = @"
-                UPDATE Empleado_01 
+                string tablaNombre = Globals.SelectedNode == 1 ? "Empleado_01" : "Empleado_02";
+
+                string query = $@"
+                UPDATE {tablaNombre} 
                 SET Nombre = @Nombre,
                     Apellido = @Apellido,
                     ID_Taller = @ID_Taller, 
                     Salario = @Salario
                 WHERE ID_Empleado = @ID_Empleado";
+
 
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -371,5 +365,24 @@ namespace GestionTalleres
             }
         }
 
+        private void guardarCambiosBtn_Click_1(object sender, EventArgs e)
+        {
+            // Realizar las validaciones necesarias
+            if (!Regex.IsMatch(nombreTextBox.Text, @"^[a-zA-Z\s]+$") ||
+                !Regex.IsMatch(apellidoTextBox.Text, @"^[a-zA-Z\s]+$"))
+            {
+                MessageBox.Show("El nombre y apeliido deben contener solo letras.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            ActualizarEmpleado();
+
+            CargarEmpleados();
+
+            Limpiar();
+            codigoTextBox.Enabled = true;
+            cedulaTextBox.Enabled = true;
+            fechaContrato.Enabled = true;
+        }
     }
 }

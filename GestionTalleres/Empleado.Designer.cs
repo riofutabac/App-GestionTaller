@@ -49,6 +49,7 @@
             label5 = new Label();
             panel3 = new Panel();
             panel1 = new Panel();
+            guardarCambiosBtn = new Button();
             apellidoTextBox = new TextBox();
             label8 = new Label();
             fechaContrato = new DateTimePicker();
@@ -112,7 +113,7 @@
             limpiarBtn.FlatStyle = FlatStyle.Flat;
             limpiarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             limpiarBtn.ForeColor = Color.White;
-            limpiarBtn.Location = new Point(248, 628);
+            limpiarBtn.Location = new Point(244, 571);
             limpiarBtn.Margin = new Padding(4);
             limpiarBtn.Name = "limpiarBtn";
             limpiarBtn.Size = new Size(144, 56);
@@ -127,7 +128,7 @@
             eliminarBtn.FlatStyle = FlatStyle.Flat;
             eliminarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             eliminarBtn.ForeColor = Color.White;
-            eliminarBtn.Location = new Point(43, 628);
+            eliminarBtn.Location = new Point(39, 571);
             eliminarBtn.Margin = new Padding(4);
             eliminarBtn.Name = "eliminarBtn";
             eliminarBtn.Size = new Size(144, 56);
@@ -142,7 +143,7 @@
             editarBtn.FlatStyle = FlatStyle.Flat;
             editarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             editarBtn.ForeColor = Color.White;
-            editarBtn.Location = new Point(248, 536);
+            editarBtn.Location = new Point(244, 479);
             editarBtn.Margin = new Padding(4);
             editarBtn.Name = "editarBtn";
             editarBtn.Size = new Size(144, 56);
@@ -157,7 +158,7 @@
             agregarBtn.FlatStyle = FlatStyle.Flat;
             agregarBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
             agregarBtn.ForeColor = Color.White;
-            agregarBtn.Location = new Point(43, 536);
+            agregarBtn.Location = new Point(39, 479);
             agregarBtn.Margin = new Padding(4);
             agregarBtn.Name = "agregarBtn";
             agregarBtn.Size = new Size(144, 56);
@@ -281,6 +282,7 @@
             // panel1
             // 
             panel1.BackColor = Color.White;
+            panel1.Controls.Add(guardarCambiosBtn);
             panel1.Controls.Add(apellidoTextBox);
             panel1.Controls.Add(label8);
             panel1.Controls.Add(fechaContrato);
@@ -303,6 +305,22 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(435, 718);
             panel1.TabIndex = 2;
+            // 
+            // guardarCambiosBtn
+            // 
+            guardarCambiosBtn.BackColor = Color.Maroon;
+            guardarCambiosBtn.FlatStyle = FlatStyle.Flat;
+            guardarCambiosBtn.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            guardarCambiosBtn.ForeColor = Color.White;
+            guardarCambiosBtn.Location = new Point(142, 658);
+            guardarCambiosBtn.Margin = new Padding(4);
+            guardarCambiosBtn.Name = "guardarCambiosBtn";
+            guardarCambiosBtn.Size = new Size(144, 56);
+            guardarCambiosBtn.TabIndex = 35;
+            guardarCambiosBtn.Text = "ACTUALIZAR";
+            guardarCambiosBtn.UseVisualStyleBackColor = false;
+            guardarCambiosBtn.Visible = false;
+            guardarCambiosBtn.Click += guardarCambiosBtn_Click_1;
             // 
             // apellidoTextBox
             // 
@@ -376,5 +394,6 @@
         private DateTimePicker fechaContrato;
         private TextBox apellidoTextBox;
         private Label label8;
+        private Button guardarCambiosBtn;
     }
 }
