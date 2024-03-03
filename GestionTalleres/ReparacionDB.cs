@@ -23,7 +23,8 @@ namespace GestionTalleres
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string query = "SELECT * FROM VistaReparacion WHERE ID_Taller = @ID_Taller";
+                string query = "SELECT * FROM VistaReparacion VR WHERE VR.Matricula " +
+                    "in (SELECT Matricula FROM VistaVehiculo VV Where VV.Matricula = VR.Matricula AND VV.ID_Taller = @ID_Taller)";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {

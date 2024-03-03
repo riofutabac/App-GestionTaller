@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Alexis Lapo\\OneDrive - Escuela Politécnica Nacional\\QUINTO SEMESTRE\\BD\\Grupo8App\\GestionTalleres\\GestionTalleres\\GestionTalleres.csproj": {}
+    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Alexis Lapo\\OneDrive - Escuela Politécnica Nacional\\QUINTO SEMESTRE\\BD\\Grupo8App\\GestionTalleres\\GestionTalleres\\GestionTalleres.csproj": {
+    "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Alexis Lapo\\OneDrive - Escuela Politécnica Nacional\\QUINTO SEMESTRE\\BD\\Grupo8App\\GestionTalleres\\GestionTalleres\\GestionTalleres.csproj",
+        "projectUniqueName": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj",
         "projectName": "GestionTalleres",
-        "projectPath": "C:\\Users\\Alexis Lapo\\OneDrive - Escuela Politécnica Nacional\\QUINTO SEMESTRE\\BD\\Grupo8App\\GestionTalleres\\GestionTalleres\\GestionTalleres.csproj",
-        "packagesPath": "C:\\Users\\Alexis Lapo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Alexis Lapo\\OneDrive - Escuela Politécnica Nacional\\QUINTO SEMESTRE\\BD\\Grupo8App\\GestionTalleres\\GestionTalleres\\obj\\",
+        "projectPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\GestionTalleres.csproj",
+        "packagesPath": "C:\\Users\\isaac\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\isaac\\Documents\\Visual Studio 2022\\GestionTalleres-branchIsaac\\GestionTalleres\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Alexis Lapo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\isaac\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -68,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
